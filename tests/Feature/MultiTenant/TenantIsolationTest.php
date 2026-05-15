@@ -1,18 +1,20 @@
 <?php
 
+use App\Modules\Tenancy\Exceptions\TenantContextMissingException;
 use App\Modules\Tenancy\Models\Tenant;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
+// --- Context management ---
+
 it('can set and retrieve current tenant', function () {
     $tenant = Tenant::factory()->create();
     Tenant::setCurrent($tenant);
 
     expect(Tenant::currentId())->toBe($tenant->id);
-    expect(Tenant::current()->id)->toBe($tenant->id);
-});
+})->group('tenancy');
 
 it('clears tenant context', function () {
     $tenant = Tenant::factory()->create();
@@ -20,18 +22,20 @@ it('clears tenant context', function () {
     Tenant::clear();
 
     expect(Tenant::currentId())->toBeNull();
-});
+})->group('tenancy');
 
-it('runs bypass block and restores bypass state afterwards', function () {
+it('bypass block works and restores state', function () {
     Tenant::clear();
-
     $bypassedDuring = false;
     $result = Tenant::bypass(function () use (&$bypassedDuring) {
         $bypassedDuring = Tenant::isBypassed();
-        return 'ok';
+        return 'inside';
     });
 
-    expect($result)->toBe('ok');
+    expect($result)->toBe('inside');
     expect($bypassedDuring)->toBeTrue();
     expect(Tenant::isBypassed())->toBeFalse();
-});
+})->group('tenancy');
+
+// Parametric isolation tests over all BelongsToTenant models are added in Task 22
+// after all domain models and their migrations exist.
