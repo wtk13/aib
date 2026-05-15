@@ -9,6 +9,10 @@ class CustomFieldsSchemaValidator
 {
     public static function validate(array $fields, Preset $preset, string $entity = 'client'): void
     {
+        if (!in_array($entity, ['client', 'job'], true)) {
+            throw new \InvalidArgumentException("Unknown entity type: {$entity}");
+        }
+
         $schema = $entity === 'client' ? $preset->clientFields() : $preset->jobFields();
 
         foreach ($schema as $field) {
@@ -16,7 +20,7 @@ class CustomFieldsSchemaValidator
             $required = $field['required'] ?? false;
             $type     = $field['type'];
 
-            if ($required && empty($fields[$key])) {
+            if ($required && (!array_key_exists($key, $fields) || $fields[$key] === null || $fields[$key] === '')) {
                 throw ValidationException::withMessages([
                     "custom_fields.{$key}" => "The {$key} field is required.",
                 ]);

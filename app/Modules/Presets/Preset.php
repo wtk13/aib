@@ -2,6 +2,8 @@
 
 namespace App\Modules\Presets;
 
+use App\Modules\Presets\Models\VerticalPreset;
+
 final class Preset
 {
     public function __construct(
@@ -15,7 +17,7 @@ final class Preset
         private readonly string $pdfTemplateKey,
     ) {}
 
-    public static function fromModel(\App\Modules\Presets\Models\VerticalPreset $model): self
+    public static function fromModel(VerticalPreset $model): self
     {
         return new self(
             slug:               $model->slug,
@@ -25,7 +27,7 @@ final class Preset
             serviceTypes:       $model->service_types ?? [],
             quoteTemplate:      $model->quote_template ?? [],
             aiHints:            $model->ai_hints ?? [],
-            pdfTemplateKey:     $model->pdf_template_key,
+            pdfTemplateKey:     $model->pdf_template_key ?? 'generic_v1',
         );
     }
 
