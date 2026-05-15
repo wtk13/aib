@@ -12,5 +12,7 @@ class PricingSuggestionFeedback extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['suggestion_id', 'decision', 'final_total', 'diff_pct'];
+    protected $fillable = ['suggestion_id', 'decision', 'final_total', 'diff_pct', 'recorded_at'];
+
+    protected $casts = ['recorded_at' => 'datetime'];
 }

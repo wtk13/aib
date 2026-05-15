@@ -11,7 +11,7 @@ class Tenant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ulid', 'slug', 'firma_name', 'nip', 'regon',
+        'ulid', 'slug', 'firma_name', 'nip', 'regon', 'preset_id',
     ];
 
     private static ?int $currentId = null;

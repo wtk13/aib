@@ -12,7 +12,7 @@ class QuoteStatusLog extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['quote_id', 'from_status', 'to_status', 'transitioned_by_user_id', 'meta'];
+    protected $fillable = ['quote_id', 'from_status', 'to_status', 'transitioned_by_user_id', 'transitioned_at', 'meta'];
 
-    protected $casts = ['meta' => 'array'];
+    protected $casts = ['meta' => 'array', 'transitioned_at' => 'datetime'];
 }

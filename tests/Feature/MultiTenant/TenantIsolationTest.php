@@ -82,3 +82,20 @@ it('TenantScope applies WHERE tenant_id when context is set', function () {
 
     Tenant::clear();
 })->group('tenancy');
+
+it('TenantScope throws TenantContextMissingException outside console with no context', function () {
+    Tenant::clear();
+
+    // Force app()->runningInConsole() to return false so TenantScope throws instead of skipping.
+    $ref = new \ReflectionProperty($this->app, 'isRunningInConsole');
+    $ref->setAccessible(true);
+    $ref->setValue($this->app, false);
+
+    try {
+        expect(fn () => Client::count())
+            ->toThrow(App\Modules\Tenancy\Exceptions\TenantContextMissingException::class);
+    } finally {
+        // Restore console mode so subsequent tests are not affected.
+        $ref->setValue($this->app, true);
+    }
+})->group('tenancy');
