@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_DB: wyceny_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+      redis:
+        image: redis:7.2-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build app image
+        run: docker build -t wyceny-app -f docker/app/Dockerfile .
+
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Generate app key
+        run: docker run --rm -v "$PWD":/var/www/html -w /var/www/html wyceny-app php artisan key:generate
+
+      - name: Run Pint (code style)
+        run: |
+          docker run --rm -v "$PWD":/var/www/html -w /var/www/html wyceny-app \
+            ./vendor/bin/pint --test
+
+      - name: Run Larastan
+        run: |
+          docker run --rm -v "$PWD":/var/www/html -w /var/www/html wyceny-app \
+            ./vendor/bin/phpstan analyse --no-progress
+
+      - name: Run Pest
+        run: |
+          docker run --rm \
+            -v "$PWD":/var/www/html \
+            -w /var/www/html \
+            --network host \
+            -e APP_ENV=testing \
+            -e DB_CONNECTION=pgsql \
+            -e DB_HOST=127.0.0.1 \
+            -e DB_PORT=5432 \
+            -e DB_DATABASE=wyceny_test \
+            -e DB_USERNAME=postgres \
+            -e DB_PASSWORD=secret \
+            -e REDIS_HOST=127.0.0.1 \
+            -e REDIS_PORT=6379 \
+            -e QUEUE_CONNECTION=sync \
+            -e CACHE_STORE=array \
+            wyceny-app ./vendor/bin/pest --no-coverage
