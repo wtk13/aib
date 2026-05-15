@@ -39,3 +39,46 @@ it('bypass block works and restores state', function () {
 
 // Parametric isolation tests over all BelongsToTenant models are added in Task 22
 // after all domain models and their migrations exist.
+
+// --- Scope isolation tests ---
+
+use App\Modules\Crm\Models\Client;
+
+dataset('tenant_scoped_models', [
+    'Client' => [Client::class, fn ($t) => Client::factory()->create(['tenant_id' => $t->id])],
+]);
+
+it('model is scoped to tenant and invisible from other tenant', function (string $modelClass, \Closure $factory) {
+    $tenantA = Tenant::factory()->create();
+    $tenantB = Tenant::factory()->create();
+
+    Tenant::bypass(function () use ($factory, $tenantA) {
+        Tenant::setCurrent($tenantA);
+        $factory($tenantA);
+        Tenant::clear();
+    });
+
+    Tenant::setCurrent($tenantB);
+    expect($modelClass::count())->toBe(0);
+    Tenant::clear();
+})->with('tenant_scoped_models')->group('tenancy');
+
+it('TenantScope applies WHERE tenant_id when context is set', function () {
+    $tenantA = Tenant::factory()->create();
+    $tenantB = Tenant::factory()->create();
+
+    Tenant::bypass(function () use ($tenantA, $tenantB) {
+        Tenant::setCurrent($tenantA);
+        Client::factory()->create(['tenant_id' => $tenantA->id]);
+        Client::factory()->create(['tenant_id' => $tenantB->id]);
+        Tenant::clear();
+    });
+
+    Tenant::setCurrent($tenantA);
+    expect(Client::count())->toBe(1);
+
+    Tenant::setCurrent($tenantB);
+    expect(Client::count())->toBe(1);
+
+    Tenant::clear();
+})->group('tenancy');
