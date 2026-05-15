@@ -22,11 +22,16 @@ it('clears tenant context', function () {
     expect(Tenant::currentId())->toBeNull();
 });
 
-it('runs bypass block without tenant context', function () {
+it('runs bypass block and restores bypass state afterwards', function () {
     Tenant::clear();
 
-    $result = Tenant::bypass(fn () => 'ok');
+    $bypassedDuring = false;
+    $result = Tenant::bypass(function () use (&$bypassedDuring) {
+        $bypassedDuring = Tenant::isBypassed();
+        return 'ok';
+    });
 
     expect($result)->toBe('ok');
+    expect($bypassedDuring)->toBeTrue();
     expect(Tenant::isBypassed())->toBeFalse();
 });

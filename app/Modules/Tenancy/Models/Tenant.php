@@ -49,7 +49,6 @@ class Tenant extends Model
     public static function clear(): void
     {
         static::$currentId = null;
-        static::$bypassed = false;
     }
 
     public static function bypass(callable $callback): mixed
