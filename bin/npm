@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-docker compose run --rm node npm "$@"
+set -euo pipefail
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# node service uses 'dev' profile; 'run --rm' starts a fresh container without requiring the service to be up
+docker compose -f "$REPO_ROOT/docker-compose.yml" run --rm node npm "$@"

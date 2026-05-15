@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-docker compose exec app php artisan "$@"
+set -euo pipefail
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+docker compose -f "$REPO_ROOT/docker-compose.yml" exec app php artisan "$@"

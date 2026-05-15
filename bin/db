@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
-docker compose exec postgres psql -U postgres -d wyceny "$@"
+set -euo pipefail
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+docker compose -f "$REPO_ROOT/docker-compose.yml" exec postgres psql \
+  -U "${DB_USERNAME:-postgres}" \
+  -d "${DB_DATABASE:-wyceny}" \
+  "$@"

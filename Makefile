@@ -7,6 +7,7 @@ down:
 	docker compose down
 
 fresh:
+	@echo "WARNING: This will destroy all local database data. Press Ctrl-C to abort, Enter to continue." && read _
 	docker compose down -v
 	docker compose up -d --wait
 	bin/art migrate:fresh --seed
