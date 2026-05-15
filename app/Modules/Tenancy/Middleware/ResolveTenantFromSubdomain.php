@@ -2,6 +2,7 @@
 
 namespace App\Modules\Tenancy\Middleware;
 
+use App\Modules\Tenancy\Exceptions\TenantNotResolvedException;
 use App\Modules\Tenancy\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
@@ -14,18 +15,21 @@ class ResolveTenantFromSubdomain
         $host = $request->getHost();
         $appDomain = config('app.app_domain', 'app.wyceny.app');
 
-        // Extract subdomain: "ania.app.wyceny.app" => "ania"
+        // Subdomain path: "ania.app.wyceny.app" => slug "ania"
         if (str_ends_with($host, '.' . $appDomain)) {
             $subdomain = substr($host, 0, strlen($host) - strlen('.' . $appDomain));
             $tenant = Tenant::bypass(fn () => Tenant::where('slug', $subdomain)->first());
-            if ($tenant) {
-                Tenant::setCurrent($tenant);
-                return $next($request);
+
+            if (! $tenant) {
+                abort(404, "Tenant '{$subdomain}' not found.");
             }
+
+            Tenant::setCurrent($tenant);
+            return $next($request);
         }
 
-        // Fallback: resolve from authenticated user's tenant_id
-        if (auth()->check() && property_exists(auth()->user(), 'tenant_id')) {
+        // Fallback for requests on the root domain: resolve from authenticated user
+        if (auth()->check() && auth()->user()->hasAttribute('tenant_id')) {
             $tenant = Tenant::bypass(fn () => Tenant::find(auth()->user()->tenant_id));
             if ($tenant) {
                 Tenant::setCurrent($tenant);

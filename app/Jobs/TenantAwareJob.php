@@ -15,6 +15,10 @@ abstract class TenantAwareJob implements ShouldQueue
 
     public string $tenantUlid;
 
+    /**
+     * Subclasses MUST call parent::__construct() first when overriding,
+     * otherwise $tenantUlid will not be set and the job will fail at runtime.
+     */
     public function __construct()
     {
         $this->tenantUlid = Tenant::current()?->ulid
