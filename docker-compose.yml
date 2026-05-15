@@ -1,3 +1,9 @@
+# Load pinned versions: docker compose --env-file docker/versions.env up
+env_file:
+  - docker/versions.env
+  - path: .env
+    required: false
+
 services:
   app:
     build:
@@ -7,6 +13,9 @@ services:
         PHP_VERSION: "${PHP_VERSION:-8.3.20}"
     volumes:
       - .:/var/www/html
+    env_file:
+      - path: .env
+        required: false
     environment:
       APP_ENV: local
       APP_KEY: "${APP_KEY}"
@@ -47,7 +56,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -71,6 +80,7 @@ services:
 
   chromium:
     image: "${CHROMIUM_IMAGE:-ghcr.io/browserless/chromium:1.61.0}"
+    mem_limit: 512m
     ports:
       - "3000:3000"
     environment:
@@ -81,9 +91,14 @@ services:
     build:
       context: .
       dockerfile: docker/app/Dockerfile
+      args:
+        PHP_VERSION: "${PHP_VERSION:-8.3.20}"
     command: php artisan horizon
     volumes:
       - .:/var/www/html
+    env_file:
+      - path: .env
+        required: false
     environment:
       APP_ENV: local
       APP_KEY: "${APP_KEY}"
