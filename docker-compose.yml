@@ -1,0 +1,117 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+      args:
+        PHP_VERSION: "${PHP_VERSION:-8.3.20}"
+    volumes:
+      - .:/var/www/html
+    environment:
+      APP_ENV: local
+      APP_KEY: "${APP_KEY}"
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: "${DB_DATABASE:-wyceny}"
+      DB_USERNAME: "${DB_USERNAME:-postgres}"
+      DB_PASSWORD: "${DB_PASSWORD:-secret}"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      QUEUE_CONNECTION: redis
+      BROWSERLESS_URL: "http://chromium:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  nginx:
+    image: "nginx:${NGINX_VERSION:-1.25-alpine}"
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  postgres:
+    image: "pgvector/pgvector:${POSTGRES_VERSION:-pg16}"
+    environment:
+      POSTGRES_DB: "${DB_DATABASE:-wyceny}"
+      POSTGRES_USER: "${DB_USERNAME:-postgres}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-secret}"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: "redis:${REDIS_VERSION:-7.2-alpine}"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+
+  chromium:
+    image: "${CHROMIUM_IMAGE:-ghcr.io/browserless/chromium:1.61.0}"
+    ports:
+      - "3000:3000"
+    environment:
+      CONCURRENT: 2
+      TIMEOUT: 60000
+
+  horizon:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    command: php artisan horizon
+    volumes:
+      - .:/var/www/html
+    environment:
+      APP_ENV: local
+      APP_KEY: "${APP_KEY}"
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: "${DB_DATABASE:-wyceny}"
+      DB_USERNAME: "${DB_USERNAME:-postgres}"
+      DB_PASSWORD: "${DB_PASSWORD:-secret}"
+      REDIS_HOST: redis
+      QUEUE_CONNECTION: redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  node:
+    image: "node:${NODE_VERSION:-20-alpine}"
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "5173:5173"
+    profiles:
+      - dev
+
+volumes:
+  postgres_data:
+  redis_data:
