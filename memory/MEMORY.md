@@ -1,0 +1,4 @@
+- [CRM project context](project_crm.md) — horizontal AI quoting CRM for SMBs; wife's cleaning company is design partner / first vertical wedge; PHP/Laravel stack, PL-first with US later
+- [No Polish in code or DB](feedback_no_polish_in_code.md) — code identifiers and DB schema are English; Polish only in user-facing UI strings (via i18n)
+- [i18n — PL first, US next](feedback_i18n_pl_first_us_next.md) — build i18n in from day 1; PL is launch locale, US/EN is the Year-2 expansion
+- [Docker-only dev environment](feedback_docker_only.md) — all dev/CI runs through docker-compose; no local installs of Postgres/Redis/PHP/Node
