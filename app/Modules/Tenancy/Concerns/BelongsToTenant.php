@@ -5,6 +5,7 @@ namespace App\Modules\Tenancy\Concerns;
 use App\Modules\Tenancy\Exceptions\TenantNotResolvedException;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\TenantScope;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait BelongsToTenant
@@ -13,7 +14,7 @@ trait BelongsToTenant
     {
         static::addGlobalScope(new TenantScope);
 
-        static::creating(function (self $model) {
+        static::creating(function (Model $model) {
             if (empty($model->tenant_id)) {
                 $model->tenant_id = Tenant::currentId()
                     ?? throw new TenantNotResolvedException(
