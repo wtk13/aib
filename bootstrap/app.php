@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(\App\Http\Middleware\SetLocaleMiddleware::class);
+        $middleware->alias([
+            'resolve.tenant' => \App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain::class,
+            'noindex'        => \App\Http\Middleware\EnforceNoindex::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
