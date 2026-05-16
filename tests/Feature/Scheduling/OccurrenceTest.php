@@ -129,3 +129,71 @@ it('weekly occurrences are 7 days apart', function () {
     expect($occurrences->first()->occurrence_at->toDateString())->toBe($start->toDateString());
     expect((int) $occurrences->first()->occurrence_at->diffInDays($occurrences->get(1)->occurrence_at))->toBe(7);
 });
+
+use App\Modules\Scheduling\Filament\Resources\JobResource\Pages\ViewJob;
+use App\Modules\Scheduling\Filament\Resources\JobResource\RelationManagers\OccurrenceRelationManager;
+
+it('can complete an occurrence', function () {
+    [$tenant, $user] = occurrenceOwner();
+    $client = Client::factory()->create();
+    $job = Job::factory()->for($client)->create();
+    $occ = JobOccurrence::factory()->for($job)->create([
+        'occurrence_at' => now()->subDay(),
+        'status' => 'planned',
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(OccurrenceRelationManager::class, [
+            'ownerRecord' => $job,
+            'pageClass' => ViewJob::class,
+        ])
+        ->callTableAction('complete', $occ)
+        ->assertHasNoErrors();
+
+    expect($occ->fresh()->status)->toBe('completed');
+    expect($occ->fresh()->completed_at)->not->toBeNull();
+});
+
+it('can skip an occurrence', function () {
+    [$tenant, $user] = occurrenceOwner();
+    $client = Client::factory()->create();
+    $job = Job::factory()->for($client)->create();
+    $occ = JobOccurrence::factory()->for($job)->create([
+        'occurrence_at' => now()->addDay(),
+        'status' => 'planned',
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(OccurrenceRelationManager::class, [
+            'ownerRecord' => $job,
+            'pageClass' => ViewJob::class,
+        ])
+        ->callTableAction('skip', $occ)
+        ->assertHasNoErrors();
+
+    expect($occ->fresh()->status)->toBe('skipped');
+});
+
+it('can reschedule an occurrence', function () {
+    [$tenant, $user] = occurrenceOwner();
+    $client = Client::factory()->create();
+    $job = Job::factory()->for($client)->create();
+    $occ = JobOccurrence::factory()->for($job)->create([
+        'occurrence_at' => now()->addDay(),
+        'status' => 'planned',
+    ]);
+    $newDate = now()->addWeek();
+
+    Livewire::actingAs($user)
+        ->test(OccurrenceRelationManager::class, [
+            'ownerRecord' => $job,
+            'pageClass' => ViewJob::class,
+        ])
+        ->mountTableAction('reschedule', $occ)
+        ->setTableActionData(['rescheduled_to' => $newDate->format('Y-m-d H:i:s')])
+        ->callMountedTableAction()
+        ->assertHasNoErrors();
+
+    expect($occ->fresh()->status)->toBe('rescheduled');
+    expect($occ->fresh()->rescheduled_to->toDateString())->toBe($newDate->toDateString());
+});
