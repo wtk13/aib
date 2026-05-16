@@ -18,7 +18,7 @@ class OccurrenceRelationManager extends RelationManager
 
     public function isReadOnly(): bool
     {
-        return false;
+        return true;
     }
 
     public function form(Form $form): Form

@@ -2,7 +2,6 @@
 
 namespace App\Modules\Scheduling\Filament\Resources;
 
-use App\Modules\Crm\Models\Client;
 use App\Modules\Scheduling\Filament\Resources\JobResource\Pages;
 use App\Modules\Scheduling\Filament\Resources\JobResource\RelationManagers;
 use App\Modules\Scheduling\Models\Job;
@@ -68,8 +67,9 @@ class JobResource extends Resource
                 ->schema([
                     Select::make('client_id')
                         ->label(__('job.fields.client'))
-                        ->options(fn () => Client::pluck('name', 'id'))
+                        ->relationship('client', 'name')
                         ->searchable()
+                        ->preload(false)
                         ->required(),
                     Select::make('service_type_key')
                         ->label(__('job.fields.service_type'))
@@ -78,12 +78,12 @@ class JobResource extends Resource
                     Select::make('recurrence_rule')
                         ->label(__('job.fields.recurrence_rule'))
                         ->options([
-                            '' => __('job.recurrence.once'),
                             'weekly' => __('job.recurrence.weekly'),
                             'biweekly' => __('job.recurrence.biweekly'),
                             'monthly' => __('job.recurrence.monthly'),
                         ])
-                        ->default('')
+                        ->placeholder(__('job.recurrence.once'))
+                        ->default(null)
                         ->nullable(),
                     TextInput::make('price_pln')
                         ->label(__('job.fields.price_pln'))
@@ -103,7 +103,7 @@ class JobResource extends Resource
                         ->suffix('min')
                         ->default(60)
                         ->required(),
-                    Select::make('custom_fields.difficulty')
+                    Select::make('custom_fields->difficulty')
                         ->label(__('job.fields.difficulty'))
                         ->options($difficultyOptions)
                         ->nullable(),
@@ -134,7 +134,7 @@ class JobResource extends Resource
                 TextColumn::make('status')
                     ->label(__('job.fields.status'))
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn (?string $state): string => match ($state) {
                         'completed' => 'success',
                         'cancelled', 'skipped' => 'danger',
                         default => 'warning',
@@ -160,11 +160,11 @@ class JobResource extends Resource
                 SelectFilter::make('recurrence_rule')
                     ->label(__('job.fields.recurrence_rule'))
                     ->options([
-                        '' => __('job.recurrence.once'),
                         'weekly' => __('job.recurrence.weekly'),
                         'biweekly' => __('job.recurrence.biweekly'),
                         'monthly' => __('job.recurrence.monthly'),
-                    ]),
+                    ])
+                    ->placeholder(__('job.recurrence.once')),
             ]);
     }
 

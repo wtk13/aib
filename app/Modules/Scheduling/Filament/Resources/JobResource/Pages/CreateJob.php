@@ -7,19 +7,21 @@ use App\Modules\Scheduling\Models\Job;
 use App\Modules\Scheduling\Models\JobOccurrence;
 use Carbon\Carbon;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class CreateJob extends CreateRecord
 {
     protected static string $resource = JobResource::class;
 
-    protected function afterCreate(): void
+    protected function handleRecordCreation(array $data): Model
     {
-        /** @var Job $job */
-        $job = $this->getRecord();
-
-        DB::transaction(function () use ($job): void {
+        return DB::transaction(function () use ($data): Model {
+            /** @var Job $job */
+            $job = parent::handleRecordCreation($data);
             $this->generateOccurrences($job);
+
+            return $job;
         });
     }
 
