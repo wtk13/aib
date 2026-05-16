@@ -49,10 +49,6 @@
                     <span style="font-size:18px;font-weight:700;color:#0f172a;">{{ filament()->getBrandName() }}</span>
                 </div>
 
-                <p style="font-size:13px;color:#64748b;margin-bottom:28px;">
-                    Wróć do swojego panelu
-                </p>
-
                 {{ $slot }}
 
             </div>
