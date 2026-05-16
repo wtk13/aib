@@ -7,6 +7,8 @@ use App\Modules\Crm\Models\Address;
 
 class GeocodeAddressJob extends TenantAwareJob
 {
+    public $afterCommit = true;
+
     public function __construct(
         public readonly int $addressId,
     ) {
@@ -21,6 +23,6 @@ class GeocodeAddressJob extends TenantAwareJob
             return;
         }
 
-        (new GeocodingService())->geocode($address);
+        (new GeocodingService)->geocode($address);
     }
 }
