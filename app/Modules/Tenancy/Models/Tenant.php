@@ -66,4 +66,9 @@ class Tenant extends Model
     {
         return static::$bypassed;
     }
+
+    public function preset(): \App\Modules\Presets\Preset
+    {
+        return \App\Modules\Presets\PresetRegistry::for($this);
+    }
 }
