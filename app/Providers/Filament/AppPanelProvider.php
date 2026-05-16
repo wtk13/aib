@@ -29,6 +29,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('/admin')
             ->login()
+            ->registration(\App\Filament\Pages\Auth\Register::class)
             ->colors(['primary' => Color::Blue])
             ->pages([Pages\Dashboard::class])
             ->middleware([
