@@ -6,7 +6,6 @@ use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\TenantSettingsPage;
-use App\Http\Middleware\EnforceNoindex;
 use App\Http\Middleware\SetLocaleMiddleware;
 use App\Modules\Crm\Filament\Resources\ClientResource;
 use App\Modules\Scheduling\Filament\Resources\JobResource;
@@ -64,7 +63,6 @@ class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                EnforceNoindex::class,
                 ResolveTenantFromSubdomain::class,
                 SetLocaleMiddleware::class,
             ])

@@ -4,6 +4,13 @@
 <title>TBA — Asystent dla firm usługowych | tbasystent.pl</title>
 <meta name="description" content="AI asystent dla małych firm usługowych. Klienci, wyceny, grafik — wszystko w jednym miejscu. Bezpłatnie przez beta.">
 <link rel="canonical" href="https://tbasystent.pl/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TBA — Asystent dla firm usługowych">
+<meta property="og:description" content="AI asystent dla małych firm usługowych. Klienci, wyceny, grafik — wszystko w jednym miejscu. Bezpłatnie przez beta.">
+<meta property="og:url" content="https://tbasystent.pl/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TBA — Asystent dla firm usługowych">
+<meta name="twitter:description" content="AI asystent dla małych firm usługowych. Klienci, wyceny, grafik — wszystko w jednym miejscu. Bezpłatnie przez beta.">
 <meta name="robots" content="index, follow">
 @endsection
 
