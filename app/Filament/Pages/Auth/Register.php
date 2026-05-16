@@ -20,7 +20,7 @@ class Register extends FilamentRegister
 {
     protected static string $view = 'filament.pages.auth.register';
 
-    protected static string $layout = 'filament.components.layout.auth-split';
+    protected static string $layout = 'filament.components.layout.auth-register';
 
     public function hasLogo(): bool
     {
