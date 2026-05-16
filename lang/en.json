@@ -91,5 +91,19 @@
     "settings.fields.fuel_rate": "Fuel rate",
     "settings.fields.is_vat_payer": "VAT payer",
     "settings.fields.default_vat_rate": "Default VAT rate",
-    "settings.fields.locale": "Language"
+    "settings.fields.locale": "Language",
+
+    "dashboard.nav_label": "Dashboard",
+    "dashboard.widgets.today_jobs.title": "Today's Jobs",
+    "dashboard.widgets.today_jobs.empty": "No jobs scheduled for today",
+    "dashboard.widgets.revenue.this_week": "Revenue (this week)",
+    "dashboard.widgets.revenue.jobs_this_week": "Completed (this week)",
+    "dashboard.widgets.revenue.jobs_next_week": "Planned (next week)",
+    "dashboard.widgets.revenue.vs_last_week": "vs. last week",
+    "dashboard.widgets.upcoming.title": "Upcoming Jobs",
+    "dashboard.widgets.overdue.title": "Clients Due for Visit",
+    "dashboard.widgets.overdue.empty": "No overdue clients",
+
+    "job.occurrences.complete": "Mark complete",
+    "job.occurrences.skip": "Skip"
 }

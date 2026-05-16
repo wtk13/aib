@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Register;
+use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\TenantSettingsPage;
 use App\Http\Middleware\EnforceNoindex;
 use App\Http\Middleware\SetLocaleMiddleware;
@@ -12,7 +13,6 @@ use App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -35,7 +35,7 @@ class AppPanelProvider extends PanelProvider
             ->login()
             ->registration(Register::class)
             ->colors(['primary' => Color::Blue])
-            ->pages([Pages\Dashboard::class, TenantSettingsPage::class])
+            ->pages([Dashboard::class, TenantSettingsPage::class])
             ->resources([
                 ClientResource::class,
                 JobResource::class,

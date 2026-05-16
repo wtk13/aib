@@ -91,5 +91,19 @@
     "settings.fields.fuel_rate": "Stawka za km",
     "settings.fields.is_vat_payer": "Płatnik VAT",
     "settings.fields.default_vat_rate": "Domyślna stawka VAT",
-    "settings.fields.locale": "Język"
+    "settings.fields.locale": "Język",
+
+    "dashboard.nav_label": "Panel główny",
+    "dashboard.widgets.today_jobs.title": "Dzisiejsze zlecenia",
+    "dashboard.widgets.today_jobs.empty": "Brak zleceń na dziś",
+    "dashboard.widgets.revenue.this_week": "Przychód (ten tydzień)",
+    "dashboard.widgets.revenue.jobs_this_week": "Zrealizowane (ten tydzień)",
+    "dashboard.widgets.revenue.jobs_next_week": "Zaplanowane (następny tydzień)",
+    "dashboard.widgets.revenue.vs_last_week": "vs. poprzedni tydzień",
+    "dashboard.widgets.upcoming.title": "Nadchodzące zlecenia",
+    "dashboard.widgets.overdue.title": "Klienci wymagający kontaktu",
+    "dashboard.widgets.overdue.empty": "Brak klientów wymagających kontaktu",
+
+    "job.occurrences.complete": "Zrealizuj",
+    "job.occurrences.skip": "Pomiń"
 }
