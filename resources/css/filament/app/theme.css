@@ -1,11 +1,10 @@
 /* =============================================
-   Wyceny — Filament Panel Theme
+   AIB — Filament Panel Theme
    Teal structural retheme
    ============================================= */
 
 /* ── Sidebar background ── */
 .fi-sidebar,
-.fi-main-sidebar .fi-sidebar,
 .fi-sidebar-header {
     background-color: #0d9488 !important;
 }
@@ -74,7 +73,6 @@
 .fi-wi-chart {
     border-top: 3px solid #14b8a6;
     border-radius: 8px;
-    overflow: hidden;
 }
 
 /* ── Auth split layout — responsive classes ── */
