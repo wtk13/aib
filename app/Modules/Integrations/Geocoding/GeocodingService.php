@@ -19,9 +19,9 @@ class GeocodingService
 
         $cacheKey = 'geocode:' . md5($query);
 
-        if (cache()->has($cacheKey)) {
-            $result = cache()->get($cacheKey);
-        } else {
+        $result = cache()->get($cacheKey);
+
+        if ($result === null) {
             try {
                 $response = Http::timeout(5)->get('https://maps.googleapis.com/maps/api/geocode/json', [
                     'address' => $query,
