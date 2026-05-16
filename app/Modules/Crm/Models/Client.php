@@ -3,6 +3,7 @@
 namespace App\Modules\Crm\Models;
 
 use App\Modules\Notes\Models\Note;
+use App\Modules\Scheduling\Models\Job;
 use App\Modules\Tenancy\Concerns\BelongsToTenant;
 use Database\Factories\ClientFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,5 +49,11 @@ class Client extends Model
     public function notes(): HasMany
     {
         return $this->hasMany(Note::class);
+    }
+
+    /** @return HasMany<Job, $this> */
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class);
     }
 }
