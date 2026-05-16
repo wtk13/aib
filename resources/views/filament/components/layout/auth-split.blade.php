@@ -14,7 +14,7 @@
 
             {{-- Brand name --}}
             <div style="position:relative;z-index:1;font-size:28px;font-weight:700;color:white;letter-spacing:0.02em;margin-bottom:10px;">
-                Wyceny
+                {{ filament()->getBrandName() }}
             </div>
 
             {{-- Tagline --}}
@@ -46,7 +46,7 @@
                 {{-- Mobile brand mark (theme CSS hides this on lg+) --}}
                 <div class="aib-auth-mobile-brand">
                     <div style="width:32px;height:32px;background:#0d9488;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">✦</div>
-                    <span style="font-size:18px;font-weight:700;color:#0f172a;">Wyceny</span>
+                    <span style="font-size:18px;font-weight:700;color:#0f172a;">{{ filament()->getBrandName() }}</span>
                 </div>
 
                 <p style="font-size:13px;color:#64748b;margin-bottom:28px;">
