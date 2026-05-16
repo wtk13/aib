@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Modules\Scheduling\Models\Job;
 use App\Modules\Scheduling\Models\JobOccurrence;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -13,6 +14,7 @@ class JobOccurrenceFactory extends Factory
     public function definition(): array
     {
         return [
+            'job_id' => Job::factory(),
             'occurrence_at' => $this->faker->dateTimeBetween('now', '+30 days'),
             'status' => 'planned',
             'rescheduled_to' => null,

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Modules\Crm\Models\Client;
 use App\Modules\Scheduling\Models\Job;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -13,6 +14,7 @@ class JobFactory extends Factory
     public function definition(): array
     {
         return [
+            'client_id' => Client::factory(),
             'service_type_key' => 'basic',
             'starts_at' => $this->faker->dateTimeBetween('now', '+30 days'),
             'duration_minutes' => 60,

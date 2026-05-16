@@ -24,7 +24,7 @@ class Job extends Model
     protected $fillable = [
         'client_id', 'service_type_key', 'custom_fields',
         'recurrence_rule', 'starts_at', 'duration_minutes',
-        'status', 'price_pln', 'internal_notes',
+        'assigned_to', 'status', 'price_pln', 'internal_notes',
     ];
 
     protected $casts = [
