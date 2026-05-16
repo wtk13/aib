@@ -31,7 +31,7 @@ class CreateClient extends CreateRecord
         $postcode = $raw['addr_postcode'] ?? '';
         $city     = $raw['addr_city'] ?? '';
 
-        if (empty($line1) && empty($city)) {
+        if (empty($line1)) {
             return null;
         }
 

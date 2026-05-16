@@ -14,4 +14,17 @@ class ViewClient extends ViewRecord
     {
         return [Actions\EditAction::make()];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $address = $this->getRecord()->address;
+
+        if ($address) {
+            $data['addr_line1']    = $address->line1;
+            $data['addr_postcode'] = $address->postcode;
+            $data['addr_city']     = $address->city;
+        }
+
+        return $data;
+    }
 }

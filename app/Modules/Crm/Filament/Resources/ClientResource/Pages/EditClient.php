@@ -42,7 +42,7 @@ class EditClient extends EditRecord
 
         if ($client->address) {
             $client->address->update($addressData);
-        } elseif (! empty($line1) || ! empty($city)) {
+        } elseif (! empty($line1)) {
             $address            = Address::create($addressData);
             $data['address_id'] = $address->id;
         }
