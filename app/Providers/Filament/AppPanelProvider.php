@@ -8,6 +8,7 @@ use App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use App\Modules\Crm\Filament\Resources\ClientResource;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -32,6 +33,9 @@ class AppPanelProvider extends PanelProvider
             ->registration(\App\Filament\Pages\Auth\Register::class)
             ->colors(['primary' => Color::Blue])
             ->pages([Pages\Dashboard::class])
+            ->resources([
+                ClientResource::class,
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
