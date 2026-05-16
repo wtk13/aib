@@ -39,11 +39,11 @@ class AppPanelProvider extends PanelProvider
             ->registration(Register::class)
             ->colors(['primary' => Color::hex('#14b8a6')])
             ->font('Inter', provider: GoogleFontProvider::class)
-            ->brandName('Wyceny')
+            ->brandName('TBA')
             ->brandLogo(new HtmlString(
                 '<div style="display:flex;align-items:center;gap:8px;">'
                 . '<div style="display:flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:6px;background:white;color:#0d9488;font-weight:700;font-size:14px;line-height:1;">✦</div>'
-                . '<span style="font-size:14px;font-weight:700;color:white;letter-spacing:0.02em;">Wyceny</span>'
+                . '<span style="font-size:14px;font-weight:700;color:white;letter-spacing:0.02em;">TBA</span>'
                 . '</div>'
             ))
             ->brandLogoHeight('2rem')
