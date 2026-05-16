@@ -3,6 +3,7 @@
 namespace App\Modules\Crm\Filament\Resources\ClientResource\Pages;
 
 use App\Modules\Crm\Filament\Resources\ClientResource;
+use App\Modules\Crm\Models\Client;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -17,12 +18,14 @@ class ViewClient extends ViewRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $address = $this->getRecord()->address;
+        /** @var Client $record */
+        $record = $this->getRecord();
+        $address = $record->address;
 
         if ($address) {
-            $data['addr_line1']    = $address->line1;
+            $data['addr_line1'] = $address->line1;
             $data['addr_postcode'] = $address->postcode;
-            $data['addr_city']     = $address->city;
+            $data['addr_city'] = $address->city;
         }
 
         return $data;

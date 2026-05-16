@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int|null $address_id
+ * @property-read Address|null $address
+ */
 class Client extends Model
 {
     /** @use HasFactory<ClientFactory> */

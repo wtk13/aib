@@ -6,6 +6,7 @@ use App\Modules\Crm\Filament\Resources\ClientResource\Pages\ListClients;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages\ViewClient;
 use App\Modules\Crm\Filament\Resources\ClientResource\RelationManagers\NoteRelationManager;
 use App\Modules\Crm\Models\Client;
+use App\Modules\Integrations\Geocoding\GeocodeAddressJob;
 use App\Modules\Notes\Models\Note;
 use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Tenancy\Models\Tenant;
@@ -13,6 +14,7 @@ use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -217,4 +219,44 @@ it('GUS action shows warning when NIP is not found', function () {
         ->fillForm(['client_type' => 'company', 'nip' => '0000000000'])
         ->callFormComponentAction('nip', 'lookup_nip')
         ->assertNotified();
+});
+
+it('dispatches GeocodeAddressJob when client is created with an address', function () {
+    Queue::fake();
+    $user = actingAsOwner();
+
+    Livewire::actingAs($user)
+        ->test(CreateClient::class)
+        ->fillForm([
+            'client_type' => 'person',
+            'name' => 'Geocode Test',
+            'addr_line1' => 'ul. Geocodowa 1',
+            'addr_postcode' => '00-001',
+            'addr_city' => 'Warszawa',
+        ])
+        ->call('create')
+        ->assertHasNoErrors();
+
+    Queue::assertPushed(GeocodeAddressJob::class);
+});
+
+it('dispatches GeocodeAddressJob when client is edited with an address', function () {
+    Queue::fake();
+    $user = actingAsOwner();
+    $client = Client::create([
+        'name' => 'Edit Geocode Test',
+        'client_type' => 'person',
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(EditClient::class, ['record' => $client->getRouteKey()])
+        ->fillForm([
+            'addr_line1' => 'ul. Edytowana 5',
+            'addr_postcode' => '00-002',
+            'addr_city' => 'Kraków',
+        ])
+        ->call('save')
+        ->assertHasNoErrors();
+
+    Queue::assertPushed(GeocodeAddressJob::class);
 });
