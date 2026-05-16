@@ -23,27 +23,41 @@
 
             {{-- Left: copy + CTAs --}}
             <div class="text-white">
-                <div class="text-xs font-semibold tracking-widest uppercase opacity-70 mb-4">
+                <div class="text-xs font-semibold tracking-widest uppercase opacity-70 mb-5">
                     AI dla firm usługowych
                 </div>
-                <h1>
-                    <span class="block text-4xl lg:text-5xl font-extrabold leading-tight mb-4">Twój biznes.<br>Twój asystent.</span>
+                <h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
+                    Twój biznes.<br>Twój asystent.
                 </h1>
-                <p class="text-lg opacity-85 mb-8">
-                    Klienci, wyceny, grafik — wszystko w jednym miejscu.<br>
+                <p class="text-lg opacity-80 mb-8 max-w-md">
+                    Klienci, wyceny, grafik — wszystko w jednym miejscu.
                     AI proponuje ceny, Ty decydujesz.
                 </p>
-                <div class="flex flex-wrap gap-3 mb-4">
+                <div class="flex flex-wrap gap-3 mb-8">
                     <a href="/admin/register"
-                       class="bg-white text-teal-600 font-bold px-6 py-3 rounded-lg hover:bg-teal-50 transition-colors">
+                       class="bg-white text-teal-600 font-bold px-7 py-3.5 rounded-lg hover:bg-teal-50 transition-colors text-base">
                         Wypróbuj za darmo →
                     </a>
                     <a href="#jak-to-dziala"
-                       class="border border-white/40 text-white px-6 py-3 rounded-lg hover:bg-white/10 transition-colors">
+                       class="border border-white/40 text-white px-7 py-3.5 rounded-lg hover:bg-white/10 transition-colors text-base">
                         Jak to działa ↓
                     </a>
                 </div>
-                <p class="text-xs opacity-55">Bezpłatnie przez beta · Bez karty · Dane w Polsce</p>
+                {{-- Stat row --}}
+                <div class="flex flex-wrap gap-6 pt-6 border-t border-white/20">
+                    <div>
+                        <div class="text-3xl font-extrabold">2 min</div>
+                        <div class="text-xs opacity-60 mt-0.5">na wycenę z AI</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold">0 zł</div>
+                        <div class="text-xs opacity-60 mt-0.5">przez cały okres beta</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold">100%</div>
+                        <div class="text-xs opacity-60 mt-0.5">danych w Polsce</div>
+                    </div>
+                </div>
             </div>
 
             {{-- Right: AI suggestion card mockup --}}
@@ -72,20 +86,23 @@
 </section>
 
 {{-- §4 Honesty Strip --}}
-<section class="bg-teal-50 border-l-4 border-teal-500">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-full bg-teal-600 flex-shrink-0 flex items-center justify-center text-white font-bold text-lg">
+<section class="bg-white border-y border-slate-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
+        <div class="text-teal-600 text-4xl font-bold mb-1" aria-hidden="true">"</div>
+        <p class="text-2xl lg:text-3xl font-semibold text-slate-900 leading-snug mb-6">
+            Wyceniałam codziennie w Excelu.<br>
+            Teraz robię to w 2 minuty i z historią klienta.
+        </p>
+        <div class="flex items-center justify-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-teal-600 flex-shrink-0 flex items-center justify-center text-white font-bold">
                 A
             </div>
-            <div>
-                <div class="text-sm font-semibold text-slate-900">Ania, firma sprzątająca · Warszawa</div>
-                <p class="italic text-slate-600 text-sm mt-1 leading-relaxed">
-                    "Wyceniałam codziennie w Excelu. Teraz robię to w 2 minuty i z historią klienta."
-                </p>
-                <p class="text-xs text-slate-400 mt-2">Buduję TBA razem z Anią od dnia pierwszego.</p>
+            <div class="text-left">
+                <div class="text-sm font-semibold text-slate-900">Ania</div>
+                <div class="text-xs text-slate-400">firma sprzątająca · Warszawa</div>
             </div>
         </div>
+        <p class="text-xs text-slate-400 mt-6">Buduję TBA razem z Anią od dnia pierwszego.</p>
     </div>
 </section>
 
@@ -165,29 +182,29 @@
 </section>
 
 {{-- §6 Value Props --}}
-<section id="funkcje" class="py-16 bg-slate-50">
+<section id="funkcje" class="py-20 bg-slate-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-3 gap-px bg-slate-200 rounded-2xl overflow-hidden">
 
-            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-                <div class="text-3xl mb-3" aria-hidden="true">💡</div>
-                <h3 class="font-bold text-slate-900 mb-2">Wycenia za Ciebie</h3>
+            <div class="bg-white p-10">
+                <div class="text-6xl font-extrabold text-teal-600 mb-3 leading-none">2 min</div>
+                <h3 class="font-bold text-slate-900 text-lg mb-2">Wycenia za Ciebie</h3>
                 <p class="text-slate-500 text-sm leading-relaxed">
                     AI proponuje cenę z historii zleceń i kosztu dojazdu. Nie musisz pamiętać ile wzięłaś od pani Kowalskiej w lutym.
                 </p>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-                <div class="text-3xl mb-3" aria-hidden="true">🧠</div>
-                <h3 class="font-bold text-slate-900 mb-2">Pamięta klientów</h3>
+            <div class="bg-white p-10">
+                <div class="text-6xl font-extrabold text-teal-600 mb-3 leading-none">∞</div>
+                <h3 class="font-bold text-slate-900 text-lg mb-2">Pamięta klientów</h3>
                 <p class="text-slate-500 text-sm leading-relaxed">
                     Notatki głosowe z samochodu, zdjęcia, preferencje, alergie — wszystko w jednym miejscu. Zapytaj, odpowie.
                 </p>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-                <div class="text-3xl mb-3" aria-hidden="true">📅</div>
-                <h3 class="font-bold text-slate-900 mb-2">Porządkuje tydzień</h3>
+            <div class="bg-white p-10">
+                <div class="text-6xl font-extrabold text-teal-600 mb-3 leading-none">0 h</div>
+                <h3 class="font-bold text-slate-900 text-lg mb-2">Porządkuje tydzień</h3>
                 <p class="text-slate-500 text-sm leading-relaxed">
                     Grafik ekipy, cykliczne zlecenia, dojazd doliczony automatycznie. Mniej Excela, więcej spokoju.
                 </p>
