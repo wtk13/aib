@@ -1,0 +1,112 @@
+/* =============================================
+   Wyceny — Filament Panel Theme
+   Teal structural retheme
+   ============================================= */
+
+/* ── Sidebar background ── */
+.fi-sidebar,
+.fi-main-sidebar .fi-sidebar,
+.fi-sidebar-header {
+    background-color: #0d9488 !important;
+}
+
+.fi-sidebar-header {
+    --tw-ring-color: transparent !important;
+    box-shadow: none !important;
+    border-bottom-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ── Sidebar nav items — default ── */
+.fi-sidebar-item-button {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.fi-sidebar-item-button:hover {
+    background-color: rgba(255, 255, 255, 0.10) !important;
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* ── Sidebar nav items — active ── */
+.fi-sidebar-item.fi-active .fi-sidebar-item-button {
+    background-color: rgba(255, 255, 255, 0.18) !important;
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* ── Sidebar icons ── */
+.fi-sidebar-item-button svg {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-button svg {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* ── Sidebar group labels ── */
+.fi-sidebar-group-label {
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* ── Brand / logo area ── */
+.fi-brand-name {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* ── Collapse / expand buttons ── */
+.fi-sidebar-collapse-btn,
+.fi-sidebar-expand-btn {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.fi-sidebar-collapse-btn:hover,
+.fi-sidebar-expand-btn:hover {
+    background-color: rgba(255, 255, 255, 0.10) !important;
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* ── Stats widget cards — teal top accent ── */
+.fi-wi-stats-overview-stat {
+    border-top: 3px solid #14b8a6 !important;
+    border-radius: 8px !important;
+}
+
+/* ── Table & chart widget wrappers — teal top accent ── */
+.fi-wi-table,
+.fi-wi-chart {
+    border-top: 3px solid #14b8a6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ── Auth split layout — responsive classes ── */
+/* Brand panel: hidden on mobile, flex on lg+ */
+.wyceny-auth-brand-panel {
+    display: none;
+    width: 42%;
+    background-color: #0d9488;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+    .wyceny-auth-brand-panel {
+        display: flex;
+    }
+}
+
+/* Mobile brand: shown only below lg */
+.wyceny-auth-mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+@media (min-width: 1024px) {
+    .wyceny-auth-mobile-brand {
+        display: none;
+    }
+}

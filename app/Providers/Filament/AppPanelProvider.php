@@ -46,6 +46,7 @@ class AppPanelProvider extends PanelProvider
                 . '</div>'
             ))
             ->brandLogoHeight('2rem')
+            ->viteTheme('resources/css/filament/app/theme.css')
             ->sidebarCollapsibleOnDesktop()
             ->pages([Dashboard::class, TenantSettingsPage::class])
             ->resources([
