@@ -18,7 +18,13 @@ class Client extends Model
         return ClientFactory::new();
     }
 
-    protected $fillable = ['name', 'phone', 'email', 'nip', 'address_id', 'custom_fields'];
+    protected $attributes = ['client_type' => 'person'];
+
+    protected $fillable = [
+        'client_type', 'name', 'phone', 'email',
+        'nip', 'regon', 'address_id',
+        'custom_fields', 'access_keys_encrypted',
+    ];
 
     protected $casts = [
         'custom_fields' => 'array',
