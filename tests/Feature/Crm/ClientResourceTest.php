@@ -95,3 +95,29 @@ it('can edit a client', function () {
 
     expect($client->fresh()->name)->toBe('Nowa Nazwa');
 });
+
+it('saves cleaning custom fields and encrypted access_keys', function () {
+    $user = actingAsOwner();
+
+    Livewire::actingAs($user)
+        ->test(CreateClient::class)
+        ->fillForm([
+            'client_type'           => 'person',
+            'name'                  => 'Pani Cleaning',
+            'custom_fields'         => [
+                'area_m2'       => 65,
+                'property_type' => 'apartment',
+                'preferences'   => 'Proszę nie używać silnych środków',
+                'allergies'     => 'Kot',
+                'access_notes'  => '3 piętro, winda',
+            ],
+            'access_keys_encrypted' => 'klucz#42, kod alarmu: 1234',
+        ])
+        ->call('create')
+        ->assertHasNoErrors();
+
+    $client = Client::where('name', 'Pani Cleaning')->first();
+    expect($client->custom_fields['area_m2'])->toBe(65)
+        ->and($client->custom_fields['property_type'])->toBe('apartment')
+        ->and($client->access_keys_encrypted)->toBe('klucz#42, kod alarmu: 1234');
+});

@@ -5,8 +5,10 @@ namespace App\Modules\Crm\Filament\Resources;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages;
 use App\Modules\Crm\Filament\Resources\ClientResource\RelationManagers;
 use App\Modules\Crm\Models\Client;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -92,6 +94,38 @@ class ClientResource extends Resource
                         ->dehydrated(false)
                         ->maxLength(100),
                 ]),
+
+            Section::make(__('client.section.cleaning'))
+                ->schema([
+                    Grid::make(2)
+                        ->schema([
+                            TextInput::make('custom_fields.area_m2')
+                                ->label(__('presets.cleaning.fields.area_m2'))
+                                ->numeric()
+                                ->minValue(1)
+                                ->maxValue(1000)
+                                ->suffix('m²'),
+                            Select::make('custom_fields.property_type')
+                                ->label(__('presets.cleaning.fields.property_type'))
+                                ->options([
+                                    'apartment' => __('presets.cleaning.property_type.apartment'),
+                                    'house'     => __('presets.cleaning.property_type.house'),
+                                    'office'    => __('presets.cleaning.property_type.office'),
+                                    'retail'    => __('presets.cleaning.property_type.retail'),
+                                ]),
+                        ]),
+                    Textarea::make('custom_fields.preferences')
+                        ->label(__('presets.cleaning.fields.preferences'))
+                        ->rows(2),
+                    TextInput::make('custom_fields.allergies')
+                        ->label(__('presets.cleaning.fields.allergies')),
+                    TextInput::make('custom_fields.access_notes')
+                        ->label(__('presets.cleaning.fields.access_notes')),
+                    Textarea::make('access_keys_encrypted')
+                        ->label(__('presets.cleaning.fields.access_keys'))
+                        ->hint(__('client.fields.access_keys_hint'))
+                        ->rows(2),
+                ]),
         ]);
     }
 
@@ -111,6 +145,9 @@ class ClientResource extends Resource
                     ->badge()
                     ->formatStateUsing(fn ($state) => __('client.type.' . $state))
                     ->color(fn ($state) => $state === 'company' ? 'warning' : 'gray'),
+                TextColumn::make('custom_fields.property_type')
+                    ->label(__('presets.cleaning.fields.property_type'))
+                    ->formatStateUsing(fn ($state) => $state ? __('presets.cleaning.property_type.' . $state) : '—'),
                 TextColumn::make('address.city')
                     ->label(__('client.fields.address_city'))
                     ->sortable(),
@@ -127,6 +164,17 @@ class ClientResource extends Resource
                         'person'  => __('client.type.person'),
                         'company' => __('client.type.company'),
                     ]),
+                SelectFilter::make('property_type')
+                    ->label(__('presets.cleaning.fields.property_type'))
+                    ->options([
+                        'apartment' => __('presets.cleaning.property_type.apartment'),
+                        'house'     => __('presets.cleaning.property_type.house'),
+                        'office'    => __('presets.cleaning.property_type.office'),
+                        'retail'    => __('presets.cleaning.property_type.retail'),
+                    ])
+                    ->query(fn ($query, $state) => $state['value']
+                        ? $query->whereJsonContains('custom_fields->property_type', $state['value'])
+                        : $query),
             ])
             ->defaultSort('created_at', 'desc');
     }
