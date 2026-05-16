@@ -2,6 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="pl">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +13,7 @@
 <body class="font-[Inter,sans-serif] antialiased">
 
     {{-- Sticky Nav --}}
-    <nav class="sticky top-0 z-50 bg-teal-600">
+    <nav aria-label="Główna nawigacja" class="sticky top-0 z-50 bg-teal-600">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-14">
                 <a href="/" class="text-white font-bold text-lg tracking-tight">✦ TBA</a>
