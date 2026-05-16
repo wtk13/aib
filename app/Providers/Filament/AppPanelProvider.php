@@ -2,13 +2,15 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Register;
 use App\Http\Middleware\EnforceNoindex;
 use App\Http\Middleware\SetLocaleMiddleware;
+use App\Modules\Crm\Filament\Resources\ClientResource;
+use App\Modules\Scheduling\Filament\Resources\JobResource;
 use App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use App\Modules\Crm\Filament\Resources\ClientResource;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -30,11 +32,12 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('/admin')
             ->login()
-            ->registration(\App\Filament\Pages\Auth\Register::class)
+            ->registration(Register::class)
             ->colors(['primary' => Color::Blue])
             ->pages([Pages\Dashboard::class])
             ->resources([
                 ClientResource::class,
+                JobResource::class,
             ])
             ->middleware([
                 EncryptCookies::class,
