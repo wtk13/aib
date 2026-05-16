@@ -7,9 +7,8 @@ uses(TestCase::class);
 it('homepage loads with correct SEO tags', function () {
     $response = $this->get('/');
     $response->assertStatus(200);
-    $response->assertSee('<title>', escape: false);
-    $response->assertSee('TBA', escape: false);
-    $response->assertSee('tbasystent.pl', escape: false);
+    $response->assertSee('TBA — Asystent dla firm usługowych | tbasystent.pl', escape: false);
+    $response->assertSee('<h1>', escape: false);
     $response->assertSee('Twój biznes', escape: false);
     $response->assertSee('canonical', escape: false);
 });
