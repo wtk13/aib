@@ -2,6 +2,7 @@
 
 namespace App\Modules\Scheduling\Filament\Resources\JobResource\RelationManagers;
 
+use App\Modules\Scheduling\Models\JobOccurrence;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -63,8 +64,8 @@ class OccurrenceRelationManager extends RelationManager
                     ->label(__('job.occurrences.complete'))
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
-                    ->visible(fn (Model $record): bool => $record->status === 'planned')
-                    ->action(function (Model $record): void {
+                    ->visible(fn (JobOccurrence $record): bool => $record->status === 'planned')
+                    ->action(function (JobOccurrence $record): void {
                         $record->update([
                             'status' => 'completed',
                             'completed_at' => now(),
@@ -74,21 +75,21 @@ class OccurrenceRelationManager extends RelationManager
                     ->label(__('job.occurrences.skip'))
                     ->icon('heroicon-o-x-circle')
                     ->color('warning')
-                    ->visible(fn (Model $record): bool => $record->status === 'planned')
-                    ->action(function (Model $record): void {
+                    ->visible(fn (JobOccurrence $record): bool => $record->status === 'planned')
+                    ->action(function (JobOccurrence $record): void {
                         $record->update(['status' => 'skipped']);
                     }),
                 Tables\Actions\Action::make('reschedule')
                     ->label(__('job.occurrences.reschedule'))
                     ->icon('heroicon-o-calendar')
                     ->color('info')
-                    ->visible(fn (Model $record): bool => $record->status === 'planned')
+                    ->visible(fn (JobOccurrence $record): bool => $record->status === 'planned')
                     ->form([
                         DateTimePicker::make('rescheduled_to')
                             ->label(__('job.fields.starts_at'))
                             ->required(),
                     ])
-                    ->action(function (Model $record, array $data): void {
+                    ->action(function (JobOccurrence $record, array $data): void {
                         $record->update([
                             'status' => 'rescheduled',
                             'rescheduled_to' => $data['rescheduled_to'],

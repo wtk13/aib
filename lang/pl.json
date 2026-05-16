@@ -105,5 +105,7 @@
     "dashboard.widgets.overdue.empty": "Brak klientów wymagających kontaktu",
 
     "job.occurrences.complete": "Zrealizuj",
-    "job.occurrences.skip": "Pomiń"
+    "job.occurrences.skip": "Pomiń",
+    "job.occurrences.reschedule": "Przesuń termin",
+    "job.occurrences.completed_at": "Zrealizowano"
 }

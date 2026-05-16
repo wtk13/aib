@@ -57,7 +57,7 @@ it('caches the distance result in distance_caches', function () {
     $service = app(DistanceService::class);
     $service->getDistance($tenant->id, $origin, $dest);
 
-    expect(\DB::table('distance_caches')
+    expect(DB::table('distance_caches')
         ->where('tenant_id', $tenant->id)
         ->where('origin_address_id', $origin->id)
         ->where('destination_address_id', $dest->id)
@@ -75,7 +75,7 @@ it('returns cached result on second call without creating duplicate', function (
     $first = $service->getDistance($tenant->id, $origin, $dest);
     $second = $service->getDistance($tenant->id, $origin, $dest);
 
-    expect(\DB::table('distance_caches')->count())->toBe(1);
+    expect(DB::table('distance_caches')->count())->toBe(1);
     expect($second->distanceKm)->toBe($first->distanceKm);
 });
 

@@ -1,12 +1,14 @@
 <?php
 
 use App\Modules\Crm\Models\Client;
+use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Scheduling\Filament\Resources\JobResource\Pages\CreateJob;
 use App\Modules\Scheduling\Filament\Resources\JobResource\Pages\EditJob;
 use App\Modules\Scheduling\Filament\Resources\JobResource\Pages\ListJobs;
 use App\Modules\Scheduling\Models\Job;
 use App\Modules\Scheduling\Models\JobOccurrence;
 use App\Modules\Tenancy\Models\Tenant;
+use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -20,10 +22,11 @@ beforeEach(function () {
 
 function jobOwner(): array
 {
-    $preset = \App\Modules\Presets\Models\VerticalPreset::where('slug', 'cleaning')->first();
+    $preset = VerticalPreset::where('slug', 'cleaning')->first();
     $tenant = Tenant::factory()->create(['preset_id' => $preset?->id]);
-    $user = Tenant::bypass(fn () => \App\Modules\Tenancy\Models\User::factory()->for($tenant, 'tenant')->create());
+    $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
     Tenant::setCurrent($tenant);
+
     return [$tenant, $user];
 }
 

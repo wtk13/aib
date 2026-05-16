@@ -20,13 +20,19 @@ class WeekRevenueWidget extends BaseWidget
         $lastWeekEnd = $weekEnd->copy()->subWeek();
 
         $thisWeekRevenue = Job::query()
-            ->join('job_occurrences', 'jobs.id', '=', 'job_occurrences.job_id')
+            ->join('job_occurrences', function ($join) {
+                $join->on('jobs.id', '=', 'job_occurrences.job_id')
+                    ->whereColumn('job_occurrences.tenant_id', 'jobs.tenant_id');
+            })
             ->whereBetween('job_occurrences.occurrence_at', [$weekStart, $weekEnd])
             ->where('job_occurrences.status', 'completed')
             ->sum('jobs.price_pln');
 
         $lastWeekRevenue = Job::query()
-            ->join('job_occurrences', 'jobs.id', '=', 'job_occurrences.job_id')
+            ->join('job_occurrences', function ($join) {
+                $join->on('jobs.id', '=', 'job_occurrences.job_id')
+                    ->whereColumn('job_occurrences.tenant_id', 'jobs.tenant_id');
+            })
             ->whereBetween('job_occurrences.occurrence_at', [$lastWeekStart, $lastWeekEnd])
             ->where('job_occurrences.status', 'completed')
             ->sum('jobs.price_pln');
@@ -46,11 +52,11 @@ class WeekRevenueWidget extends BaseWidget
             : 0;
 
         $description = $revenueDiff >= 0
-            ? "+{$revenueDiff}% " . __('dashboard.widgets.revenue.vs_last_week')
-            : '-' . abs($revenueDiff) . '% ' . __('dashboard.widgets.revenue.vs_last_week');
+            ? "+{$revenueDiff}% ".__('dashboard.widgets.revenue.vs_last_week')
+            : '-'.abs($revenueDiff).'% '.__('dashboard.widgets.revenue.vs_last_week');
 
         return [
-            Stat::make(__('dashboard.widgets.revenue.this_week'), 'PLN ' . number_format((float) $thisWeekRevenue, 2))
+            Stat::make(__('dashboard.widgets.revenue.this_week'), 'PLN '.number_format((float) $thisWeekRevenue, 2))
                 ->description($description)
                 ->color($revenueDiff >= 0 ? 'success' : 'danger'),
             Stat::make(__('dashboard.widgets.revenue.jobs_this_week'), (string) $thisWeekJobs),

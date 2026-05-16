@@ -6,6 +6,7 @@ use App\Modules\Crm\Models\Address;
 use App\Modules\Integrations\Geocoding\GeocodeAddressJob;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\TenantSettings;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -16,6 +17,9 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 
+/**
+ * @property-read ComponentContainer $form
+ */
 class TenantSettingsPage extends Page implements HasForms
 {
     use InteractsWithForms;

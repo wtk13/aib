@@ -24,6 +24,7 @@ function occurrenceOwner(): array
     $tenant = Tenant::factory()->create(['preset_id' => $preset?->id]);
     $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
     Tenant::setCurrent($tenant);
+
     return [$tenant, $user];
 }
 

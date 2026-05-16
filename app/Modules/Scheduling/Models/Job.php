@@ -29,8 +29,8 @@ class Job extends Model
 
     protected $casts = [
         'custom_fields' => 'array',
-        'starts_at'     => 'datetime',
-        'price_pln'     => 'decimal:2',
+        'starts_at' => 'datetime',
+        'price_pln' => 'decimal:2',
     ];
 
     /** @return BelongsTo<Client, $this> */

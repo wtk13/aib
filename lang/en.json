@@ -105,5 +105,7 @@
     "dashboard.widgets.overdue.empty": "No overdue clients",
 
     "job.occurrences.complete": "Mark complete",
-    "job.occurrences.skip": "Skip"
+    "job.occurrences.skip": "Skip",
+    "job.occurrences.reschedule": "Reschedule",
+    "job.occurrences.completed_at": "Completed at"
 }

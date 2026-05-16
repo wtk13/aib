@@ -27,7 +27,7 @@ class TenantSettings extends Model
 
     protected $casts = [
         'fuel_rate_pln_per_km' => 'decimal:2',
-        'is_vat_payer'         => 'boolean',
+        'is_vat_payer' => 'boolean',
     ];
 
     /** @return BelongsTo<Address, $this> */
