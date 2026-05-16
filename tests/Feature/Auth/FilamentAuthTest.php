@@ -39,6 +39,6 @@ it('login page renders with split layout brand panel', function () {
 
     $response->assertStatus(200);
     $response->assertSee('aib-auth-brand-panel', escape: false);
-    $response->assertSee('Wyceny');
+    $response->assertSee(filament()->getBrandName());
     $response->assertSee('CRM dla małych firm usługowych');
 });
