@@ -19,7 +19,9 @@ class GeocodingService
 
         $cacheKey = 'geocode:' . md5($query);
 
-        $result = cache()->rememberForever($cacheKey, function () use ($query) {
+        if (cache()->has($cacheKey)) {
+            $result = cache()->get($cacheKey);
+        } else {
             try {
                 $response = Http::timeout(5)->get('https://maps.googleapis.com/maps/api/geocode/json', [
                     'address' => $query,
@@ -31,18 +33,15 @@ class GeocodingService
                 $data = $response->json();
 
                 if (($data['status'] ?? '') !== 'OK' || empty($data['results'])) {
-                    return null;
+                    return;
                 }
 
-                return $data['results'][0]['geometry']['location'];
+                $result = $data['results'][0]['geometry']['location'];
+                cache()->forever($cacheKey, $result);
             } catch (\Exception $e) {
                 Log::warning('Geocoding failed: ' . $e->getMessage(), ['query' => $query]);
-                return null;
+                return;
             }
-        });
-
-        if ($result === null) {
-            return;
         }
 
         $address->lat = $result['lat'];
