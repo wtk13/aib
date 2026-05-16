@@ -2,31 +2,36 @@
 
 namespace App\Modules\Tenancy\Models;
 
+use App\Modules\Presets\Preset;
+use App\Modules\Presets\PresetRegistry;
+use Database\Factories\TenantFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\TenantFactory;
 
 class Tenant extends Model
 {
+    /** @use HasFactory<TenantFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'ulid', 'slug', 'firma_name', 'nip', 'regon', 'preset_id',
+        'ulid', 'slug', 'company_name', 'nip', 'regon', 'preset_id',
     ];
 
-    private static ?int $currentId = null;
-    private static bool $bypassed = false;
+    protected static ?int $currentId = null;
+
+    protected static bool $bypassed = false;
 
     protected static function newFactory(): TenantFactory
     {
         return TenantFactory::new();
     }
 
-    public static function current(): ?static
+    public static function current(): ?self
     {
         if (static::$currentId === null) {
             return null;
         }
+
         return static::withoutGlobalScopes()->find(static::$currentId);
     }
 
@@ -67,8 +72,8 @@ class Tenant extends Model
         return static::$bypassed;
     }
 
-    public function preset(): \App\Modules\Presets\Preset
+    public function preset(): Preset
     {
-        return \App\Modules\Presets\PresetRegistry::for($this);
+        return PresetRegistry::for($this);
     }
 }

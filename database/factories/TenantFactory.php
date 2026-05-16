@@ -13,11 +13,11 @@ class TenantFactory extends Factory
     public function definition(): array
     {
         return [
-            'ulid'       => (string) Str::ulid(),
-            'slug'       => $this->faker->unique()->slug(2),
-            'firma_name' => $this->faker->company(),
-            'nip'        => null,
-            'regon'      => null,
+            'ulid' => (string) Str::ulid(),
+            'slug' => $this->faker->unique()->slug(2),
+            'company_name' => $this->faker->company(),
+            'nip' => null,
+            'regon' => null,
         ];
     }
 }

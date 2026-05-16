@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->char('ulid', 26)->unique();
             $table->string('slug')->unique();
-            $table->string('firma_name');
+            $table->string('company_name');
             $table->string('nip', 10)->nullable();
             $table->string('regon', 14)->nullable();
             $table->foreignId('preset_id')->nullable()->constrained('vertical_presets')->nullOnDelete();

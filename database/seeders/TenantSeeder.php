@@ -19,9 +19,9 @@ class TenantSeeder extends Seeder
         $ania = Tenant::firstOrCreate(
             ['slug' => 'ania'],
             [
-                'ulid'       => (string) Str::ulid(),
-                'firma_name' => 'Cleaning by Ania',
-                'preset_id'  => $preset?->id,
+                'ulid' => (string) Str::ulid(),
+                'company_name' => 'Cleaning by Ania',
+                'preset_id' => $preset?->id,
             ]
         );
 
@@ -39,9 +39,9 @@ class TenantSeeder extends Seeder
         $test = Tenant::firstOrCreate(
             ['slug' => 'test'],
             [
-                'ulid'       => (string) Str::ulid(),
-                'firma_name' => 'Test Company',
-                'preset_id'  => $preset?->id,
+                'ulid' => (string) Str::ulid(),
+                'company_name' => 'Test Company',
+                'preset_id' => $preset?->id,
             ]
         );
 
