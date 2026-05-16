@@ -72,7 +72,44 @@ class ClientResource extends Resource
                 ->schema([
                     TextInput::make('nip')
                         ->label(__('client.fields.nip'))
-                        ->maxLength(10),
+                        ->maxLength(10)
+                        ->suffixAction(
+                            \Filament\Forms\Components\Actions\Action::make('lookup_nip')
+                                ->label(__('client.actions.lookup_nip'))
+                                ->icon('heroicon-o-magnifying-glass')
+                                ->action(function ($get, $set) {
+                                    $nip = $get('nip');
+                                    if (empty($nip)) {
+                                        \Filament\Notifications\Notification::make()
+                                            ->warning()
+                                            ->title(__('client.actions.lookup_nip_empty'))
+                                            ->send();
+                                        return;
+                                    }
+
+                                    $service = new \App\Modules\Integrations\Gus\GusNipLookupService();
+                                    $data    = $service->lookup($nip);
+
+                                    if ($data === null) {
+                                        \Filament\Notifications\Notification::make()
+                                            ->warning()
+                                            ->title(__('client.actions.lookup_nip_not_found'))
+                                            ->send();
+                                        return;
+                                    }
+
+                                    $set('name', $data['name']);
+                                    $set('regon', $data['regon']);
+                                    $set('addr_line1', $data['line1']);
+                                    $set('addr_city', $data['city']);
+                                    $set('addr_postcode', $data['postcode']);
+
+                                    \Filament\Notifications\Notification::make()
+                                        ->success()
+                                        ->title(__('client.actions.lookup_nip_success'))
+                                        ->send();
+                                })
+                        ),
                     TextInput::make('regon')
                         ->label(__('client.fields.regon'))
                         ->maxLength(14),

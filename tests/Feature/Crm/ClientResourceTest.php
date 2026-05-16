@@ -11,6 +11,7 @@ use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -159,4 +160,33 @@ it('can delete a note', function () {
         ->assertHasNoTableActionErrors();
 
     expect(Note::withTrashed()->find($note->id)?->deleted_at)->not->toBeNull();
+});
+
+it('GUS action fills company fields from NIP', function () {
+    $user = actingAsOwner();
+
+    Http::fake([
+        'wyszukiwarkaregon.stat.gov.pl/*' => Http::sequence()
+            ->push(['sessionId' => 'fake-session'])
+            ->push([
+                'name'     => 'ABC Service Sp. z o.o.',
+                'street'   => 'ul. Nowa 5',
+                'city'     => 'Kraków',
+                'postcode' => '30-001',
+                'regon'    => '987654321',
+            ])
+            ->push(['ok' => true]),
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(CreateClient::class)
+        ->fillForm(['client_type' => 'company', 'nip' => '1234567890'])
+        ->callFormComponentAction('nip', 'lookup_nip')
+        ->assertFormSet([
+            'name'          => 'ABC Service Sp. z o.o.',
+            'regon'         => '987654321',
+            'addr_line1'    => 'ul. Nowa 5',
+            'addr_city'     => 'Kraków',
+            'addr_postcode' => '30-001',
+        ]);
 });
