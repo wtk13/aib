@@ -43,13 +43,14 @@ class Register extends FilamentRegister
                             ->label(__('auth.register.password_confirmation'))
                             ->password()
                             ->required()
-                            ->same('password'),
+                            ->same('password')
+                            ->dehydrated(false),
                     ]),
                 Wizard\Step::make(__('auth.register.step_industry'))
                     ->schema([
                         Radio::make('preset_id')
                             ->label(__('auth.register.industry'))
-                            ->options(fn () => VerticalPreset::pluck('name', 'id')->toArray())
+                            ->options(fn () => VerticalPreset::where('is_active', true)->pluck('name', 'id')->toArray())
                             ->required(),
                     ]),
             ])
@@ -66,37 +67,46 @@ class Register extends FilamentRegister
 
     protected function handleRegistration(array $data): Model
     {
-        return DB::transaction(function () use ($data) {
+        /** @var array{User, int} $result */
+        $result = DB::transaction(function () use ($data) {
             $slug = $this->uniqueSlug(Str::slug($data['name']));
 
             $tenant = Tenant::bypass(fn () => Tenant::create([
-                'ulid' => (string) Str::ulid(),
-                'slug' => $slug,
+                'ulid'         => (string) Str::ulid(),
+                'slug'         => $slug,
                 'company_name' => $data['name'],
-                'preset_id' => $data['preset_id'],
+                'preset_id'    => $data['preset_id'],
             ]));
 
-            Tenant::setCurrent($tenant);
-
-            /** @var User $user */
-            $user = User::create([
+            $user = Tenant::bypass(fn () => User::create([
                 'tenant_id' => $tenant->id,
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'role' => 'owner',
-            ]);
+                'name'      => $data['name'],
+                'email'     => $data['email'],
+                'password'  => $data['password'],
+                'role'      => 'owner',
+            ]));
 
-            return $user;
+            return [$user, $tenant->id];
         });
+
+        [$user, $tenantId] = $result;
+
+        // Set tenant context after transaction commits (not inside, to avoid stale state on rollback)
+        $tenant = Tenant::bypass(fn () => Tenant::find($tenantId));
+        if ($tenant !== null) {
+            Tenant::setCurrent($tenant);
+        }
+
+        return $user;
     }
 
     private function uniqueSlug(string $base): string
     {
-        $slug = $base ?: 'tenant';
-        $i = 1;
+        $prefix = $base ?: 'tenant';
+        $slug   = $prefix;
+        $i      = 1;
         while (Tenant::bypass(fn () => Tenant::where('slug', $slug)->exists())) {
-            $slug = $base . '-' . $i++;
+            $slug = $prefix . '-' . $i++;
         }
 
         return $slug;
