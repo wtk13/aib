@@ -61,8 +61,8 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', \App\Modules\Tenancy\Models\User::class),
+            'driver' => 'tenant_aware_eloquent',
+            'model'  => env('AUTH_MODEL', \App\Modules\Tenancy\Models\User::class),
         ],
 
         // 'users' => [

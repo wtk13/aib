@@ -14,5 +14,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(VerticalPresetUpdated::class, BustPresetCache::class);
+
+        \Illuminate\Support\Facades\Auth::provider(
+            'tenant_aware_eloquent',
+            fn ($app, $config) => new \App\Modules\Tenancy\Auth\TenantAwareUserProvider(
+                $app['hash'],
+                $config['model']
+            )
+        );
     }
 }

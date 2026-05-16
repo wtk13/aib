@@ -1,29 +1,30 @@
 <?php
 
 use App\Modules\Tenancy\Models\Tenant;
+use App\Modules\Tenancy\Models\User;
+use Database\Seeders\CleaningPresetSeeder;
+use Filament\Pages\Auth\Login;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
-it('ania can log in to Filament and see her tenant scope', function () {
-    $this->seed(\Database\Seeders\CleaningPresetSeeder::class);
+it('a user can log in to Filament under their tenant scope', function () {
+    $this->seed(CleaningPresetSeeder::class);
     $preset = \App\Modules\Presets\Models\VerticalPreset::where('slug', 'cleaning')->first();
-    $tenant = Tenant::factory()->create(['slug' => 'ania-test', 'preset_id' => $preset?->id]);
-    \Illuminate\Support\Facades\DB::table('users')->insert([
-        'tenant_id'  => $tenant->id,
-        'name'       => 'Ania',
-        'email'      => 'ania-test@wyceny.app',
-        'password'   => bcrypt('password'),
-        'role'       => 'owner',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
 
-    $this->post('/admin/login', [
-        'email'    => 'ania-test@wyceny.app',
+    $tenant = Tenant::factory()->create(['preset_id' => $preset?->id]);
+    $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create([
+        'email'    => 'login-test@wyceny.app',
         'password' => 'password',
-    ])->assertRedirect('/admin');
+    ]));
+
+    Livewire::test(Login::class)
+        ->set('data.email', 'login-test@wyceny.app')
+        ->set('data.password', 'password')
+        ->call('authenticate')
+        ->assertRedirect('/admin');
 });
 
 it('app subdomain returns noindex header', function () {
