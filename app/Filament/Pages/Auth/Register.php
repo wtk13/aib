@@ -18,6 +18,15 @@ use Illuminate\Support\Str;
 
 class Register extends FilamentRegister
 {
+    protected static string $view = 'filament.pages.auth.register';
+
+    protected static string $layout = 'filament.components.layout.auth-split';
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
+
     public function form(Form $form): Form
     {
         return $form->schema([
