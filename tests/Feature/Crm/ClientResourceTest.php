@@ -1,12 +1,13 @@
 <?php
 
-use App\Modules\Crm\Filament\Resources\ClientResource;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages\CreateClient;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages\EditClient;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages\ListClients;
+use App\Modules\Crm\Filament\Resources\ClientResource\Pages\ViewClient;
 use App\Modules\Crm\Filament\Resources\ClientResource\RelationManagers\NoteRelationManager;
 use App\Modules\Crm\Models\Client;
 use App\Modules\Notes\Models\Note;
+use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
@@ -24,9 +25,9 @@ beforeEach(function () {
 // Helper — creates seeded tenant + user, sets context
 function actingAsOwner(): User
 {
-    $preset = \App\Modules\Presets\Models\VerticalPreset::where('slug', 'cleaning')->first();
+    $preset = VerticalPreset::where('slug', 'cleaning')->first();
     $tenant = Tenant::factory()->create(['preset_id' => $preset?->id]);
-    $user   = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
+    $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
     Tenant::setCurrent($tenant);
 
     return $user;
@@ -55,7 +56,7 @@ it('client can store regon', function () {
 });
 
 it('can list clients', function () {
-    $user   = actingAsOwner();
+    $user = actingAsOwner();
     $client = Client::create(['name' => 'Pani Nowak', 'client_type' => 'person']);
 
     Livewire::actingAs($user)
@@ -69,13 +70,13 @@ it('can create a person client', function () {
     Livewire::actingAs($user)
         ->test(CreateClient::class)
         ->fillForm([
-            'client_type'   => 'person',
-            'name'          => 'Jan Testowy',
-            'phone'         => '600100200',
-            'email'         => 'jan@test.pl',
-            'addr_line1'    => 'ul. Przykładowa 1',
+            'client_type' => 'person',
+            'name' => 'Jan Testowy',
+            'phone' => '600100200',
+            'email' => 'jan@test.pl',
+            'addr_line1' => 'ul. Przykładowa 1',
             'addr_postcode' => '00-001',
-            'addr_city'     => 'Warszawa',
+            'addr_city' => 'Warszawa',
         ])
         ->call('create')
         ->assertHasNoErrors();
@@ -87,7 +88,7 @@ it('can create a person client', function () {
 });
 
 it('can edit a client', function () {
-    $user   = actingAsOwner();
+    $user = actingAsOwner();
     $client = Client::create(['name' => 'Stara Nazwa', 'client_type' => 'person']);
 
     Livewire::actingAs($user)
@@ -105,14 +106,14 @@ it('saves cleaning custom fields and encrypted access_keys', function () {
     Livewire::actingAs($user)
         ->test(CreateClient::class)
         ->fillForm([
-            'client_type'           => 'person',
-            'name'                  => 'Pani Cleaning',
-            'custom_fields'         => [
-                'area_m2'       => 65,
+            'client_type' => 'person',
+            'name' => 'Pani Cleaning',
+            'custom_fields' => [
+                'area_m2' => 65,
                 'property_type' => 'apartment',
-                'preferences'   => 'Proszę nie używać silnych środków',
-                'allergies'     => 'Kot',
-                'access_notes'  => '3 piętro, winda',
+                'preferences' => 'Proszę nie używać silnych środków',
+                'allergies' => 'Kot',
+                'access_notes' => '3 piętro, winda',
             ],
             'access_keys_encrypted' => 'klucz#42, kod alarmu: 1234',
         ])
@@ -126,13 +127,13 @@ it('saves cleaning custom fields and encrypted access_keys', function () {
 });
 
 it('can add a note from the relation manager', function () {
-    $user   = actingAsOwner();
+    $user = actingAsOwner();
     $client = Client::create(['name' => 'Test Klient', 'client_type' => 'person']);
 
     Livewire::actingAs($user)
         ->test(NoteRelationManager::class, [
             'ownerRecord' => $client,
-            'pageClass'   => \App\Modules\Crm\Filament\Resources\ClientResource\Pages\ViewClient::class,
+            'pageClass' => ViewClient::class,
         ])
         ->callTableAction('create', data: ['body' => 'Pierwsza notatka'])
         ->assertHasNoTableActionErrors();
@@ -142,19 +143,19 @@ it('can add a note from the relation manager', function () {
 });
 
 it('can delete a note', function () {
-    $user   = actingAsOwner();
+    $user = actingAsOwner();
     $client = Client::create(['name' => 'Test Klient 2', 'client_type' => 'person']);
-    $note   = Note::create([
-        'client_id'          => $client->id,
-        'body'               => 'Do usunięcia',
-        'source'             => 'text',
+    $note = Note::create([
+        'client_id' => $client->id,
+        'body' => 'Do usunięcia',
+        'source' => 'text',
         'created_by_user_id' => $user->id,
     ]);
 
     Livewire::actingAs($user)
         ->test(NoteRelationManager::class, [
             'ownerRecord' => $client,
-            'pageClass'   => \App\Modules\Crm\Filament\Resources\ClientResource\Pages\ViewClient::class,
+            'pageClass' => ViewClient::class,
         ])
         ->callTableAction('delete', $note)
         ->assertHasNoTableActionErrors();
@@ -169,11 +170,11 @@ it('GUS action fills company fields from NIP', function () {
         'wyszukiwarkaregon.stat.gov.pl/*' => Http::sequence()
             ->push(['sessionId' => 'fake-session'])
             ->push([
-                'name'     => 'ABC Service Sp. z o.o.',
-                'street'   => 'ul. Nowa 5',
-                'city'     => 'Kraków',
+                'name' => 'ABC Service Sp. z o.o.',
+                'street' => 'ul. Nowa 5',
+                'city' => 'Kraków',
                 'postcode' => '30-001',
-                'regon'    => '987654321',
+                'regon' => '987654321',
             ])
             ->push(['ok' => true]),
     ]);
@@ -183,10 +184,37 @@ it('GUS action fills company fields from NIP', function () {
         ->fillForm(['client_type' => 'company', 'nip' => '1234567890'])
         ->callFormComponentAction('nip', 'lookup_nip')
         ->assertFormSet([
-            'name'          => 'ABC Service Sp. z o.o.',
-            'regon'         => '987654321',
-            'addr_line1'    => 'ul. Nowa 5',
-            'addr_city'     => 'Kraków',
+            'name' => 'ABC Service Sp. z o.o.',
+            'regon' => '987654321',
+            'addr_line1' => 'ul. Nowa 5',
+            'addr_city' => 'Kraków',
             'addr_postcode' => '30-001',
         ]);
+});
+
+it('GUS action shows warning when NIP is empty', function () {
+    $user = actingAsOwner();
+
+    Livewire::actingAs($user)
+        ->test(CreateClient::class)
+        ->fillForm(['client_type' => 'company'])
+        ->callFormComponentAction('nip', 'lookup_nip')
+        ->assertNotified();
+});
+
+it('GUS action shows warning when NIP is not found', function () {
+    $user = actingAsOwner();
+
+    Http::fake([
+        'wyszukiwarkaregon.stat.gov.pl/*' => Http::sequence()
+            ->push(['sessionId' => 'fake-session'])
+            ->push(null) // empty result — no 'name' key
+            ->push(['ok' => true]),
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(CreateClient::class)
+        ->fillForm(['client_type' => 'company', 'nip' => '0000000000'])
+        ->callFormComponentAction('nip', 'lookup_nip')
+        ->assertNotified();
 });

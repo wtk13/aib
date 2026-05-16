@@ -5,12 +5,15 @@ namespace App\Modules\Crm\Filament\Resources;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages;
 use App\Modules\Crm\Filament\Resources\ClientResource\RelationManagers;
 use App\Modules\Crm\Models\Client;
+use App\Modules\Integrations\Gus\GusNipLookupService;
+use Filament\Forms\Components\Actions\Action as FormAction;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -46,7 +49,7 @@ class ClientResource extends Resource
                     Select::make('client_type')
                         ->label(__('client.fields.client_type'))
                         ->options([
-                            'person'  => __('client.type.person'),
+                            'person' => __('client.type.person'),
                             'company' => __('client.type.company'),
                         ])
                         ->default('person')
@@ -74,27 +77,29 @@ class ClientResource extends Resource
                         ->label(__('client.fields.nip'))
                         ->maxLength(10)
                         ->suffixAction(
-                            \Filament\Forms\Components\Actions\Action::make('lookup_nip')
+                            FormAction::make('lookup_nip')
                                 ->label(__('client.actions.lookup_nip'))
                                 ->icon('heroicon-o-magnifying-glass')
                                 ->action(function ($get, $set) {
-                                    $nip = $get('nip');
+                                    $nip = preg_replace('/\D/', '', (string) $get('nip'));
                                     if (empty($nip)) {
-                                        \Filament\Notifications\Notification::make()
+                                        Notification::make()
                                             ->warning()
                                             ->title(__('client.actions.lookup_nip_empty'))
                                             ->send();
+
                                         return;
                                     }
 
-                                    $service = new \App\Modules\Integrations\Gus\GusNipLookupService();
-                                    $data    = $service->lookup($nip);
+                                    $service = app(GusNipLookupService::class);
+                                    $data = $service->lookup($nip);
 
                                     if ($data === null) {
-                                        \Filament\Notifications\Notification::make()
+                                        Notification::make()
                                             ->warning()
                                             ->title(__('client.actions.lookup_nip_not_found'))
                                             ->send();
+
                                         return;
                                     }
 
@@ -104,7 +109,7 @@ class ClientResource extends Resource
                                     $set('addr_city', $data['city']);
                                     $set('addr_postcode', $data['postcode']);
 
-                                    \Filament\Notifications\Notification::make()
+                                    Notification::make()
                                         ->success()
                                         ->title(__('client.actions.lookup_nip_success'))
                                         ->send();
@@ -146,9 +151,9 @@ class ClientResource extends Resource
                                 ->label(__('presets.cleaning.fields.property_type'))
                                 ->options([
                                     'apartment' => __('presets.cleaning.property_type.apartment'),
-                                    'house'     => __('presets.cleaning.property_type.house'),
-                                    'office'    => __('presets.cleaning.property_type.office'),
-                                    'retail'    => __('presets.cleaning.property_type.retail'),
+                                    'house' => __('presets.cleaning.property_type.house'),
+                                    'office' => __('presets.cleaning.property_type.office'),
+                                    'retail' => __('presets.cleaning.property_type.retail'),
                                 ]),
                         ]),
                     Textarea::make('custom_fields.preferences')
@@ -180,11 +185,11 @@ class ClientResource extends Resource
                 TextColumn::make('client_type')
                     ->label(__('client.fields.client_type'))
                     ->badge()
-                    ->formatStateUsing(fn ($state) => __('client.type.' . $state))
+                    ->formatStateUsing(fn ($state) => __('client.type.'.$state))
                     ->color(fn ($state) => $state === 'company' ? 'warning' : 'gray'),
                 TextColumn::make('custom_fields.property_type')
                     ->label(__('presets.cleaning.fields.property_type'))
-                    ->formatStateUsing(fn ($state) => $state ? __('presets.cleaning.property_type.' . $state) : '—'),
+                    ->formatStateUsing(fn ($state) => $state ? __('presets.cleaning.property_type.'.$state) : '—'),
                 TextColumn::make('address.city')
                     ->label(__('client.fields.address_city'))
                     ->sortable(),
@@ -198,16 +203,16 @@ class ClientResource extends Resource
                 SelectFilter::make('client_type')
                     ->label(__('client.fields.client_type'))
                     ->options([
-                        'person'  => __('client.type.person'),
+                        'person' => __('client.type.person'),
                         'company' => __('client.type.company'),
                     ]),
                 SelectFilter::make('property_type')
                     ->label(__('presets.cleaning.fields.property_type'))
                     ->options([
                         'apartment' => __('presets.cleaning.property_type.apartment'),
-                        'house'     => __('presets.cleaning.property_type.house'),
-                        'office'    => __('presets.cleaning.property_type.office'),
-                        'retail'    => __('presets.cleaning.property_type.retail'),
+                        'house' => __('presets.cleaning.property_type.house'),
+                        'office' => __('presets.cleaning.property_type.office'),
+                        'retail' => __('presets.cleaning.property_type.retail'),
                     ])
                     ->query(fn ($query, $state) => $state['value']
                         ? $query->whereJsonContains('custom_fields->property_type', $state['value'])
@@ -226,10 +231,10 @@ class ClientResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListClients::route('/'),
+            'index' => Pages\ListClients::route('/'),
             'create' => Pages\CreateClient::route('/create'),
-            'view'   => Pages\ViewClient::route('/{record}'),
-            'edit'   => Pages\EditClient::route('/{record}/edit'),
+            'view' => Pages\ViewClient::route('/{record}'),
+            'edit' => Pages\EditClient::route('/{record}/edit'),
         ];
     }
 }
