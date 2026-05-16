@@ -80,5 +80,16 @@
     "job.status.completed": "Completed",
     "job.status.cancelled": "Cancelled",
     "job.status.skipped": "Skipped",
-    "job.occurrences.title": "Occurrences"
+    "job.occurrences.title": "Occurrences",
+
+    "settings.nav_label": "Settings",
+    "settings.saved": "Save settings",
+    "settings.section.location": "Home base & travel",
+    "settings.section.billing": "Billing & localisation",
+    "settings.fields.address_line1": "Street and number",
+    "settings.fields.address_city": "City",
+    "settings.fields.fuel_rate": "Fuel rate",
+    "settings.fields.is_vat_payer": "VAT payer",
+    "settings.fields.default_vat_rate": "Default VAT rate",
+    "settings.fields.locale": "Language"
 }

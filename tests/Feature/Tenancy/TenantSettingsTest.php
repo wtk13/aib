@@ -1,9 +1,12 @@
 <?php
 
+use App\Filament\Pages\TenantSettingsPage;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\TenantSettings;
+use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
@@ -36,4 +39,28 @@ it('tenant settings uses tenant_id as primary key', function () {
     ]);
 
     expect(TenantSettings::find($tenant->id)?->fuel_rate_pln_per_km)->toBe('1.80');
+});
+
+it('can load the settings page', function () {
+    $tenant = Tenant::factory()->create();
+    $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
+    Tenant::setCurrent($tenant);
+
+    Livewire::actingAs($user)
+        ->test(TenantSettingsPage::class)
+        ->assertSuccessful();
+});
+
+it('can save fuel rate in settings', function () {
+    $tenant = Tenant::factory()->create();
+    $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
+    Tenant::setCurrent($tenant);
+
+    Livewire::actingAs($user)
+        ->test(TenantSettingsPage::class)
+        ->fillForm(['fuel_rate_pln_per_km' => '2.50'])
+        ->call('save')
+        ->assertHasNoFormErrors();
+
+    expect(TenantSettings::find($tenant->id)?->fuel_rate_pln_per_km)->toBe('2.50');
 });

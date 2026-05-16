@@ -80,5 +80,16 @@
     "job.status.completed": "Zrealizowane",
     "job.status.cancelled": "Anulowane",
     "job.status.skipped": "Pominięte",
-    "job.occurrences.title": "Realizacje"
+    "job.occurrences.title": "Realizacje",
+
+    "settings.nav_label": "Ustawienia",
+    "settings.saved": "Zapisz ustawienia",
+    "settings.section.location": "Baza i dojazdy",
+    "settings.section.billing": "Rozliczenia i lokalizacja",
+    "settings.fields.address_line1": "Ulica i numer",
+    "settings.fields.address_city": "Miasto",
+    "settings.fields.fuel_rate": "Stawka za km",
+    "settings.fields.is_vat_payer": "Płatnik VAT",
+    "settings.fields.default_vat_rate": "Domyślna stawka VAT",
+    "settings.fields.locale": "Język"
 }

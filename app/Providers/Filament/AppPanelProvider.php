@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Register;
+use App\Filament\Pages\TenantSettingsPage;
 use App\Http\Middleware\EnforceNoindex;
 use App\Http\Middleware\SetLocaleMiddleware;
 use App\Modules\Crm\Filament\Resources\ClientResource;
@@ -34,7 +35,7 @@ class AppPanelProvider extends PanelProvider
             ->login()
             ->registration(Register::class)
             ->colors(['primary' => Color::Blue])
-            ->pages([Pages\Dashboard::class])
+            ->pages([Pages\Dashboard::class, TenantSettingsPage::class])
             ->resources([
                 ClientResource::class,
                 JobResource::class,
