@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 class GusNipLookupService
 {
     private string $baseUrl;
+
     private string $apiKey;
 
     public function __construct()
@@ -19,7 +20,7 @@ class GusNipLookupService
 
     public function lookup(string $nip): ?array
     {
-        $cacheKey = 'gus:nip:' . $nip;
+        $cacheKey = 'gus:nip:'.$nip;
 
         $cached = Cache::get($cacheKey);
         if ($cached !== null) {
@@ -45,6 +46,7 @@ class GusNipLookupService
             return $data;
         } catch (\Exception $e) {
             Log::warning('GUS NIP lookup failed', ['nip' => $nip, 'error' => $e->getMessage()]);
+
             return null;
         }
     }
@@ -53,10 +55,11 @@ class GusNipLookupService
     {
         $response = Http::timeout(5)
             ->withHeader('userKey', $this->apiKey)
-            ->post($this->baseUrl . '/Login');
+            ->post($this->baseUrl.'/Login');
 
         if (! $response->successful()) {
             Log::warning('GUS login failed', ['status' => $response->status()]);
+
             return null;
         }
 
@@ -67,7 +70,7 @@ class GusNipLookupService
     {
         $response = Http::timeout(5)
             ->withHeader('sid', $sessionId)
-            ->post($this->baseUrl . '/DaneSzukajPodmioty', ['Nip' => $nip]);
+            ->post($this->baseUrl.'/DaneSzukajPodmioty', ['Nip' => $nip]);
 
         if (! $response->successful()) {
             return null;
@@ -80,11 +83,11 @@ class GusNipLookupService
         }
 
         return [
-            'name'     => $data['name'],
-            'line1'    => $data['street'] ?? '',
-            'city'     => $data['city'] ?? '',
+            'name' => $data['name'],
+            'line1' => $data['street'] ?? '',
+            'city' => $data['city'] ?? '',
             'postcode' => $data['postcode'] ?? '',
-            'regon'    => $data['regon'] ?? '',
+            'regon' => $data['regon'] ?? '',
         ];
     }
 
@@ -92,6 +95,6 @@ class GusNipLookupService
     {
         Http::timeout(3)
             ->withHeader('sid', $sessionId)
-            ->post($this->baseUrl . '/Wyloguj');
+            ->post($this->baseUrl.'/Wyloguj');
     }
 }

@@ -34,7 +34,7 @@ it('geocodes an address and stores lat/lng', function () {
         'city' => 'Warszawa',
     ]);
 
-    $service = new GeocodingService();
+    $service = new GeocodingService;
     $service->geocode($address);
 
     $fresh = $address->fresh();
@@ -57,7 +57,7 @@ it('does nothing silently when API returns no results', function () {
         'city' => 'Nowhere',
     ]);
 
-    $service = new GeocodingService();
+    $service = new GeocodingService;
     $service->geocode($address);
 
     expect($address->fresh()->lat)->toBeNull();

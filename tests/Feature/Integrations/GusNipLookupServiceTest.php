@@ -23,7 +23,7 @@ it('returns company data for a valid NIP', function () {
             ->push(['ok' => true]),
     ]);
 
-    $service = new GusNipLookupService();
+    $service = new GusNipLookupService;
     $result = $service->lookup('1234567890');
 
     expect($result)->not->toBeNull()
@@ -39,7 +39,7 @@ it('returns null for an unknown NIP', function () {
             ->push(['ok' => true]),
     ]);
 
-    $service = new GusNipLookupService();
+    $service = new GusNipLookupService;
     $result = $service->lookup('0000000000');
 
     expect($result)->toBeNull();
@@ -50,7 +50,7 @@ it('returns null and logs warning on API error', function () {
         'wyszukiwarkaregon.stat.gov.pl/*' => Http::response(null, 500),
     ]);
 
-    $service = new GusNipLookupService();
+    $service = new GusNipLookupService;
     $result = $service->lookup('1234567890');
 
     expect($result)->toBeNull();

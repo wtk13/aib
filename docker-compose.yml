@@ -18,7 +18,7 @@ services:
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_DATABASE: "${DB_DATABASE:-wyceny}"
+      DB_DATABASE: "${DB_DATABASE:-aib}"
       DB_USERNAME: "${DB_USERNAME:-postgres}"
       DB_PASSWORD: "${DB_PASSWORD:-secret}"
       REDIS_HOST: redis
@@ -44,7 +44,7 @@ services:
   postgres:
     image: "pgvector/pgvector:${POSTGRES_VERSION:-pg16}"
     environment:
-      POSTGRES_DB: "${DB_DATABASE:-wyceny}"
+      POSTGRES_DB: "${DB_DATABASE:-aib}"
       POSTGRES_USER: "${DB_USERNAME:-postgres}"
       POSTGRES_PASSWORD: "${DB_PASSWORD:-secret}"
     ports:
@@ -103,7 +103,7 @@ services:
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_DATABASE: "${DB_DATABASE:-wyceny}"
+      DB_DATABASE: "${DB_DATABASE:-aib}"
       DB_USERNAME: "${DB_USERNAME:-postgres}"
       DB_PASSWORD: "${DB_PASSWORD:-secret}"
       REDIS_HOST: redis

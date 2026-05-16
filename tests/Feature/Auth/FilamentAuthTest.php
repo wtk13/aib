@@ -17,12 +17,12 @@ it('a user can log in to Filament under their tenant scope', function () {
 
     $tenant = Tenant::factory()->create(['preset_id' => $preset?->id]);
     $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create([
-        'email' => 'login-test@wyceny.app',
+        'email' => 'login-test@aib.app',
         'password' => 'password',
     ]));
 
     Livewire::test(Login::class)
-        ->set('data.email', 'login-test@wyceny.app')
+        ->set('data.email', 'login-test@aib.app')
         ->set('data.password', 'password')
         ->call('authenticate')
         ->assertRedirect('/admin');

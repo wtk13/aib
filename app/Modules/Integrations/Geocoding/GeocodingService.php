@@ -17,7 +17,7 @@ class GeocodingService
             'Polska',
         ]));
 
-        $cacheKey = 'geocode:' . md5($query);
+        $cacheKey = 'geocode:'.md5($query);
 
         $result = cache()->get($cacheKey);
 
@@ -39,7 +39,8 @@ class GeocodingService
                 $result = $data['results'][0]['geometry']['location'];
                 cache()->forever($cacheKey, $result);
             } catch (\Exception $e) {
-                Log::warning('Geocoding failed: ' . $e->getMessage(), ['query' => $query]);
+                Log::warning('Geocoding failed: '.$e->getMessage(), ['query' => $query]);
+
                 return;
             }
         }

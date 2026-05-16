@@ -28,6 +28,7 @@ class DistanceService
 
         if ($cached !== null) {
             $km = $cached->distance_meters / 1000.0;
+
             return new DistanceResult($km, $km * 2 * $fuelRatePln);
         }
 
@@ -41,15 +42,16 @@ class DistanceService
         $distanceMetersRounded = (int) round($distanceMeters);
 
         DB::table('distance_caches')->insertOrIgnore([
-            'tenant_id'              => $tenantId,
-            'origin_address_id'      => $origin->id,
+            'tenant_id' => $tenantId,
+            'origin_address_id' => $origin->id,
             'destination_address_id' => $destination->id,
-            'distance_meters'        => $distanceMetersRounded,
-            'duration_seconds'       => 0,
-            'raw_response'           => json_encode(['source' => 'haversine']),
+            'distance_meters' => $distanceMetersRounded,
+            'duration_seconds' => 0,
+            'raw_response' => json_encode(['source' => 'haversine']),
         ]);
 
         $km = $distanceMetersRounded / 1000.0;
+
         return new DistanceResult($km, $km * 2 * $fuelRatePln);
     }
 

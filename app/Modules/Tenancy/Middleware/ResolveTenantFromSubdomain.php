@@ -12,9 +12,9 @@ class ResolveTenantFromSubdomain
     public function handle(Request $request, Closure $next): Response
     {
         $host = $request->getHost();
-        $appDomain = config('app.app_domain', 'app.wyceny.app');
+        $appDomain = config('app.app_domain', 'app.aib.app');
 
-        // Subdomain path: "ania.app.wyceny.app" => slug "ania"
+        // Subdomain path: "ania.app.aib.app" => slug "ania"
         if (str_ends_with($host, '.'.$appDomain)) {
             $subdomain = substr($host, 0, strlen($host) - strlen('.'.$appDomain));
             $tenant = Tenant::bypass(fn () => Tenant::where('slug', $subdomain)->first());

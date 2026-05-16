@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Pages\Auth\Register;
 use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
@@ -21,7 +22,7 @@ it('registration page is accessible', function () {
 it('can register a new tenant and user', function () {
     $preset = VerticalPreset::where('slug', 'cleaning')->firstOrFail();
 
-    Livewire::test(\App\Filament\Pages\Auth\Register::class)
+    Livewire::test(Register::class)
         ->set('data.name', 'Ania Cleaning')
         ->set('data.email', 'ania@example.com')
         ->set('data.password', 'password123')
@@ -44,7 +45,7 @@ it('registration fails with duplicate email', function () {
     $tenant = Tenant::factory()->create();
     Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create(['email' => 'taken@example.com']));
 
-    Livewire::test(\App\Filament\Pages\Auth\Register::class)
+    Livewire::test(Register::class)
         ->set('data.name', 'Other')
         ->set('data.email', 'taken@example.com')
         ->set('data.password', 'password123')

@@ -14,7 +14,7 @@ jobs:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_DB: wyceny_test
+          POSTGRES_DB: aib_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: secret
         ports:
@@ -55,7 +55,7 @@ jobs:
           context: .
           file: docker/app/Dockerfile
           load: true
-          tags: wyceny-app
+          tags: aib-app
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
@@ -68,16 +68,16 @@ jobs:
         run: cp .env.example .env
 
       - name: Generate app key
-        run: docker run --rm -v "$PWD":/var/www/html -w /var/www/html wyceny-app php artisan key:generate
+        run: docker run --rm -v "$PWD":/var/www/html -w /var/www/html aib-app php artisan key:generate
 
       - name: Run Pint (code style)
         run: |
-          docker run --rm -v "$PWD":/var/www/html -w /var/www/html wyceny-app \
+          docker run --rm -v "$PWD":/var/www/html -w /var/www/html aib-app \
             ./vendor/bin/pint --test
 
       - name: Run Larastan
         run: |
-          docker run --rm -v "$PWD":/var/www/html -w /var/www/html wyceny-app \
+          docker run --rm -v "$PWD":/var/www/html -w /var/www/html aib-app \
             ./vendor/bin/phpstan analyse --no-progress
 
       - name: Run Pest
@@ -90,11 +90,11 @@ jobs:
             -e DB_CONNECTION=pgsql \
             -e DB_HOST=127.0.0.1 \
             -e DB_PORT=5432 \
-            -e DB_DATABASE=wyceny_test \
+            -e DB_DATABASE=aib_test \
             -e DB_USERNAME=postgres \
             -e DB_PASSWORD=secret \
             -e REDIS_HOST=127.0.0.1 \
             -e REDIS_PORT=6379 \
             -e QUEUE_CONNECTION=sync \
             -e CACHE_STORE=array \
-            wyceny-app ./vendor/bin/pest --no-coverage
+            aib-app ./vendor/bin/pest --no-coverage

@@ -26,7 +26,7 @@ class TenantSeeder extends Seeder
         );
 
         DB::table('users')->updateOrInsert(
-            ['email' => 'ania@wyceny.app', 'tenant_id' => $ania->id],
+            ['email' => 'ania@aib.app', 'tenant_id' => $ania->id],
             ['name' => 'Ania', 'password' => Hash::make('password'), 'role' => 'owner']
         );
 
@@ -46,7 +46,7 @@ class TenantSeeder extends Seeder
         );
 
         DB::table('users')->updateOrInsert(
-            ['email' => 'test@wyceny.app', 'tenant_id' => $test->id],
+            ['email' => 'test@aib.app', 'tenant_id' => $test->id],
             ['name' => 'Test', 'password' => Hash::make('password'), 'role' => 'owner']
         );
     }

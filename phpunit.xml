@@ -20,7 +20,7 @@
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="CACHE_STORE" value="array"/>
-        <server name="DB_DATABASE" value="wyceny_test"/>
+        <server name="DB_DATABASE" value="aib_test"/>
         <server name="MAIL_MAILER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
@@ -29,7 +29,7 @@
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_STORE" value="array" force="true"/>
         <env name="DB_CONNECTION" value="pgsql"/>
-        <env name="DB_DATABASE" value="wyceny_test" force="true"/>
+        <env name="DB_DATABASE" value="aib_test" force="true"/>
         <env name="MAIL_MAILER" value="array" force="true"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync" force="true"/>

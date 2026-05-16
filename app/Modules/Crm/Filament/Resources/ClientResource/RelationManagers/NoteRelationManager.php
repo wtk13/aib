@@ -57,8 +57,9 @@ class NoteRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
-                        $data['source']             = 'text';
+                        $data['source'] = 'text';
                         $data['created_by_user_id'] = Auth::id();
+
                         return $data;
                     }),
             ])

@@ -54,9 +54,9 @@ class Register extends FilamentRegister
                             ->required(),
                     ]),
             ])
-            ->submitAction(new HtmlString(Blade::render(
-                '<x-filament::button type="submit" size="sm">{{ __("auth.register.submit") }}</x-filament::button>'
-            ))),
+                ->submitAction(new HtmlString(Blade::render(
+                    '<x-filament::button type="submit" size="sm">{{ __("auth.register.submit") }}</x-filament::button>'
+                ))),
         ]);
     }
 
@@ -72,18 +72,18 @@ class Register extends FilamentRegister
             $slug = $this->uniqueSlug(Str::slug($data['name']));
 
             $tenant = Tenant::bypass(fn () => Tenant::create([
-                'ulid'         => (string) Str::ulid(),
-                'slug'         => $slug,
+                'ulid' => (string) Str::ulid(),
+                'slug' => $slug,
                 'company_name' => $data['name'],
-                'preset_id'    => $data['preset_id'],
+                'preset_id' => $data['preset_id'],
             ]));
 
             $user = Tenant::bypass(fn () => User::create([
                 'tenant_id' => $tenant->id,
-                'name'      => $data['name'],
-                'email'     => $data['email'],
-                'password'  => $data['password'],
-                'role'      => 'owner',
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'role' => 'owner',
             ]));
 
             return [$user, $tenant->id];
@@ -103,10 +103,10 @@ class Register extends FilamentRegister
     private function uniqueSlug(string $base): string
     {
         $prefix = $base ?: 'tenant';
-        $slug   = $prefix;
-        $i      = 1;
+        $slug = $prefix;
+        $i = 1;
         while (Tenant::bypass(fn () => Tenant::where('slug', $slug)->exists())) {
-            $slug = $prefix . '-' . $i++;
+            $slug = $prefix.'-'.$i++;
         }
 
         return $slug;

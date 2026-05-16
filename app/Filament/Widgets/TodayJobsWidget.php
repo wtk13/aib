@@ -33,7 +33,7 @@ class TodayJobsWidget extends BaseWidget
                     ->label(__('job.fields.client')),
                 TextColumn::make('job.service_type_key')
                     ->label(__('job.fields.service_type'))
-                    ->formatStateUsing(fn (string $state): string => __('presets.cleaning.services.' . $state)),
+                    ->formatStateUsing(fn (string $state): string => __('presets.cleaning.services.'.$state)),
                 TextColumn::make('status')
                     ->label(__('job.fields.status'))
                     ->badge()
