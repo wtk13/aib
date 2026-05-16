@@ -42,7 +42,7 @@
             {{-- Right: AI suggestion card mockup --}}
             <div class="mt-10 lg:mt-0">
                 <div class="bg-white rounded-xl shadow-lg p-5 max-w-sm mx-auto">
-                    <div class="text-teal-600 text-sm font-semibold mb-3">✦ Sugestia AI — pani Kowalska</div>
+                    <div class="text-teal-600 text-sm font-semibold mb-3" aria-hidden="true">✦ Sugestia AI — pani Kowalska</div>
                     <div class="border-t border-slate-100 pt-3 space-y-2">
                         <div class="flex justify-between text-sm">
                             <span class="text-slate-700">Sprzątanie 90m²</span>
@@ -92,27 +92,27 @@
 
             {{-- Chips --}}
             <div class="flex flex-wrap justify-center gap-3 mb-8">
-                <button @click="industry = 'sprzatanie'"
+                <button type="button" @click="industry = 'sprzatanie'"
                         :class="industry === 'sprzatanie' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
                         class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
                     ✓ Sprzątanie
                 </button>
-                <button @click="industry = 'remonty'"
+                <button type="button" @click="industry = 'remonty'"
                         :class="industry === 'remonty' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
                         class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
                     Remonty
                 </button>
-                <button @click="industry = 'fotografia'"
+                <button type="button" @click="industry = 'fotografia'"
                         :class="industry === 'fotografia' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
                         class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
                     Fotografia
                 </button>
-                <button @click="industry = 'korepetycje'"
+                <button type="button" @click="industry = 'korepetycje'"
                         :class="industry === 'korepetycje' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
                         class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
                     Korepetycje
                 </button>
-                <button @click="industry = 'inna'"
+                <button type="button" @click="industry = 'inna'"
                         :class="industry === 'inna' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
                         class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
                     Inna branża
@@ -163,7 +163,7 @@
         <div class="grid md:grid-cols-3 gap-6">
 
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-                <div class="text-3xl mb-3">💡</div>
+                <div class="text-3xl mb-3" aria-hidden="true">💡</div>
                 <h3 class="font-bold text-slate-900 mb-2">Wycenia za Ciebie</h3>
                 <p class="text-slate-500 text-sm leading-relaxed">
                     AI proponuje cenę z historii zleceń i kosztu dojazdu. Nie musisz pamiętać ile wzięłaś od pani Kowalskiej w lutym.
@@ -171,7 +171,7 @@
             </div>
 
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-                <div class="text-3xl mb-3">🧠</div>
+                <div class="text-3xl mb-3" aria-hidden="true">🧠</div>
                 <h3 class="font-bold text-slate-900 mb-2">Pamięta klientów</h3>
                 <p class="text-slate-500 text-sm leading-relaxed">
                     Notatki głosowe z samochodu, zdjęcia, preferencje, alergie — wszystko w jednym miejscu. Zapytaj, odpowie.
@@ -179,7 +179,7 @@
             </div>
 
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-                <div class="text-3xl mb-3">📅</div>
+                <div class="text-3xl mb-3" aria-hidden="true">📅</div>
                 <h3 class="font-bold text-slate-900 mb-2">Porządkuje tydzień</h3>
                 <p class="text-slate-500 text-sm leading-relaxed">
                     Grafik ekipy, cykliczne zlecenia, dojazd doliczony automatycznie. Mniej Excela, więcej spokoju.
@@ -196,7 +196,7 @@
         <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
 
             <div class="bg-teal-50 border border-teal-100 rounded-xl p-5 mb-8 lg:mb-0">
-                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-3">✦ AI WYCENA</div>
+                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-3" aria-hidden="true">✦ AI WYCENA</div>
                 <p class="text-slate-600 text-sm mb-3">
                     Notatka: <em>"90m² mieszkanie, kot, pierwsze sprzątanie generalne"</em>
                 </p>
@@ -234,7 +234,7 @@
             </div>
 
             <div class="order-1 lg:order-2 bg-white border border-slate-100 rounded-xl p-5 mb-8 lg:mb-0">
-                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-3">🎙️ NOTATKI GŁOSOWE</div>
+                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-3" aria-hidden="true">🎙️ NOTATKI GŁOSOWE</div>
                 <div class="bg-red-50 border border-red-100 rounded-lg px-3 py-2 text-sm text-red-700 font-medium mb-3">
                     ● Nagrywanie... 0:42
                 </div>
@@ -254,7 +254,7 @@
         <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
 
             <div class="bg-slate-50 border border-slate-100 rounded-xl p-5 mb-8 lg:mb-0 font-mono text-sm">
-                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-4 font-sans">💬 CHAT O KLIENCIE</div>
+                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-4 font-sans" aria-hidden="true">💬 CHAT O KLIENCIE</div>
                 <div class="bg-blue-50 border border-blue-100 rounded-lg px-3 py-2 text-slate-700 mb-3">
                     Ty: Co obiecałam pani Kowalskiej na maj?
                 </div>
