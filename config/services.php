@@ -39,4 +39,9 @@ return [
         'api_key' => env('GOOGLE_MAPS_API_KEY', 'placeholder'),
     ],
 
+    'gus' => [
+        'api_key' => env('GUS_API_KEY', 'placeholder'),
+        'base_url' => env('GUS_BASE_URL', 'https://wyszukiwarkaregon.stat.gov.pl/api/'),
+    ],
+
 ];
