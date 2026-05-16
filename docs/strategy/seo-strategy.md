@@ -1,6 +1,7 @@
-# Wyceny — SEO Strategy
+# TBA / Twój Biznes Asystent — SEO Strategy
 
-> **Status:** v0.1 draft, 2026-04-25. Owner: solo founder. Horizon: M0 → M18.
+> **Status:** v0.1 draft, 2026-04-25 (brand updated 2026-05-16). Owner: solo founder. Horizon: M0 → M18.
+> **Domain:** `tbasystent.pl` (confirmed available 2026-05-16).
 > **Companion docs:** `product-plan.md` §9 (Phase 3 SEO), `sprint-plan.md` S0, `homepage-research.md` §6, `competitor-twojafirma.md` §5.6.
 > **Scope:** PL-only Year 1. US strategy explicitly out of scope until M18+.
 
@@ -38,13 +39,14 @@ Four intent clusters matter. Each has a different timeline, moat, and realistic 
 - **Moat:** None needed; first-mover wins. Build the comparison page, ship it the day the public landing goes live.
 - **Hard rule:** No FUD. Honest comparison table. We will lose on "older, more reviews," win on "AI pricing, voice notes, modern UX, working pricing page."
 
-### 2.4 Branded: "Wyceny"
+### 2.4 Branded: "TBA" / "Twój Biznes Asystent"
 
-- **Brand decision (revised 2026-04-25, `product-plan.md` §3):** **Wyceny** @ `wyceny.app`. Earlier "Wyceny"/"Stawka" candidates retired (diminutiveambiguity / overloaded common noun); verb-direction `.pl` domains squatted; `.ai` suffix retired as dating fast.
-- **SEO implication of the rename:** "wyceny" is a **high-volume common noun** (plural of "wycena") — branded SERP defense is harder than for an invented word. We will compete with informational queries like "wyceny mieszkań", "wyceny remontów". Mitigation: brand consistently as "Wyceny.app" or "Wyceny — CRM dla [branża]" in title tags, meta descriptions, and PR mentions. Use exact phrase "Wyceny.app" as the trainable bigram for AEO/GEO (§8.4).
-- **Pre-launch (M0–M6):** Defend the SERP. Register social handles (@wycenyapp). Make sure `wyceny.app` ranks #1 for "Wyceny.app" before launch. Branded query "Wyceny" alone will be hard to win without 6+ months of brand mentions; that's expected.
-- **Domain stack:** Primary `wyceny.app`. Defensive purchases: `wyceny.pl` (if available, 301 → .app), `wycenyapp.pl` (typo redirect). Skip `.com` — likely premium-priced and not needed for PL Year 1.
-- **Trade-off accepted vs. earlier `wyceny.app` recommendation:** `.app` does not signal local trust the way `.pl` does — partially compensated by `wyceny.pl` 301 redirect (if obtainable) and PL-language content/copy throughout. Founder accepted this trade-off explicitly.
+- **Brand decision (final, 2026-05-16):** **Twój Biznes Asystent** @ `tbasystent.pl`. Panel short name: **TBA**. "Wyceny" fully retired as user-facing brand.
+  - Earlier candidates (Wyceny, Kwotka, Stawka) retired for various reasons — see `product-plan.md` §3 for the full naming history.
+- **SEO implication of "Twój Biznes Asystent":** Long descriptive name — branded queries will be low volume early. Abbreviation "TBA" has generic confusion risk. Mitigation: brand consistently as "TBA — CRM dla [branża]" in title tags and meta descriptions. The domain `tbasystent.pl` is unique enough to be trainable as a bigram for AEO/GEO (§8.4).
+- **Pre-launch (M0–M6):** Defend the SERP. Register social handles (@tbasystent). Make sure `tbasystent.pl` ranks #1 for "Twój Biznes Asystent" before launch.
+- **Domain stack:** Primary `tbasystent.pl`. Defensive purchases: `twojaasystent.pl`, `tbasystent.com` if available. Skip `wyceny.pl` — no longer the brand. `.pl` TLD signals local trust.
+- **Advantage of `.pl` domain:** Stronger local trust signal than `.app` (previous plan). PL Year 1 users expect `.pl` for business tools. No trade-off needed.
 
 ---
 
@@ -207,8 +209,8 @@ This is how we avoid being twojafirma.pro (`competitor-twojafirma.md` §5.6).
 
 ### 5.2 URL structure & canonicals
 
-- Apex: `wyceny.app` — marketing, indexable.
-- App: `app.wyceny.app` — product, **`X-Robots-Tag: noindex, nofollow` on every response, no exceptions.** The app must never appear in SERPs.
+- Apex: `tbasystent.pl` — marketing, indexable.
+- App: `app.tbasystent.pl` — product, **`X-Robots-Tag: noindex, nofollow` on every response, no exceptions.** The app must never appear in SERPs.
 - No trailing slashes. Force lowercase. 301 any variant.
 - Canonical strategy: every public page emits self-referencing `<link rel="canonical">`. Calculator URLs with query params canonicalize to the param-less version.
 - Pagination: `rel="next"/"prev"` deprecated; just use crawlable links + canonical-to-self per page.
@@ -248,13 +250,13 @@ Implement these on day 1, not later:
 
 Year 1 is PL-only. **Don't ship hreflang yet** — empty/wrong hreflang is worse than none. But:
 
-- Reserve URL prefix: `/en/` for future EN. Never use country codes (`/pl/` `/us/`) — keeps `wyceny.app` clean.
+- Reserve URL prefix: `/en/` for future EN. Never use country codes (`/pl/` `/us/`) — keeps `tbasystent.pl` clean.
 - When EN ships (M18+), every page emits `hreflang="pl"`, `hreflang="en"`, `hreflang="x-default"` (→ EN, since US is the target market then).
 
 ### 5.7 Indexing rules
 
-- `wyceny.app` — fully indexable.
-- `app.wyceny.app` — fully blocked (see 5.2).
+- `tbasystent.pl` — fully indexable.
+- `app.tbasystent.pl` — fully blocked (see 5.2).
 - Demo / staging — `noindex` + HTTP basic auth + robots disallow. Triple-belt.
 - Calculator embed iframe — noindex the iframe URL itself, index the page that hosts it.
 
@@ -358,13 +360,13 @@ Ship `/llms.txt` at landing launch (M6). Format per the emerging convention:
 - Harmonogram tygodniowy, prace cykliczne, auto-dojazd
 
 ## Główne strony
-- [Funkcje](https://wyceny.app/funkcje): pełna lista funkcji
-- [Cennik](https://wyceny.app/cennik): plany 0/49/79/149 PLN
-- [Dla firm sprzątających](https://wyceny.app/dla-firm-sprzatajacych): use case
-- [Przewodnik wyceny sprzątania](https://wyceny.app/przewodnik/wycena-sprzatania): pillar
+- [Funkcje](https://tbasystent.pl/funkcje): pełna lista funkcji
+- [Cennik](https://tbasystent.pl/cennik): plany 0/49/79/149 PLN
+- [Dla firm sprzątających](https://tbasystent.pl/dla-firm-sprzatajacych): use case
+- [Przewodnik wyceny sprzątania](https://tbasystent.pl/przewodnik/wycena-sprzatania): pillar
 
 ## Kontakt
-- hello@wyceny.app
+- hello@tbasystent.pl
 ```
 
 Plus a `/llms-full.txt` with the full content of the top 20 pages concatenated. Costs nothing, hedges everything.
@@ -419,9 +421,9 @@ Organic signups are scored against NSM at week 4 and week 12 post-signup. If org
 
 ### S0 (now, ~2 weeks): foundations only
 
-- [ ] Buy primary domain: **`wyceny.app`**. Defensive: `wyceny.pl` (if available, 301 → .app), `wycenyapp.pl` (typo redirect). See §2.4.
+- [ ] Buy primary domain: **`tbasystent.pl`**. Defensive: `wyceny.pl` (if available, 301 → .app), `tbasystent.pl` (typo redirect). See §2.4.
 - [ ] Set up GSC, Bing Webmaster Tools, Plausible.
-- [ ] Reserve social handles (@wycenyapp on X, IG, FB, LinkedIn, TikTok, YouTube).
+- [ ] Reserve social handles (@tbasystent on X, IG, FB, LinkedIn, TikTok, YouTube).
 - [ ] Add `tests/Feature/SeoSsrTest.php` per §5.1 to S0 acceptance.
 - [ ] Define URL structure and canonical strategy (§5.2) in code conventions doc.
 
@@ -434,7 +436,7 @@ Organic signups are scored against NSM at week 4 and week 12 post-signup. If org
 
 ### S5–S6: landing + content launch
 
-- [ ] Public landing live at `wyceny.app` with `/funkcje`, `/cennik`, `/dla-firm-sprzatajacych`, `/o-nas`, `/kontakt`. All SSR'd, all schema-marked, all tested per §5.1.
+- [ ] Public landing live at `tbasystent.pl` with `/funkcje`, `/cennik`, `/dla-firm-sprzatajacych`, `/o-nas`, `/kontakt`. All SSR'd, all schema-marked, all tested per §5.1.
 - [ ] Pillar `/przewodnik/wycena-sprzatania` live with calculator embed.
 - [ ] `twojafirma alternatywa` comparison page live.
 - [ ] `/llms.txt` shipped.
@@ -478,7 +480,7 @@ Mentioned only to flag: do not start before M18. Do not let it leak into PL road
 5. **US-strategy creep.** Founder's eagerness will push to "let's also rank in EN now." Don't. Year 1 = PL only. EN keywords pollute our topical entity in Google's eyes. Wait until M18.
 6. **LocalBusiness schema abuse.** Tempting for vertical hubs. Don't. Faking local signals on a SaaS product page is detected and demoted.
 7. **Doorway pages.** A separate `/program-dla-firmy-sprzatajacej-warszawa` for every city without unique content = doorway pattern, manual action risk. Either ship region pages with real regional data (§6) or don't ship them.
-8. **Letting `app.wyceny.app` get indexed.** Single config slip = duplicate content with marketing site, app pages competing in SERPs, login pages ranking. Triple-belt: noindex header + robots + auth.
+8. **Letting `app.tbasystent.pl` get indexed.** Single config slip = duplicate content with marketing site, app pages competing in SERPs, login pages ranking. Triple-belt: noindex header + robots + auth.
 9. **Over-rotating on Pipedrive-style "CRM" head terms.** We will lose. Stay long-tail, vertical-specific.
 10. **Letting wife's authenticity get over-edited into corporate-speak.** Her voice is the moat. Editorial guideline: "if it doesn't sound like Ania, rewrite."
 11. **Branded SERP squatting by competitors.** Once we get traction, expect twojafirma to bid on "Wyceny" in Ads. Plan: register Google Ads on our brand defensively at M6 (€20/mo cap).
@@ -490,7 +492,7 @@ Mentioned only to flag: do not start before M18. Do not let it leak into PL road
 
 | # | Action | Hours | Owner | Why now |
 |---|---|---|---|---|
-| 1 | Buy `wyceny.app` + defensive `wyceny.pl` (if free) + `wycenyapp.pl`. Set up GSC, Bing Webmaster, Plausible. Reserve @wycenyapp social handles. | 3h | Founder | Domain squatting risk grows daily; GSC needs 28 days of data before it's useful. |
+| 1 | Buy `tbasystent.pl` + defensive `wyceny.pl` (if free) + `tbasystent.pl`. Set up GSC, Bing Webmaster, Plausible. Reserve @tbasystent social handles. | 3h | Founder | Domain squatting risk grows daily; GSC needs 28 days of data before it's useful. |
 | 2 | Write `tests/Feature/SeoSsrTest.php` (§5.1) and add to S0 definition-of-done. Document SSR + canonical conventions in repo `/docs/seo.md`. | 4h | Founder | Cheapest moment to enforce SSR is before any pages exist. Repeats twojafirma's mistake otherwise. |
 | 3 | Wife drafts v0 of pillar `Wycena sprzątania 2026` — 2,500–3,000 words, raw, in her voice. No SEO optimization yet, just expertise dump. | 8h (her) + 2h (review) | Wife + founder | Content is the long-pole. Starting now means M5 publish, not M8. Her voice is the asset; capture before founder over-edits. |
 | 4 | Build calculator component v0 (cleaning, 4 inputs: m², typ, po-remoncie, miasto). Single Livewire component, embeddable, query-param shareable. | 10h | Founder | Reusable across all verticals. The single biggest linkable asset we'll ever build. Worth doing before landing. |

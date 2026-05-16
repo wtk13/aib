@@ -1,8 +1,9 @@
-# Product Plan: AI-Powered Quoting CRM for Small Service Businesses
+# Product Plan: TBA — Twój Biznes Asystent
 
+> **Brand:** **TBA** (panel name) / **Twój Biznes Asystent** (full Polish name) / domain: `tbasystent.pl`
 > **Positioning:** Horizontal product for **any service business that quotes jobs** (sprzątanie, remonty, fotografia, korepetycje, przeprowadzki, DJ-e, ogrodnictwo, itd.).
 >
-> **First vertical wedge:** firmy sprzątające — bo żona prowadzi jedną i będzie user #1 / design partner / źródło danych i feedbacku od dnia 1.
+> **First vertical wedge:** firmy sprzątające — Ania (design partner / user #1) runs one and provides daily feedback from day 1.
 
 ## 1. Product Vision
 
@@ -47,13 +48,16 @@ Nazwa **NIE MOŻE** być branżowa (odpada Szczotka/Klucznik) — musi służyć
 
 **Original recommendation (2026-04-19):** Kwotka lub Stawka — wycofane.
 
-**Decision (2026-04-25):** **Wyceny** @ **`wyceny.app`**.
+**Decision (2026-04-25):** **Wyceny** @ **`wyceny.app`** — later revised.
 - "Kwotka" — diminutywa "kwoty" niejednoznaczna; brak instant clarity co produkt robi
 - "Stawka" — overloaded (zakłady / godzinowa stawka / pozycja)
 - Verb-direction (`wyceniaj.pl`, `wyceniam.pl`) niedostępne; `wycena.ai` odrzucone (AI-suffix dating fast)
 - "Wyceny" = plural noun + `.app` TLD = czytelne SaaS, ages well, brandable
-- **Spoken brand:** "Wyceny" jako proper noun (odmienia się — "korzystam z Wycen", "polecam Wyceny"). Bolt/Allegro precedent — common-noun brands działają jeśli kontekst jasny
-- **Defensywnie:** kupić `wyceny.pl` (jeśli wolne, 301 → .app), `wycenyapp.pl` jako typo-redirect
+
+**Final decision (2026-05-16):** **Twój Biznes Asystent** @ **`tbasystent.pl`** (confirmed available).
+- Panel brand name: **TBA** (short form, permanent)
+- "Wyceny" fully retired — not user-facing anywhere
+- Internal code artifact `wyceny` (slugs, preset key) retained as technical identifier only
 
 ## 4. Strategic Positioning
 

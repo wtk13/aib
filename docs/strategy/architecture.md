@@ -1,6 +1,6 @@
-# Architecture — Wyceny (`wyceny.app`)
+# Architecture — TBA / Twój Biznes Asystent (`tbasystent.pl`)
 
-> **Status:** v0.1, 2026-04-25. Companion to `sprint-plan.md` (S0–S6) and `product-plan.md`.
+> **Status:** v0.1, 2026-04-25 (brand updated 2026-05-16). Companion to `sprint-plan.md` (S0–S6) and `product-plan.md`.
 > **Scope:** the architecture that makes the 13-week MVP buildable in ~15–20h/week without painting the founder into a corner before M7 (second vertical preset) and M11+ (team mode).
 > **Anti-scope:** does not redefine sprint stories or DoD. References to `sprint-plan.md S0.4`, `seo-strategy.md §5`, etc., are load-bearing.
 
@@ -14,7 +14,7 @@
 - **One decision the founder should push back on:** **custom-field storage as JSONB columns** instead of a `custom_field_values` side table. Easier today, harder to validate cross-preset at M7. Picking JSONB; trade-off in §3.4.
 - **Embeddings:** `pgvector` + `ivfflat` (not hnsw). At <10k vectors per tenant index choice doesn't matter; ivfflat has cheaper inserts. Reverse at M9+ if dataset >100k notes.
 - **PDF:** `spatie/browsershot` (Forge-installed Chromium), not `dompdf`. Browsershot handles Polish typography, web fonts, CSS Grid; dompdf will fight us on diacritics within a sprint. Cost: ~600 MB Chromium binary.
-- **Deployment:** single Laravel app. `wyceny.app` (public, SSR per `seo-strategy.md §5`) + `app.wyceny.app` (Filament, `noindex`) routed by subdomain middleware in same codebase. No Next.js front, no Webflow split.
+- **Deployment:** single Laravel app. `tbasystent.pl` (public, SSR per `seo-strategy.md §5`) + `app.tbasystent.pl` (Filament, `noindex`) routed by subdomain middleware in same codebase. No Next.js front, no Webflow split.
 - **Boring on purpose.** 8 Horizon queues, one Filament panel, one Livewire-FullCalendar bridge, one ADR per S0 story. We fix walls, we don't replatform.
 
 ---
@@ -36,7 +36,7 @@ Codebase under `app/Modules/<Context>/` (PSR-4 `App\Modules\<Context>\`). Each m
 | `AI` | Provider abstraction, prompt loading, JSON schema retry, token logging, cost cap | `AIUsageLog`, `Prompt` | `AIProvider`, `ClaudeProvider`, `WhisperProvider`, `EmbeddingsProvider`, `OcrProvider`, `PromptRegistry` | Domain logic |
 | `Integrations` | GUS REGON, Google Maps Distance + Geocoding, caches | `GeocodingCache`, `DistanceCache`, `GusLookupCache` | `GusClient::lookup(NIP)`, `Geocoder`, `DistanceCalculator` | Domain models |
 | `Pdf` | Browsershot wrapper, PDF caching by content hash, signed URLs | `PdfRender` | `PdfRenderer::render()`, `SignedShareLink::for(Quote)` | What goes on the PDF (in `Quoting`) |
-| `Public` | Marketing site (`wyceny.app`), pillars, calculator widget, SEO helpers | — | Routes only | App auth, tenant data |
+| `Public` | Marketing site (`tbasystent.pl`), pillars, calculator widget, SEO helpers | — | Routes only | App auth, tenant data |
 | `Billing` | **STUB only M1–M3.** Folder exists, no code. M5 ships Stripe/Tpay. | — | `BillingStub::canCreateQuote(): true` | Anything real (per `sprint-plan.md` §10) |
 
 **Cross-module communication, in preference order:** (1) domain events (default for "after X, do Y"); (2) public service class call (sync answer needed); (3) direct Eloquent relation (only within same aggregate root).
@@ -217,15 +217,15 @@ Applied to: `Client`, `Job`, `JobOccurrence`, `Quote`, `QuoteItem`, `QuoteStatus
 ### 4.3 Subdomain → tenant resolution
 
 ```
-Request → ResolveTenantFromSubdomain middleware (on app.wyceny.app group)
-        → "ania.app.wyceny.app" → tenants.slug = 'ania' → bind Tenant::current() in container
+Request → ResolveTenantFromSubdomain middleware (on app.tbasystent.pl group)
+        → "ania.app.tbasystent.pl" → tenants.slug = 'ania' → bind Tenant::current() in container
         → fall through to ResolveTenantFromUser if subdomain didn't resolve
         → Filament + global scope use Tenant::current()
 ```
 
 In M1–M3 every user has one tenant; user-fallback always works. M11+ multi-tenant users: subdomain authoritative.
 
-**[FOUNDER REVIEW]** Subdomain UX: `ania.app.wyceny.app`. Wildcard SSL (Forge handles). Subdomain locked at signup; rename allowed in M5+ with 30-day redirect.
+**[FOUNDER REVIEW]** Subdomain UX: `ania.app.tbasystent.pl`. Wildcard SSL (Forge handles). Subdomain locked at signup; rename allowed in M5+ with 30-day redirect.
 
 ### 4.4 The three places multi-tenant scope leaks in Laravel
 
@@ -502,7 +502,7 @@ Pattern `{YYYY}/{MM}/{seq:003}` per tenant, configurable via `tenant_settings.qu
 
 ### 10.5 Signed-URL share links
 
-`quote_share_tokens.token` is 64-char random (not predictable from quote_id). URL: `https://wyceny.app/q/{token}` (locale-neutral path). Server-side rate limit (10 req/min/token, 100/h/IP). Public route renders SSR Blade (`resources/views/public/shared-quote.blade.php`), `noindex,nofollow`. Accept button (label `__('quote.share.accept')` = "Akceptuj" in pl, "Accept" in en) POSTs to `/q/{token}/accept`, records IP+UA in `quote_status_log`, transitions to `accepted`.
+`quote_share_tokens.token` is 64-char random (not predictable from quote_id). URL: `https://tbasystent.pl/q/{token}` (locale-neutral path). Server-side rate limit (10 req/min/token, 100/h/IP). Public route renders SSR Blade (`resources/views/public/shared-quote.blade.php`), `noindex,nofollow`. Accept button (label `__('quote.share.accept')` = "Akceptuj" in pl, "Accept" in en) POSTs to `/q/{token}/accept`, records IP+UA in `quote_status_log`, transitions to `accepted`.
 
 ---
 
@@ -684,11 +684,11 @@ Horizon balancing: `auto`, min 1 / max 10 processes, scaling by queue length. 25
 ### 17.1 Routing
 
 ```php
-// Public marketing — wyceny.app
+// Public marketing — tbasystent.pl
 Route::middleware('domain.public')->domain(config('app.public_domain'))
      ->group(__DIR__.'/public.php');     // homepage, /funkcje, /cennik, /przewodnik/*, /kalkulator/*
 
-// App — *.app.wyceny.app
+// App — *.app.tbasystent.pl
 Route::middleware(['domain.app','auth','resolve.tenant'])
      ->domain('{subdomain}.'.config('app.app_domain'))
      ->group(__DIR__.'/app.php');        // Filament + share tokens
@@ -709,7 +709,7 @@ it('public homepage is fully SSR', function () {
     expect($html)->toMatch('/<title>[^<]{10,}<\/title>/')
         ->toMatch('/<meta name="description" content="[^"]{120,160}"/')
         ->toContain('rel="canonical"')
-        ->toContain('Wyceny — CRM');  // controller-rendered text, proves not Livewire-only
+        ->toContain('TBA');  // controller-rendered text, proves not Livewire-only
 });
 ```
 
@@ -840,7 +840,7 @@ Default locale: `pl`. Fallback locale: `en` (so missing PL keys at least render 
 
 ### 21.4 URL strategy (per `seo-strategy.md` §5.6)
 
-- Year 1: `wyceny.app/*` — implicit `pl`, no prefix.
+- Year 1: `tbasystent.pl/*` — implicit `pl`, no prefix.
 - Year 2: `/en/*` prefix added. PL stays at root. `hreflang` tags emitted on every public page.
 - App routes (`/clients`, `/quotes`, `/jobs`) are English regardless of locale — UI is locale-aware, paths are not (this is the right call for SaaS apps; it's how Stripe, Linear, Notion all do it).
 - Public landing pages may use translated slugs (`/cennik` ↔ `/en/pricing`) — handled via Laravel route binding from translation file at boot.

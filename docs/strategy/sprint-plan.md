@@ -1,14 +1,17 @@
-# Sprint Plan — Wyceny (M1–M3)
+# Sprint Plan — TBA (Twój Biznes Asystent)
 
+> **Product:** TBA — `tbasystent.pl` — AI business assistant for small service businesses.
 > **Horizon:** Sprint 0 (1 week) + Sprints 1–6 (12 weeks of 2-week cadence) = ~13 calendar weeks.
-> **Definition of success at end:** żona uses the app as her primary operations tool for her cleaning company, replacing Excel + calendar + WhatsApp for quoting, client memory, and scheduling.
+> **Definition of success at end:** Ania uses TBA as her primary operations tool for her cleaning company, replacing Excel + calendar + WhatsApp for quoting, client memory, and scheduling.
 > **Working assumption:** solo dev, part-time, ~15–20 focused hrs/week (evenings + weekend blocks). Plan is sized to that, not to a full-time startup.
+>
+> **Status as of 2026-05-16:** Sprint 0, 1, 2 completed. Sprint 3 (AI Pricing) is next. See reconciled sprint order below.
 
 ---
 
 ## 0. Operating Principles (read first, then never again)
 
-1. **Wife-first, not firm-generic.** Every sprint demo is "does żona's Monday morning get easier?" If not, the sprint failed regardless of story points.
+1. **Ania-first, not firm-generic.** Every sprint demo is "does Ania's Monday morning get easier?" If not, the sprint failed regardless of story points.
 2. **Preset system is architecture, not a feature.** Build the seam from M1. But populate ONE preset (`cleaning`) only. Do not build a second preset in these 12 weeks — that is M7 territory.
 3. **Boring tech wins.** Filament CRUD + Livewire for everything except the two AI hero flows. No SPA, no custom Vue, no mobile app.
 4. **AI is a suggestion layer, never a blocker.** If Claude/Whisper is down, the CRM still works. No hard dependencies in write paths.
@@ -65,11 +68,11 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 2. Sprint 0 — Foundations (1 week, ~15 hrs)
+## 2. Sprint 0 — Foundations (1 week, ~15 hrs) ✅ Done
 
 **Goal:** Empty repo → deployable skeleton with multi-tenancy, preset engine scaffold, and wife's tenant provisioned. No user-facing features. All future rework-risk is paid down here.
 
-**Demo:** Log in at `app.wyceny.app` (or staging subdomain) as wife's tenant. Empty Filament panel shows `Klienci`, `Zlecenia`, `Wyceny` resources scoped to her tenant_id. Second seeded tenant proves isolation.
+**Demo:** Log in at `app.tbasystent.pl` (or staging subdomain) as wife's tenant. Empty Filament panel shows `Klienci`, `Zlecenia`, `Wyceny` resources scoped to her tenant_id. Second seeded tenant proves isolation.
 
 ### Stories
 
@@ -85,7 +88,7 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 | S0.8 | Data model ERD + migrations (bare tables, no UI) | Tables: tenants, users, vertical_presets, clients, jobs, quotes, quote_items, notes, note_attachments. All FK-constrained. All have tenant_id. Seeders produce wife's tenant + 3 fake clients. |
 | S0.9 | Dev env — Docker (**mandatory**, per `feedback_docker_only.md` + `architecture.md` §22) | `docker compose up -d` gives full stack: postgres+pgvector, redis, mailhog, app (php-fpm), nginx, horizon worker, browserless/chromium sidecar (PDF), optional node sidecar (vite). Pinned versions in `docker/versions.env`. Wrapper scripts in `bin/` (`bin/art`, `bin/composer`, `bin/test`, etc.) + `Makefile` (`make up`, `make fresh`, `make logs`). **Herd / Valet / local PHP installs are off the table.** |
 | S0.10 | CI: GitHub Actions | Pint + Larastan + Pest on every PR. Red = no merge. |
-| S0.11 | SEO foundations (per `seo-strategy.md` §5 + §10) | Domain `wyceny.app` bought + `wyceny.pl` (if available) parked as 301. GSC + Bing Webmaster + Plausible set up. Social handles reserved (@wycenyapp). `tests/Feature/SeoSsrTest.php` scaffolded — when first public route exists, it asserts: HTTP 200, non-default `<title>`, `<meta description>` 120–160 chars, `<h1>` present, canonical tag present, raw HTML contains controller-rendered text (not Livewire-only). Convention doc `/docs/seo.md` defines URL structure (`wyceny.app` indexable, `app.wyceny.app` `noindex`), canonical strategy, schema.org helper trait. |
+| S0.11 | SEO foundations (per `seo-strategy.md` §5 + §10) | Domain `tbasystent.pl` bought + `wyceny.pl` (if available) parked as 301. GSC + Bing Webmaster + Plausible set up. Social handles reserved (@wycenyapp). `tests/Feature/SeoSsrTest.php` scaffolded — when first public route exists, it asserts: HTTP 200, non-default `<title>`, `<meta description>` 120–160 chars, `<h1>` present, canonical tag present, raw HTML contains controller-rendered text (not Livewire-only). Convention doc `/docs/seo.md` defines URL structure (`tbasystent.pl` indexable, `app.tbasystent.pl` `noindex`), canonical strategy, schema.org helper trait. |
 
 ### Sprint 0 risks
 
@@ -95,7 +98,7 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 3. Sprint 1 — Client + Onboarding (Weeks 2–3)
+## 3. Sprint 1 — Client + Onboarding (Weeks 2–3) ✅ Done
 
 **Theme:** "Żona może przenieść listę klientów z Excela do Kwotki."
 **Goal:** Wife can create her tenant, import/enter all her real clients with cleaning-specific custom fields, and see them in a list.
@@ -123,7 +126,7 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 4. Sprint 2 — Zlecenia + Kalendarz (Weeks 4–5)
+## 4. Sprint 2 — Jobs + Dashboard (Weeks 4–5) ✅ Done
 
 **Theme:** "Żona widzi tydzień pracy ekipy w jednym miejscu."
 **Goal:** Jobs (jednorazowe + cykliczne) can be created against a klient and appear on a weekly calendar. Drag & drop reschedules.
@@ -150,12 +153,14 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 5. Sprint 3 — Quote + PDF (Weeks 6–7)
+## 5. Sprint 3 — AI Pricing (Weeks 6–7) ← Next
 
-**Theme:** "Żona wysyła klientowi PDF wyceny z Kwotki, nie z Excela."
-**Goal:** Create a wycena from a klient/zlecenie, add line items per preset template, export PDF, track status (sent/accepted/rejected).
+**Theme:** "Ania wpisuje notatkę z wizyty → TBA proponuje cenę, która ma sens."
+**Goal:** Assessment → AI price proposal. After visiting a new client, Ania adds a note; TBA reads notes + client data + history and proposes 3 prices (one-time, monthly, weekly), each including commute cost. Quote is generated from the accepted suggestion.
 
-**Demo at end:** Wife makes a real wycena for a real prospect. PDF looks professional. She sends it via WhatsApp. Client accepts. Status flips in Wyceny.
+**Demo at end:** Ania enters a note for a new prospect: "90m² apartment, cat, deep clean first." TBA proposes three prices within 5 seconds. She adjusts weekly price, accepts, and a quote is generated.
+
+> **Note:** Original S3 (Quotes+PDF) content moved to Sprint 4 below. AI Pricing moves to S3 because the price proposal is the hero feature; a polished quote PDF is the delivery mechanism, which comes next.
 
 ### Stories
 
@@ -179,12 +184,14 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 6. Sprint 4 — Notatki głosowe + Dojazd (Weeks 8–9)
+## 6. Sprint 4 — Quotes & PDF (Weeks 8–9)
 
-**Theme:** "Żona dyktuje notatkę z samochodu, dojazd liczy się sam."
-**Goal:** Voice notes transcribed via Whisper; wycena automatically includes dojazd cost based on Google Distance Matrix.
+**Theme:** "Ania wysyła klientowi PDF wyceny z TBA, nie z Excela."
+**Goal:** Full quote resource with line items, PDF export, share-by-link, and status tracking (draft/sent/accepted/rejected/expired). Builds on the price proposals from S3.
 
-**Demo at end:** Wife, after visiting a prospect, records a 2-minute voice note on her phone. Transcription appears on klient's timeline within 30s. Next wycena for that klient auto-includes `Dojazd: 14km × 1.80 PLN = 25.20 PLN`.
+**Demo at end:** Ania creates a full quote for a prospect (prefilled from S3 AI suggestion). PDF looks professional. She sends via WhatsApp link. Client clicks, sees quote, accepts. Status flips to Accepted in TBA.
+
+> **Note:** This was S3 in the original sprint plan. The detailed stories (S3.1–S3.8) below originally belonged here and are kept as written — only the sprint numbering changed.
 
 ### Stories
 
@@ -208,12 +215,14 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 7. Sprint 5 — AI Quote v1 (Weeks 10–11)
+## 7. Sprint 5 — Voice Notes + Dojazd (Weeks 10–11)
 
-**Theme:** "Wyceny mówi: tej klientce wyceniaj 280 PLN bo tak wyceniałaś ostatnie 3 razy + mieszkanie 65m² + dojazd."
-**Goal:** Hero AI feature #1 — pricing suggestion based on klient history + preset + dojazd + zakres.
+**Theme:** "Ania dyktuje notatkę z samochodu, dojazd liczy się sam."
+**Goal:** Voice notes transcribed via Whisper; quotes automatically include commute cost based on Google Distance Matrix.
 
-**Demo at end:** Wife starts a new wycena for an existing klient. Before she enters prices, Wyceny shows: "Sugerowana cena: 290 PLN. Bo: podobne 3 wyceny 260–310 PLN, mieszkanie 65m² (stawka preset 4 PLN/m²), dojazd 28 PLN." She clicks "użyj" or adjusts.
+**Demo at end:** Ania, after visiting a prospect, records a 2-minute voice note on her phone. Transcription appears on client's timeline within 30s. Next quote for that client auto-includes `Dojazd: 14km × 1.80 PLN = 25.20 PLN`.
+
+> **Note:** This was S4 in the original sprint plan. The detailed stories (S4.1–S4.8) below originally belonged here.
 
 ### Stories
 
@@ -236,12 +245,14 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 8. Sprint 6 — AI Chat o Kliencie + Polish (Weeks 12–13)
+## 8. Sprint 6 — Intelligence + Polish (Weeks 12–13)
 
-**Theme:** "Żona pyta 'co ostatnio u pani Kowalskiej?' i dostaje odpowiedź w 3 sekundy."
-**Goal:** Hero AI feature #2 — semantic Q&A over a klient's notes + zlecenia + wyceny. Plus final polish for daily use.
+**Theme:** "Ania pyta 'co ostatnio u pani Kowalskiej?' i dostaje odpowiedź w 3 sekundy."
+**Goal:** Hero AI feature — semantic Q&A over a client's notes + jobs + quotes (RAG on embeddings). Plus proactive alerts (overdue clients, slow months) and final polish for daily use.
 
-**Demo at end:** Wife asks: "co obiecałam pani Kowalskiej na maj?" Wyceny answers with citations to specific notes. Wife closes Excel permanently.
+**Demo at end:** Ania asks: "co obiecałam pani Kowalskiej na maj?" TBA answers with citations to specific notes. Ania closes Excel permanently.
+
+> **Note:** This combines original S5 (AI Quote stories → moved to S3) and S6 (AI Chat), plus proactive alerts from the product-vision.md S5 "Intelligence" sprint.
 
 ### Stories
 
@@ -254,7 +265,7 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 | S6.5 | Claude answer with citations | Prompt forces citation format: "Zapowiedziałaś majowe sprzątanie generalne [note #123]." UI renders citations as links to the note. |
 | S6.6 | Guardrails | System prompt: "Answer only from provided context. If not in context, say 'nie widzę tego w notatkach.'" Test: ask about unrelated klient → refuses. |
 | S6.7 | M3 polish list (time-boxed, 2 days max) | Top 10 wife-reported papercuts from daily use in Sprints 4–5. Triaged ruthlessly. Anything > 2 hrs moves to M4. |
-| S6.8 | M3 demo day: wife uses Wyceny for a full real workweek | No Excel. No separate calendar. Log failures. This IS the acceptance test for MVP. |
+| S6.8 | M3 demo day: Ania uses TBA for a full real workweek | No Excel. No separate calendar. Log failures. This IS the acceptance test for MVP. |
 
 ### Sprint 6 risks
 
@@ -269,7 +280,7 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 Measurable, wife-verifiable:
 
-1. **Replacement:** For 5 consecutive business days, wife uses Wyceny (web + PWA on phone) and does NOT open Excel or her paper notebook. Google Calendar read-only for external events only.
+1. **Replacement:** For 5 consecutive business days, Ania uses TBA (web + PWA on phone) and does NOT open Excel or her paper notebook. Google Calendar read-only for external events only.
 2. **Data volume in prod:** ≥ 30 real klientów, ≥ 20 real zlecenia (mix of one-off + recurring), ≥ 10 real wyceny (of which ≥ 3 accepted), ≥ 15 notatki (of which ≥ 5 voice-transcribed).
 3. **AI adoption:** AI wycena suggestion shown on ≥ 8 of her last 10 wyceny. She accepted or adjusted-within-15% on ≥ 5 of those. Chat o kliencie used ≥ 10 times total.
 4. **Reliability:** Zero data-loss incidents. Zero tenant isolation bugs. < 3 sev-2 bugs open. Daily backups verified (test restore once).
@@ -337,14 +348,16 @@ If any of 1, 2, 4, or 8 fails → MVP is not done. Fix before M4 expansion.
 
 ## 13. Summary Cadence
 
-| Sprint | Weeks | Theme | Demoable |
-|---|---|---|---|
-| S0 | 1 | Foundations | Empty but isolated multi-tenant Filament app deployed |
-| S1 | 2–3 | Client + Onboarding | Wife's 10 real klientów in system, NIP autofill working |
-| S2 | 4–5 | Zlecenia + Kalendarz | Weekly schedule for 3 cleaners, recurring jobs work |
-| S3 | 6–7 | Quote + PDF | Real wycena sent as PDF, klient accepts via link |
-| S4 | 8–9 | Voice notes + Dojazd | Voice note transcribed, dojazd auto-priced |
-| S5 | 10–11 | AI Quote | Suggestion panel on new wycena, wife uses it |
-| S6 | 12–13 | AI Chat + Polish | Q&A over klient's history, 5-day Excel-free work week |
+| Sprint | Weeks | Theme | Demoable | Status |
+|---|---|---|---|---|
+| S0 | 1 | Foundations | Multi-tenant Filament app deployed, Docker, CI, preset engine | ✅ Done |
+| S1 | 2–3 | Client + Onboarding | Ania's clients in system, NIP autofill, registration flow | ✅ Done |
+| S2 | 4–5 | Jobs + Dashboard | Dashboard home, jobs CRUD, tenant settings, commute display | ✅ Done |
+| S3 | 6–7 | AI Pricing | Assessment → price proposal, pricing suggestions, quote generation | ← **Next** |
+| S4 | 8–9 | Quotes & PDF | Quote resource, PDF generation, share-by-link, quote status flow | |
+| S5 | 10–11 | Voice notes + Dojazd | Voice note transcribed via Whisper, dojazd auto-priced in quotes | |
+| S6 | 12–13 | Intelligence + Polish | Proactive alerts, client comparison, embeddings, 5-day Excel-free week | |
 
-**End state:** żona uses Wyceny daily. Quote takes 2 min instead of 15. Historia klienta in 3 seconds. Ready to onboard firma #2 in M4.
+> **Sprint order note (2026-05-16):** Sprint order was revised from the original plan (which had Quotes+PDF at S3). AI Pricing (S3) now comes before Quotes+PDF (S4) because the assessment→price workflow is the hero feature that justifies the app, and quotes are the delivery mechanism for those prices. The data model supports both; AI Pricing sprint produces a functioning quote; S4 makes it polished.
+
+**End state:** Ania uses TBA daily. Quote takes 2 min instead of 15. Client history in 3 seconds. Ready to onboard firma #2 in M4.

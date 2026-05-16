@@ -1,13 +1,14 @@
-# Twój Asystent — Product Vision
+# TBA / Twój Biznes Asystent — Product Vision
 
 **Date:** 2026-05-16
-**Status:** Active — supersedes prior "Wyceny" product framing
+**Brand:** TBA (panel short name) / Twój Biznes Asystent (full PL name) / `tbasystent.pl`
+**Status:** Active — supersedes prior "Wyceny" and "Twój Asystent" product framing
 
 ---
 
 ## What It Is
 
-Twój Asystent is a personal AI business assistant for independent service professionals. It is not a tool you operate — it is a partner that knows your business and helps you run it better, day by day.
+TBA (Twój Biznes Asystent) is a personal AI business assistant for independent service professionals. It is not a tool you operate — it is a partner that knows your business and helps you run it better, day by day.
 
 The application replaces the cognitive overhead of running a service business solo: tracking clients and their needs, planning the work week, pricing new jobs fairly, and noticing patterns you would otherwise miss.
 
@@ -104,4 +105,4 @@ Suggested pricing:
 
 ## Name
 
-**Twój Asystent** ("Your Assistant" in Polish). The name signals a relationship, not a tool category. It is direct, warm, and makes the AI-first positioning clear from the first word.
+**Twój Biznes Asystent** ("Your Business Assistant" in Polish). Panel short name: **TBA**. Domain: `tbasystent.pl` (confirmed available 2026-05-16). The name signals a relationship, not a tool category — direct, warm, AI-first positioning clear from the first word.
