@@ -20,5 +20,8 @@ return new class extends Migration
         });
     }
 
-    public function down(): void { Schema::dropIfExists('note_attachments'); }
+    public function down(): void
+    {
+        Schema::dropIfExists('note_attachments');
+    }
 };

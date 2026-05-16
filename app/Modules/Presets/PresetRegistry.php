@@ -18,8 +18,9 @@ final class PresetRegistry
 
         $cacheKey = "preset:tenant:{$tenant->id}";
 
-        return Cache::remember($cacheKey, static::$ttl, function () use ($tenant) {
+        return Cache::remember($cacheKey, self::$ttl, function () use ($tenant) {
             $model = VerticalPreset::findOrFail($tenant->preset_id);
+
             return Preset::fromModel($model);
         });
     }

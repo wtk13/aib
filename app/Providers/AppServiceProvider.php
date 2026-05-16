@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Modules\Presets\Events\VerticalPresetUpdated;
 use App\Modules\Presets\Listeners\BustPresetCache;
+use App\Modules\Tenancy\Auth\TenantAwareUserProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,9 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Event::listen(VerticalPresetUpdated::class, BustPresetCache::class);
 
-        \Illuminate\Support\Facades\Auth::provider(
+        Auth::provider(
             'tenant_aware_eloquent',
-            fn ($app, $config) => new \App\Modules\Tenancy\Auth\TenantAwareUserProvider(
+            fn ($app, $config) => new TenantAwareUserProvider(
                 $app['hash'],
                 $config['model']
             )

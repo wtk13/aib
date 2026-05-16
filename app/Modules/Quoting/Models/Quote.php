@@ -18,9 +18,9 @@ class Quote extends Model
     ];
 
     protected $casts = [
-        'issued_at'   => 'date',
+        'issued_at' => 'date',
         'valid_until' => 'date',
-        'subtotal'    => 'decimal:2',
-        'total'       => 'decimal:2',
+        'subtotal' => 'decimal:2',
+        'total' => 'decimal:2',
     ];
 }

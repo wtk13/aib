@@ -13,11 +13,11 @@ class VerticalPreset extends Model
     ];
 
     protected $casts = [
-        'vocabulary'           => 'array',
+        'vocabulary' => 'array',
         'custom_fields_schema' => 'array',
-        'service_types'        => 'array',
-        'quote_template'       => 'array',
-        'ai_hints'             => 'array',
-        'is_active'            => 'boolean',
+        'service_types' => 'array',
+        'quote_template' => 'array',
+        'ai_hints' => 'array',
+        'is_active' => 'boolean',
     ];
 }

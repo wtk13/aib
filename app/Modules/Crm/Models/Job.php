@@ -19,6 +19,6 @@ class Job extends Model
 
     protected $casts = [
         'custom_fields' => 'array',
-        'starts_at'     => 'datetime',
+        'starts_at' => 'datetime',
     ];
 }

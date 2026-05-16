@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\Scope;
 
 class TenantScope implements Scope
 {
+    /** @param Builder<Model> $builder */
     public function apply(Builder $builder, Model $model): void
     {
         $tenantId = Tenant::currentId();
 
         if ($tenantId !== null) {
             $builder->where($model->qualifyColumn('tenant_id'), $tenantId);
+
             return;
         }
 

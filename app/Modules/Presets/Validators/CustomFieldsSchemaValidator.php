@@ -9,34 +9,34 @@ class CustomFieldsSchemaValidator
 {
     public static function validate(array $fields, Preset $preset, string $entity = 'client'): void
     {
-        if (!in_array($entity, ['client', 'job'], true)) {
+        if (! in_array($entity, ['client', 'job'], true)) {
             throw new \InvalidArgumentException("Unknown entity type: {$entity}");
         }
 
         $schema = $entity === 'client' ? $preset->clientFields() : $preset->jobFields();
 
         foreach ($schema as $field) {
-            $key      = $field['key'];
+            $key = $field['key'];
             $required = $field['required'] ?? false;
-            $type     = $field['type'];
+            $type = $field['type'];
 
-            if ($required && (!array_key_exists($key, $fields) || $fields[$key] === null || $fields[$key] === '')) {
+            if ($required && (! array_key_exists($key, $fields) || $fields[$key] === null || $fields[$key] === '')) {
                 throw ValidationException::withMessages([
                     "custom_fields.{$key}" => "The {$key} field is required.",
                 ]);
             }
 
-            if (!empty($fields[$key]) && $type === 'select') {
+            if (! empty($fields[$key]) && $type === 'select') {
                 $allowed = $field['options'] ?? [];
-                if (!in_array($fields[$key], $allowed, true)) {
+                if (! in_array($fields[$key], $allowed, true)) {
                     throw ValidationException::withMessages([
                         "custom_fields.{$key}" => "Invalid value for {$key}.",
                     ]);
                 }
             }
 
-            if (!empty($fields[$key]) && $type === 'number') {
-                if (!is_numeric($fields[$key])) {
+            if (! empty($fields[$key]) && $type === 'number') {
+                if (! is_numeric($fields[$key])) {
                     throw ValidationException::withMessages([
                         "custom_fields.{$key}" => "The {$key} must be a number.",
                     ]);

@@ -1,5 +1,7 @@
 <?php
 
+use App\Modules\Tenancy\Models\User;
+
 return [
 
     /*
@@ -62,7 +64,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'tenant_aware_eloquent',
-            'model'  => env('AUTH_MODEL', \App\Modules\Tenancy\Models\User::class),
+            'model' => env('AUTH_MODEL', User::class),
         ],
 
         // 'users' => [

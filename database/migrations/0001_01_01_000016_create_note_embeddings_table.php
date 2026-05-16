@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -23,5 +23,8 @@ return new class extends Migration
         DB::statement('CREATE INDEX note_embeddings_ivfflat ON note_embeddings USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)');
     }
 
-    public function down(): void { Schema::dropIfExists('note_embeddings'); }
+    public function down(): void
+    {
+        Schema::dropIfExists('note_embeddings');
+    }
 };

@@ -12,6 +12,7 @@ class EnforceNoindex
     {
         $response = $next($request);
         $response->headers->set('X-Robots-Tag', 'noindex, nofollow');
+
         return $response;
     }
 }

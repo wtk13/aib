@@ -13,8 +13,8 @@ class JobOccurrence extends Model
     protected $fillable = ['job_id', 'occurrence_at', 'status', 'rescheduled_to', 'completed_at'];
 
     protected $casts = [
-        'occurrence_at'  => 'datetime',
+        'occurrence_at' => 'datetime',
         'rescheduled_to' => 'datetime',
-        'completed_at'   => 'datetime',
+        'completed_at' => 'datetime',
     ];
 }

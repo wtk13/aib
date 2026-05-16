@@ -18,7 +18,7 @@ class PricingSuggestion extends Model
     ];
 
     protected $casts = [
-        'breakdown'       => 'array',
+        'breakdown' => 'array',
         'suggested_total' => 'decimal:2',
     ];
 }

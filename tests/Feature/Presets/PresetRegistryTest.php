@@ -1,12 +1,14 @@
 <?php
 
+use App\Modules\Presets\Events\VerticalPresetUpdated;
+use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Presets\Preset;
 use App\Modules\Presets\PresetRegistry;
 use App\Modules\Tenancy\Models\Tenant;
 use Database\Seeders\CleaningPresetSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
@@ -17,7 +19,7 @@ beforeEach(function () {
 });
 
 it('returns cleaning preset for tenant', function () {
-    $tenant = Tenant::factory()->create(['preset_id' => \App\Modules\Presets\Models\VerticalPreset::where('slug', 'cleaning')->value('id')]);
+    $tenant = Tenant::factory()->create(['preset_id' => VerticalPreset::where('slug', 'cleaning')->value('id')]);
     Tenant::setCurrent($tenant);
 
     $preset = PresetRegistry::for($tenant);
@@ -30,7 +32,7 @@ it('returns cleaning preset for tenant', function () {
 });
 
 it('caches preset and returns same instance', function () {
-    $tenant = Tenant::factory()->create(['preset_id' => \App\Modules\Presets\Models\VerticalPreset::where('slug', 'cleaning')->value('id')]);
+    $tenant = Tenant::factory()->create(['preset_id' => VerticalPreset::where('slug', 'cleaning')->value('id')]);
 
     DB::enableQueryLog();
     PresetRegistry::for($tenant);
@@ -44,11 +46,11 @@ it('caches preset and returns same instance', function () {
 });
 
 it('busts cache on VerticalPresetUpdated event', function () {
-    $tenant = Tenant::factory()->create(['preset_id' => \App\Modules\Presets\Models\VerticalPreset::where('slug', 'cleaning')->value('id')]);
+    $tenant = Tenant::factory()->create(['preset_id' => VerticalPreset::where('slug', 'cleaning')->value('id')]);
 
     PresetRegistry::for($tenant); // warm cache
 
-    event(new \App\Modules\Presets\Events\VerticalPresetUpdated($tenant->preset_id));
+    event(new VerticalPresetUpdated($tenant->preset_id));
 
     // After bust, a second DB query must fire (cache miss)
     DB::enableQueryLog();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
@@ -12,11 +13,11 @@ uses(TestCase::class, RefreshDatabase::class);
 
 it('a user can log in to Filament under their tenant scope', function () {
     $this->seed(CleaningPresetSeeder::class);
-    $preset = \App\Modules\Presets\Models\VerticalPreset::where('slug', 'cleaning')->first();
+    $preset = VerticalPreset::where('slug', 'cleaning')->first();
 
     $tenant = Tenant::factory()->create(['preset_id' => $preset?->id]);
     $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create([
-        'email'    => 'login-test@wyceny.app',
+        'email' => 'login-test@wyceny.app',
         'password' => 'password',
     ]));
 

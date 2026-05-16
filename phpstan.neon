@@ -7,10 +7,8 @@ parameters:
         - app
     excludePaths:
         - app/Modules/Billing/.gitkeep
-    checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         - identifier: missingType.iterableValue
         -
-            message: '#Access to an undefined property App\\Models\\User::\$tenant_id#'
-            path: app/Http/Middleware/SetLocaleMiddleware.php
+            message: '#uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types: TFactory#'

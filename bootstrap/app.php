@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\EnforceNoindex;
+use App\Http\Middleware\SetLocaleMiddleware;
+use App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,10 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->append(\App\Http\Middleware\SetLocaleMiddleware::class);
+        $middleware->append(SetLocaleMiddleware::class);
+        $middleware->append(EnforceNoindex::class);
         $middleware->alias([
-            'resolve.tenant' => \App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain::class,
-            'noindex'        => \App\Http\Middleware\EnforceNoindex::class,
+            'resolve.tenant' => ResolveTenantFromSubdomain::class,
+            'noindex' => EnforceNoindex::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

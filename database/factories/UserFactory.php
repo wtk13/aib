@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -13,11 +14,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id' => \App\Modules\Tenancy\Models\Tenant::factory(),
-            'name'      => fake()->name(),
-            'email'     => fake()->unique()->safeEmail(),
-            'password'  => 'password',
-            'role'      => 'owner',
+            'tenant_id' => Tenant::factory(),
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'password' => 'password',
+            'role' => 'owner',
         ];
     }
 }

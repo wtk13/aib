@@ -2,8 +2,8 @@
 
 use App\Modules\Tenancy\Exceptions\TenantContextMissingException;
 use App\Modules\Tenancy\Models\Tenant;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
@@ -29,6 +29,7 @@ it('bypass block works and restores state', function () {
     $bypassedDuring = false;
     $result = Tenant::bypass(function () use (&$bypassedDuring) {
         $bypassedDuring = Tenant::isBypassed();
+
         return 'inside';
     });
 
@@ -48,7 +49,7 @@ dataset('tenant_scoped_models', [
     'Client' => [Client::class, fn ($t) => Client::factory()->create(['tenant_id' => $t->id])],
 ]);
 
-it('model is scoped to tenant and invisible from other tenant', function (string $modelClass, \Closure $factory) {
+it('model is scoped to tenant and invisible from other tenant', function (string $modelClass, Closure $factory) {
     $tenantA = Tenant::factory()->create();
     $tenantB = Tenant::factory()->create();
 
@@ -87,13 +88,13 @@ it('TenantScope throws TenantContextMissingException outside console with no con
     Tenant::clear();
 
     // Force app()->runningInConsole() to return false so TenantScope throws instead of skipping.
-    $ref = new \ReflectionProperty($this->app, 'isRunningInConsole');
+    $ref = new ReflectionProperty($this->app, 'isRunningInConsole');
     $ref->setAccessible(true);
     $ref->setValue($this->app, false);
 
     try {
         expect(fn () => Client::count())
-            ->toThrow(App\Modules\Tenancy\Exceptions\TenantContextMissingException::class);
+            ->toThrow(TenantContextMissingException::class);
     } finally {
         // Restore console mode so subsequent tests are not affected.
         $ref->setValue($this->app, true);

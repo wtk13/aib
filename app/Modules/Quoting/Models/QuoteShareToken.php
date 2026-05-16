@@ -13,7 +13,7 @@ class QuoteShareToken extends Model
     protected $fillable = ['quote_id', 'token', 'expires_at', 'accepted_at', 'accepted_ip', 'accepted_user_agent'];
 
     protected $casts = [
-        'expires_at'  => 'datetime',
+        'expires_at' => 'datetime',
         'accepted_at' => 'datetime',
     ];
 }

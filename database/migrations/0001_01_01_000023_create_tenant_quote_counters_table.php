@@ -17,5 +17,8 @@ return new class extends Migration
         });
     }
 
-    public function down(): void { Schema::dropIfExists('tenant_quote_counters'); }
+    public function down(): void
+    {
+        Schema::dropIfExists('tenant_quote_counters');
+    }
 };

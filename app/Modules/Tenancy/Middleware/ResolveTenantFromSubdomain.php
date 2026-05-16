@@ -2,7 +2,6 @@
 
 namespace App\Modules\Tenancy\Middleware;
 
-use App\Modules\Tenancy\Exceptions\TenantNotResolvedException;
 use App\Modules\Tenancy\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
@@ -16,8 +15,8 @@ class ResolveTenantFromSubdomain
         $appDomain = config('app.app_domain', 'app.wyceny.app');
 
         // Subdomain path: "ania.app.wyceny.app" => slug "ania"
-        if (str_ends_with($host, '.' . $appDomain)) {
-            $subdomain = substr($host, 0, strlen($host) - strlen('.' . $appDomain));
+        if (str_ends_with($host, '.'.$appDomain)) {
+            $subdomain = substr($host, 0, strlen($host) - strlen('.'.$appDomain));
             $tenant = Tenant::bypass(fn () => Tenant::where('slug', $subdomain)->first());
 
             if (! $tenant) {
@@ -25,6 +24,7 @@ class ResolveTenantFromSubdomain
             }
 
             Tenant::setCurrent($tenant);
+
             return $next($request);
         }
 

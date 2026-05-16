@@ -8,6 +8,9 @@ use App\Modules\Tenancy\TenantScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $tenant_id
+ */
 trait BelongsToTenant
 {
     protected static function bootBelongsToTenant(): void
@@ -15,15 +18,18 @@ trait BelongsToTenant
         static::addGlobalScope(new TenantScope);
 
         static::creating(function (Model $model) {
-            if (empty($model->tenant_id)) {
-                $model->tenant_id = Tenant::currentId()
-                    ?? throw new TenantNotResolvedException(
-                        'Cannot create ' . static::class . ' without tenant context.'
-                    );
+            if (empty($model->getAttribute('tenant_id'))) {
+                $model->setAttribute(
+                    'tenant_id',
+                    Tenant::currentId() ?? throw new TenantNotResolvedException(
+                        'Cannot create '.static::class.' without tenant context.'
+                    )
+                );
             }
         });
     }
 
+    /** @return BelongsTo<Tenant, $this> */
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);

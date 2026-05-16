@@ -12,13 +12,13 @@ class CleaningPresetSeeder extends Seeder
         VerticalPreset::updateOrCreate(
             ['slug' => 'cleaning'],
             [
-                'name'    => 'Cleaning',
+                'name' => 'Cleaning',
                 'version' => '1',
                 'vocabulary' => [
                     'client_singular' => 'presets.cleaning.vocab.client_singular',
-                    'client_plural'   => 'presets.cleaning.vocab.client_plural',
-                    'job_singular'    => 'presets.cleaning.vocab.job_singular',
-                    'job_plural'      => 'presets.cleaning.vocab.job_plural',
+                    'client_plural' => 'presets.cleaning.vocab.client_plural',
+                    'job_singular' => 'presets.cleaning.vocab.job_singular',
+                    'job_plural' => 'presets.cleaning.vocab.job_plural',
                 ],
                 'custom_fields_schema' => [
                     'client' => [
@@ -41,11 +41,11 @@ class CleaningPresetSeeder extends Seeder
                     ['key' => 'upholstery',      'label_key' => 'presets.cleaning.services.upholstery',      'default_unit' => 'piece', 'default_rate' => 80.0, 'default_duration_min' => 90],
                 ],
                 'quote_template' => [
-                    'default_items'       => [
+                    'default_items' => [
                         ['service_type_key' => 'basic', 'unit' => 'm2', 'qty_from' => 'client.custom_fields.area_m2'],
                     ],
-                    'auto_lines'          => ['commute'],
-                    'vat_default'         => 8,
+                    'auto_lines' => ['commute'],
+                    'vat_default' => 8,
                     'rate_modifier_rules' => [
                         ['if' => "client.custom_fields.property_type == 'office'", 'rate_multiplier' => 1.15],
                     ],
@@ -55,7 +55,7 @@ class CleaningPresetSeeder extends Seeder
                     'cold_start_note' => 'Use preset default rates when client history is thin.',
                 ],
                 'pdf_template_key' => 'cleaning_v1',
-                'is_active'        => true,
+                'is_active' => true,
             ]
         );
     }

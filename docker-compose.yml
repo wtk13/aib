@@ -1,8 +1,4 @@
 # Load pinned versions: docker compose --env-file docker/versions.env up
-env_file:
-  - docker/versions.env
-  - path: .env
-    required: false
 
 services:
   app:
@@ -10,7 +6,7 @@ services:
       context: .
       dockerfile: docker/app/Dockerfile
       args:
-        PHP_VERSION: "${PHP_VERSION:-8.3.20}"
+        PHP_VERSION: "${PHP_VERSION:-8.4}"
     volumes:
       - .:/var/www/html
     env_file:
@@ -86,13 +82,15 @@ services:
     environment:
       CONCURRENT: 2
       TIMEOUT: 60000
+    profiles:
+      - pdf
 
   horizon:
     build:
       context: .
       dockerfile: docker/app/Dockerfile
       args:
-        PHP_VERSION: "${PHP_VERSION:-8.3.20}"
+        PHP_VERSION: "${PHP_VERSION:-8.4}"
     command: php artisan horizon
     volumes:
       - .:/var/www/html

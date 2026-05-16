@@ -21,5 +21,8 @@ return new class extends Migration
         });
     }
 
-    public function down(): void { Schema::dropIfExists('chat_messages'); }
+    public function down(): void
+    {
+        Schema::dropIfExists('chat_messages');
+    }
 };
