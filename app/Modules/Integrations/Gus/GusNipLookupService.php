@@ -32,8 +32,11 @@ class GusNipLookupService
                 return null;
             }
 
-            $data = $this->search($sessionId, $nip);
-            $this->logout($sessionId);
+            try {
+                $data = $this->search($sessionId, $nip);
+            } finally {
+                $this->logout($sessionId);
+            }
 
             if ($data !== null) {
                 Cache::put($cacheKey, $data, now()->addDays(30));
@@ -53,6 +56,7 @@ class GusNipLookupService
             ->post($this->baseUrl . '/Login');
 
         if (! $response->successful()) {
+            Log::warning('GUS login failed', ['status' => $response->status()]);
             return null;
         }
 
