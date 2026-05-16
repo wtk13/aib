@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\TenantSettingsPage;
@@ -34,7 +35,7 @@ class AppPanelProvider extends PanelProvider
             ->default()
             ->id('app')
             ->path('/admin')
-            ->login()
+            ->login(Login::class)
             ->registration(Register::class)
             ->colors(['primary' => Color::hex('#14b8a6')])
             ->font('Inter', provider: GoogleFontProvider::class)
