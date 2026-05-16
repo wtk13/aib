@@ -40,7 +40,7 @@ class DistanceService
 
         $distanceMetersRounded = (int) round($distanceMeters);
 
-        DB::table('distance_caches')->insert([
+        DB::table('distance_caches')->insertOrIgnore([
             'tenant_id'              => $tenantId,
             'origin_address_id'      => $origin->id,
             'destination_address_id' => $destination->id,
