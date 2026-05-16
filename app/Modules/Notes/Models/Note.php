@@ -3,8 +3,10 @@
 namespace App\Modules\Notes\Models;
 
 use App\Modules\Tenancy\Concerns\BelongsToTenant;
+use App\Modules\Tenancy\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Note extends Model
@@ -15,4 +17,10 @@ class Note extends Model
         'client_id', 'body', 'body_cleaned', 'audio_path',
         'audio_duration_seconds', 'status', 'source', 'created_by_user_id',
     ];
+
+    /** @return BelongsTo<User, $this> */
+    public function createdByUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by_user_id');
+    }
 }

@@ -4,7 +4,9 @@ use App\Modules\Crm\Filament\Resources\ClientResource;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages\CreateClient;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages\EditClient;
 use App\Modules\Crm\Filament\Resources\ClientResource\Pages\ListClients;
+use App\Modules\Crm\Filament\Resources\ClientResource\RelationManagers\NoteRelationManager;
 use App\Modules\Crm\Models\Client;
+use App\Modules\Notes\Models\Note;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
@@ -120,4 +122,41 @@ it('saves cleaning custom fields and encrypted access_keys', function () {
     expect($client->custom_fields['area_m2'])->toBe(65)
         ->and($client->custom_fields['property_type'])->toBe('apartment')
         ->and($client->access_keys_encrypted)->toBe('klucz#42, kod alarmu: 1234');
+});
+
+it('can add a note from the relation manager', function () {
+    $user   = actingAsOwner();
+    $client = Client::create(['name' => 'Test Klient', 'client_type' => 'person']);
+
+    Livewire::actingAs($user)
+        ->test(NoteRelationManager::class, [
+            'ownerRecord' => $client,
+            'pageClass'   => \App\Modules\Crm\Filament\Resources\ClientResource\Pages\ViewClient::class,
+        ])
+        ->callTableAction('create', data: ['body' => 'Pierwsza notatka'])
+        ->assertHasNoTableActionErrors();
+
+    expect(Note::where('client_id', $client->id)->count())->toBe(1)
+        ->and(Note::where('client_id', $client->id)->first()->body)->toBe('Pierwsza notatka');
+});
+
+it('can delete a note', function () {
+    $user   = actingAsOwner();
+    $client = Client::create(['name' => 'Test Klient 2', 'client_type' => 'person']);
+    $note   = Note::create([
+        'client_id'          => $client->id,
+        'body'               => 'Do usunięcia',
+        'source'             => 'text',
+        'created_by_user_id' => $user->id,
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(NoteRelationManager::class, [
+            'ownerRecord' => $client,
+            'pageClass'   => \App\Modules\Crm\Filament\Resources\ClientResource\Pages\ViewClient::class,
+        ])
+        ->callTableAction('delete', $note)
+        ->assertHasNoTableActionErrors();
+
+    expect(Note::withTrashed()->find($note->id)?->deleted_at)->not->toBeNull();
 });
