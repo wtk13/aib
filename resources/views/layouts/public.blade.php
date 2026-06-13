@@ -22,15 +22,18 @@
         .pub-nav-logo { font-weight: 900; font-size: 18px; letter-spacing: -0.5px; color: #fff; text-decoration: none; }
         .pub-nav-logo span { color: #4ade80; }
         .pub-nav-links { display: flex; gap: 28px; }
-        .pub-nav-links a { color: rgba(255,255,255,0.5); font-size: 14px; text-decoration: none; transition: color .2s; }
+        .pub-nav-links a { color: rgba(255,255,255,0.65); font-size: 14px; text-decoration: none; transition: color .2s; }
         .pub-nav-links a:hover { color: #fff; }
         .pub-nav-cta {
             background: #4ade80; color: #0d1117; border-radius: 8px;
             padding: 8px 18px; font-size: 14px; font-weight: 700; text-decoration: none;
+            transition: background .2s;
         }
+        .pub-nav-cta:focus { outline: 2px solid #4ade80; outline-offset: 3px; }
         @media (max-width: 768px) {
             .pub-nav { padding: 0 20px; }
             .pub-nav-links { display: none; }
+            .pub-nav-cta { padding: 6px 14px; font-size: 13px; }
         }
     </style>
 </head>
