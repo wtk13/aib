@@ -12,6 +12,7 @@ use Filament\Pages\Auth\Register as FilamentRegister;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 
 class Register extends FilamentRegister
 {
@@ -48,7 +49,7 @@ class Register extends FilamentRegister
                 ->label(__('auth.register.password'))
                 ->password()
                 ->required()
-                ->minLength(8),
+                ->rules([Password::min(8)->letters()->numbers()]),
             TextInput::make('password_confirmation')
                 ->label(__('auth.register.password_confirmation'))
                 ->password()
@@ -57,7 +58,7 @@ class Register extends FilamentRegister
                 ->dehydrated(false),
             ToggleButtons::make('preset_id')
                 ->label(__('auth.register.industry'))
-                ->options(fn () => VerticalPreset::where('is_active', true)->pluck('name', 'id')->toArray())
+                ->options(fn () => VerticalPreset::where('is_active', true)->get()->mapWithKeys(fn ($p) => [$p->id => __('presets.' . $p->slug . '.name')])->toArray())
                 ->required()
                 ->grouped()
                 ->columnSpanFull(),
@@ -80,7 +81,7 @@ class Register extends FilamentRegister
             $user = Tenant::bypass(fn () => User::create([
                 'tenant_id' => $tenant->id,
                 'name' => $data['name'],
-                'email' => $data['email'],
+                'email' => mb_strtolower($data['email']),
                 'password' => $data['password'],
                 'role' => 'owner',
             ]));
@@ -95,6 +96,8 @@ class Register extends FilamentRegister
         if ($tenant !== null) {
             Tenant::setCurrent($tenant);
         }
+
+        $user->sendEmailVerificationNotification();
 
         return $user;
     }
