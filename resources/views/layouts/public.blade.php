@@ -17,7 +17,7 @@
             padding: 0 48px; height: 60px;
             border-bottom: 1px solid rgba(255,255,255,0.06);
             position: sticky; top: 0; z-index: 100;
-            background: rgba(13,13,20,0.85); backdrop-filter: blur(12px);
+            background: rgba(13,13,20,0.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
         }
         .pub-nav-logo { font-weight: 900; font-size: 18px; letter-spacing: -0.5px; color: #fff; text-decoration: none; }
         .pub-nav-logo span { color: #4ade80; }
@@ -29,6 +29,7 @@
             padding: 8px 18px; font-size: 14px; font-weight: 700; text-decoration: none;
             transition: background .2s;
         }
+        .pub-nav-cta:hover { background: #22c55e; }
         .pub-nav-cta:focus { outline: 2px solid #4ade80; outline-offset: 3px; }
         @media (max-width: 768px) {
             .pub-nav { padding: 0 20px; }

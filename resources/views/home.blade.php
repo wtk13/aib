@@ -44,13 +44,16 @@
 .btn-primary {
     background: #4ade80; color: #0d1117; border-radius: 10px;
     padding: 14px 28px; font-size: 15px; font-weight: 800; text-decoration: none;
-    display: inline-block;
+    display: inline-block; transition: background .2s;
 }
+.btn-primary:hover { background: #22c55e; }
 .btn-secondary {
     border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
     padding: 14px 22px; font-size: 15px; color: rgba(255,255,255,0.7);
     text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color .2s, color .2s;
 }
+.btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
 .hero-trust { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.3); }
 
 /* ─── APP MOCKUP ────────────────────────────────────────── */
@@ -163,8 +166,10 @@
     display: block; text-align: center; margin-top: 20px; padding: 11px;
     border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none;
 }
-.pricing-btn-green { background: #4ade80; color: #0d1117; }
-.pricing-btn-ghost { border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
+.pricing-btn-green { background: #4ade80; color: #0d1117; transition: background .2s; }
+.pricing-btn-green:hover { background: #22c55e; }
+.pricing-btn-ghost { border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); transition: border-color .2s, color .2s; }
+.pricing-btn-ghost:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.9); }
 
 /* ─── FINAL CTA ─────────────────────────────────────────── */
 .final-cta {
@@ -404,7 +409,7 @@
 <section class="pricing" id="cennik">
     <div class="section-tag">Cennik</div>
     <h2 class="section-title" style="font-size:36px">Prosto i uczciwie</h2>
-    <p class="section-sub" style="margin:14px auto 0;max-width:400px">
+    <p class="section-sub" style="margin-top:14px;max-width:400px;margin-left:auto;margin-right:auto">
         W becie wszystko za darmo. Po becie — płacisz tylko jeśli TBA Ci pomógł.
     </p>
 
