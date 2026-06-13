@@ -34,11 +34,18 @@ it('app subdomain returns noindex header', function () {
     $response->assertHeader('X-Robots-Tag', 'noindex, nofollow');
 });
 
-it('login page renders with split layout brand panel', function () {
+it('login page renders with simple centered layout', function () {
     $response = $this->get('/admin/login');
 
     $response->assertStatus(200);
-    $response->assertSee('aib-auth-brand-panel', escape: false);
+    $response->assertSee('aib-auth-simple', escape: false);
     $response->assertSee(filament()->getBrandName());
-    $response->assertSee('CRM dla małych firm usługowych');
+});
+
+it('register page renders with simple centered layout', function () {
+    $response = $this->get('/admin/register');
+
+    $response->assertStatus(200);
+    $response->assertSee('aib-auth-simple', escape: false);
+    $response->assertSee('Załóż konto');
 });
