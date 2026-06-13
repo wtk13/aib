@@ -9,6 +9,8 @@
         @endif
     </div>
 
+    {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::AUTH_REGISTER_FORM_BEFORE, scopes: $this->getRenderHookScopes()) }}
+
     <x-filament-panels::form id="form" wire:submit="register">
         {{ $this->form }}
 
@@ -17,6 +19,8 @@
             :full-width="$this->hasFullWidthFormActions()"
         />
     </x-filament-panels::form>
+
+    {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::AUTH_REGISTER_FORM_AFTER, scopes: $this->getRenderHookScopes()) }}
 
     @if (! $this instanceof \Filament\Tables\Contracts\HasTable)
         <x-filament-actions::modals />

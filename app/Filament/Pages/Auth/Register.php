@@ -26,7 +26,7 @@ class Register extends FilamentRegister
 
     public function getHeading(): string|\Illuminate\Contracts\Support\Htmlable
     {
-        return 'Załóż konto';
+        return __('auth.register.heading');
     }
 
     public function form(Form $form): Form

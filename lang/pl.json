@@ -1,5 +1,7 @@
 {
     "auth.layout.tagline": "Bezpłatnie przez beta · Bez karty · Dane w Polsce",
+    "auth.login.heading": "Zaloguj się",
+    "auth.register.heading": "Załóż konto",
 
     "auth.register.step_account": "Konto",
     "auth.register.step_industry": "Branża",

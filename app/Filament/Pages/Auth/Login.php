@@ -10,7 +10,7 @@ class Login extends \Filament\Pages\Auth\Login
 
     public function getHeading(): string|\Illuminate\Contracts\Support\Htmlable
     {
-        return 'Zaloguj się';
+        return __('auth.login.heading');
     }
 
     public function hasLogo(): bool
