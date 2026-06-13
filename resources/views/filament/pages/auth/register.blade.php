@@ -1,10 +1,13 @@
-<x-filament-panels::page.simple>
-    @if (filament()->hasLogin())
-        <x-slot name="subheading">
-            {{ __('filament-panels::pages/auth/register.actions.login.before') }}
-            {{ $this->loginAction }}
-        </x-slot>
-    @endif
+<div>
+    <div style="margin-bottom:20px;">
+        <h2 style="font-size:17px;font-weight:700;color:#0f172a;margin:0 0 4px 0;">{{ $this->getHeading() }}</h2>
+        @if (filament()->hasLogin())
+            <p style="font-size:12px;color:#64748b;margin:0;">
+                {{ __('filament-panels::pages/auth/register.actions.login.before') }}
+                {{ $this->loginAction }}
+            </p>
+        @endif
+    </div>
 
     <x-filament-panels::form id="form" wire:submit="register">
         {{ $this->form }}
@@ -14,4 +17,8 @@
             :full-width="$this->hasFullWidthFormActions()"
         />
     </x-filament-panels::form>
-</x-filament-panels::page.simple>
+
+    @if (! $this instanceof \Filament\Tables\Contracts\HasTable)
+        <x-filament-actions::modals />
+    @endif
+</div>
