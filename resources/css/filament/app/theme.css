@@ -80,6 +80,13 @@
     border-radius: 8px;
 }
 
+/* ── Auth simple layout — form field labels ── */
+.aib-auth-simple .fi-fo-field-wrp-label {
+    color: #374151 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+
 /* ── Auth simple layout — chip preset selector ── */
 
 /* Override flex gap on the toggle-buttons container */
