@@ -8,6 +8,7 @@ use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\TenantSettingsPage;
 use App\Http\Middleware\SetLocaleMiddleware;
 use App\Modules\Crm\Filament\Resources\ClientResource;
+use App\Modules\Employees\Filament\Resources\EmployeeResource;
 use App\Modules\Scheduling\Filament\Resources\JobResource;
 use App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain;
 use Filament\FontProviders\GoogleFontProvider;
@@ -39,6 +40,7 @@ class AppPanelProvider extends PanelProvider
             ->path('/admin')
             ->login(Login::class)
             ->registration(Register::class)
+            ->emailVerification()
             ->colors(['primary' => Color::hex('#14b8a6')])
             ->darkMode(false)
             ->font('Inter', provider: GoogleFontProvider::class)
@@ -60,6 +62,7 @@ class AppPanelProvider extends PanelProvider
             ->resources([
                 ClientResource::class,
                 JobResource::class,
+                EmployeeResource::class,
             ])
             ->middleware([
                 EncryptCookies::class,
