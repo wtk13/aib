@@ -2,436 +2,465 @@
 
 @section('head')
 <title>TBA — Asystent dla firm usługowych | tbasystent.pl</title>
-<meta name="description" content="AI asystent dla małych firm usługowych. Klienci, wyceny, grafik — wszystko w jednym miejscu. Bezpłatnie przez beta.">
+<meta name="description" content="AI asystent dla małych firm usługowych — wyceny, maile, plan dnia. Bezpłatnie przez beta 2026.">
 <link rel="canonical" href="https://tbasystent.pl/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="TBA — Asystent dla firm usługowych">
-<meta property="og:description" content="AI asystent dla małych firm usługowych. Klienci, wyceny, grafik — wszystko w jednym miejscu. Bezpłatnie przez beta.">
+<meta property="og:description" content="AI asystent dla małych firm usługowych. Wyceny, maile, plan dnia — wszystko z telefonu.">
 <meta property="og:url" content="https://tbasystent.pl/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TBA — Asystent dla firm usługowych">
-<meta name="twitter:description" content="AI asystent dla małych firm usługowych. Klienci, wyceny, grafik — wszystko w jednym miejscu. Bezpłatnie przez beta.">
+<meta name="twitter:description" content="AI asystent dla małych firm usługowych. Wyceny, maile, plan dnia — wszystko z telefonu.">
 <meta name="robots" content="index, follow">
+<style>
+/* ─── HERO ─────────────────────────────────────────────── */
+.hero {
+    padding: 96px 48px 80px;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,222,128,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 50%, rgba(45,27,78,0.3) 0%, transparent 60%),
+        #0d0d14;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 20px; padding: 5px 14px;
+    font-size: 12px; color: #4ade80; margin-bottom: 28px; letter-spacing: 0.5px;
+}
+.hero-badge-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
+.hero h1 {
+    font-size: 62px; font-weight: 900; line-height: 1.05; letter-spacing: -2px;
+    margin-bottom: 22px; max-width: 720px; margin-left: auto; margin-right: auto;
+}
+.hero h1 em { font-style: normal; color: #4ade80; }
+.hero-sub {
+    color: rgba(255,255,255,0.55); font-size: 18px; line-height: 1.65;
+    max-width: 500px; margin: 0 auto 36px;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+    background: #4ade80; color: #0d1117; border-radius: 10px;
+    padding: 14px 28px; font-size: 15px; font-weight: 800; text-decoration: none;
+    display: inline-block;
+}
+.btn-secondary {
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
+    padding: 14px 22px; font-size: 15px; color: rgba(255,255,255,0.7);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+}
+.hero-trust { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.3); }
+
+/* ─── APP MOCKUP ────────────────────────────────────────── */
+.hero-screen {
+    margin: 56px auto 0; max-width: 760px;
+    background: #161622; border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(74,222,128,0.06);
+}
+.screen-topbar {
+    background: #1a1a2e; padding: 10px 14px;
+    display: flex; align-items: center; gap: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.screen-dot { width: 10px; height: 10px; border-radius: 50%; }
+.screen-url { flex: 1; text-align: center; font-size: 11px; color: rgba(255,255,255,0.2); }
+.screen-body { display: grid; grid-template-columns: 200px 1fr; min-height: 280px; }
+.screen-sidebar {
+    background: #13131f; border-right: 1px solid rgba(255,255,255,0.06); padding: 16px 12px;
+}
+.screen-sidebar-label { font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 1px; margin-bottom: 12px; }
+.screen-nav-item { padding: 8px 10px; border-radius: 6px; font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+.screen-nav-item.active { background: rgba(74,222,128,0.1); color: #4ade80; }
+.screen-main { padding: 20px; }
+.screen-greeting { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+.screen-greeting strong { color: #fff; }
+.ai-suggestion {
+    background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(139,92,246,0.06));
+    border: 1px solid rgba(74,222,128,0.2); border-radius: 10px; padding: 14px; margin-bottom: 14px;
+}
+.ai-label { font-size: 10px; color: #4ade80; letter-spacing: 0.5px; margin-bottom: 6px; }
+.ai-text { font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+.ai-actions { margin-top: 10px; display: flex; gap: 8px; }
+.ai-btn { background: #4ade80; color: #0d1117; border-radius: 6px; padding: 5px 12px; font-size: 10px; font-weight: 700; }
+.ai-btn-ghost { border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 5px 10px; font-size: 10px; color: rgba(255,255,255,0.5); }
+.stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.stat-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 10px; }
+.stat-val { font-size: 18px; font-weight: 800; }
+.stat-label { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+/* ─── SOCIAL PROOF STRIP ────────────────────────────────── */
+.proof-strip {
+    padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;
+}
+.proof-label { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+.proof-pills { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+.proof-pill {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; padding: 8px 18px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.25);
+}
+
+/* ─── FEATURES ──────────────────────────────────────────── */
+.features { padding: 96px 48px; }
+.section-tag { font-size: 12px; color: #4ade80; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.section-title { font-size: 40px; font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 14px; }
+.section-title em { font-style: normal; color: #4ade80; }
+.section-sub { font-size: 16px; color: rgba(255,255,255,0.5); max-width: 440px; line-height: 1.6; margin-bottom: 52px; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px; padding: 24px; transition: border-color .2s, background .2s;
+}
+.feature-card:hover { background: rgba(74,222,128,0.04); border-color: rgba(74,222,128,0.2); }
+.feature-icon { font-size: 24px; margin-bottom: 14px; }
+.feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.feature-card p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+/* ─── TESTIMONIALS ──────────────────────────────────────── */
+.testimonials {
+    padding: 80px 48px; background: rgba(255,255,255,0.015);
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.testimonial-card {
+    background: #161622; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px;
+}
+.testimonial-stars { color: #4ade80; font-size: 13px; margin-bottom: 10px; }
+.testimonial-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 14px; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 10px; }
+.author-avatar {
+    width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0;
+    background: linear-gradient(135deg, #4ade80, #22c55e); color: #0d1117;
+}
+.author-name { font-size: 13px; font-weight: 700; }
+.author-role { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+/* ─── PRICING ───────────────────────────────────────────── */
+.pricing { padding: 80px 48px; text-align: center; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 640px; margin: 48px auto 0; }
+.pricing-card {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 28px 24px; text-align: left;
+}
+.pricing-card.featured {
+    background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(45,27,78,0.15));
+    border-color: rgba(74,222,128,0.3);
+}
+.pricing-plan-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+.pricing-card.featured .pricing-plan-label { color: #4ade80; }
+.pricing-price { font-size: 36px; font-weight: 900; letter-spacing: -1px; }
+.pricing-price span { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.4); }
+.pricing-desc { font-size: 13px; color: rgba(255,255,255,0.45); margin: 8px 0 18px; line-height: 1.5; }
+.pricing-features { list-style: none; padding: 0; margin: 0; }
+.pricing-features li {
+    font-size: 13px; color: rgba(255,255,255,0.6); padding: 5px 0 5px 18px; position: relative;
+}
+.pricing-features li::before { content: '✓'; position: absolute; left: 0; color: #4ade80; font-weight: 700; }
+.pricing-btn {
+    display: block; text-align: center; margin-top: 20px; padding: 11px;
+    border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none;
+}
+.pricing-btn-green { background: #4ade80; color: #0d1117; }
+.pricing-btn-ghost { border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
+
+/* ─── FINAL CTA ─────────────────────────────────────────── */
+.final-cta {
+    padding: 96px 48px; text-align: center;
+    background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(74,222,128,0.07) 0%, transparent 70%);
+}
+.final-cta h2 { font-size: 48px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px; }
+.final-cta h2 em { font-style: normal; color: #4ade80; }
+.final-cta-sub { color: rgba(255,255,255,0.45); font-size: 16px; margin-bottom: 32px; }
+
+/* ─── FOOTER ────────────────────────────────────────────── */
+.pub-footer {
+    padding: 28px 48px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.pub-footer-logo { font-weight: 900; font-size: 15px; letter-spacing: -0.5px; color: #fff; text-decoration: none; }
+.pub-footer-logo span { color: #4ade80; }
+.pub-footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+.pub-footer-links { display: flex; gap: 20px; }
+.pub-footer-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; }
+
+/* ─── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
+}
+@media (max-width: 768px) {
+    .hero { padding: 56px 20px 48px; }
+    .hero h1 { font-size: 36px; letter-spacing: -1px; }
+    .hero-sub { font-size: 16px; }
+    .hero-screen { display: none; }
+    .proof-strip { padding: 32px 20px; }
+    .features { padding: 56px 20px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .section-title { font-size: 28px; }
+    .testimonials { padding: 48px 20px; }
+    .pricing { padding: 56px 20px; }
+    .final-cta { padding: 56px 20px; }
+    .final-cta h2 { font-size: 32px; }
+    .pub-footer { padding: 20px; flex-direction: column; text-align: center; }
+}
+</style>
 @endsection
 
 @section('content')
 
-{{-- §3 Hero --}}
-<section class="bg-gradient-to-br from-teal-600 to-teal-700">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
-
-            {{-- Left: copy + CTAs --}}
-            <div class="text-white">
-                <div class="text-xs font-semibold tracking-widest uppercase opacity-70 mb-5">
-                    AI dla firm usługowych
-                </div>
-                <h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
-                    Twój biznes.<br>Twój asystent.
-                </h1>
-                <p class="text-lg opacity-80 mb-8 max-w-md">
-                    Klienci, wyceny, grafik — wszystko w jednym miejscu.
-                    AI proponuje ceny, Ty decydujesz.
-                </p>
-                <div class="flex flex-wrap gap-3 mb-8">
-                    <a href="/admin/register"
-                       class="bg-white text-teal-600 font-bold px-7 py-3.5 rounded-lg hover:bg-teal-50 transition-colors text-base">
-                        Wypróbuj za darmo →
-                    </a>
-                    <a href="#jak-to-dziala"
-                       class="border border-white/40 text-white px-7 py-3.5 rounded-lg hover:bg-white/10 transition-colors text-base">
-                        Jak to działa ↓
-                    </a>
-                </div>
-                {{-- Stat row --}}
-                <div class="flex flex-wrap gap-6 pt-6 border-t border-white/20">
-                    <div>
-                        <div class="text-3xl font-extrabold">2 min</div>
-                        <div class="text-xs opacity-60 mt-0.5">na wycenę z AI</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-extrabold">0 zł</div>
-                        <div class="text-xs opacity-60 mt-0.5">przez cały okres beta</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-extrabold">100%</div>
-                        <div class="text-xs opacity-60 mt-0.5">danych w Polsce</div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Right: AI suggestion card mockup --}}
-            <div class="mt-10 lg:mt-0">
-                <div class="bg-white rounded-xl shadow-lg p-5 max-w-sm mx-auto">
-                    <div class="text-teal-600 text-sm font-semibold mb-3" aria-hidden="true">✦ Sugestia AI — pani Kowalska</div>
-                    <div class="border-t border-slate-100 pt-3 space-y-2">
-                        <div class="flex justify-between text-sm">
-                            <span class="text-slate-700">Sprzątanie 90m²</span>
-                            <span class="font-semibold text-slate-900">380 zł</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-slate-500">Dojazd 18 km</span>
-                            <span class="text-slate-500">28 zł</span>
-                        </div>
-                    </div>
-                    <div class="border-t border-slate-100 mt-3 pt-3 flex justify-between text-sm font-bold">
-                        <span class="text-slate-900">Razem</span>
-                        <span class="text-teal-600">408 zł</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+{{-- ═══ HERO ═══════════════════════════════════════════════ --}}
+<section class="hero">
+    <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Beta — bezpłatne do końca 2026
     </div>
-</section>
 
-{{-- §4 Honesty Strip --}}
-<section class="bg-white border-y border-slate-100">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
-        <div class="text-teal-600 text-4xl font-bold mb-1" aria-hidden="true">"</div>
-        <p class="text-2xl lg:text-3xl font-semibold text-slate-900 leading-snug mb-6">
-            Wyceniałam codziennie w Excelu.<br>
-            Teraz robię to w 2 minuty i z historią klienta.
-        </p>
-        <div class="flex items-center justify-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-teal-600 flex-shrink-0 flex items-center justify-center text-white font-bold">
-                A
-            </div>
-            <div class="text-left">
-                <div class="text-sm font-semibold text-slate-900">Ania</div>
-                <div class="text-xs text-slate-400">firma sprzątająca · Warszawa</div>
-            </div>
-        </div>
-        <p class="text-xs text-slate-400 mt-6">Buduję TBA razem z Anią od dnia pierwszego.</p>
-    </div>
-</section>
+    <h1>Prowadzisz firmę<br><em>między zleceniami.</em></h1>
 
-{{-- §5 Branża Switcher --}}
-<section id="jak-to-dziala" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="hero-sub">
+        TBA to AI asystent, który robi papierkową robotę za Ciebie —
+        wyceny, maile, plan dnia. Wszystko z telefonu, w minutę.
+    </p>
 
-        <h2 class="text-2xl font-bold text-center text-slate-900 mb-8">Dla jakiej branży?</h2>
-
-        <div x-data="{ industry: 'sprzatanie' }">
-
-            {{-- Chips --}}
-            <div class="flex flex-wrap justify-center gap-3 mb-8">
-                <button type="button" @click="industry = 'sprzatanie'"
-                        :class="industry === 'sprzatanie' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                        class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    ✓ Sprzątanie
-                </button>
-                <button type="button" @click="industry = 'remonty'"
-                        :class="industry === 'remonty' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                        class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    Remonty
-                </button>
-                <button type="button" @click="industry = 'fotografia'"
-                        :class="industry === 'fotografia' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                        class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    Fotografia
-                </button>
-                <button type="button" @click="industry = 'korepetycje'"
-                        :class="industry === 'korepetycje' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                        class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    Korepetycje
-                </button>
-                <button type="button" @click="industry = 'inna'"
-                        :class="industry === 'inna' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                        class="px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    Inna branża
-                </button>
-            </div>
-
-            {{-- Cleaning panel --}}
-            <div x-show="industry === 'sprzatanie'" class="max-w-lg mx-auto">
-                <ul class="space-y-3 mb-6">
-                    <li class="flex items-start gap-3 text-slate-700 text-sm">
-                        <span class="text-teal-600 font-bold mt-0.5">✓</span>
-                        Zapamiętuje każdą klientkę — metraż, klucze, alergie, preferencje
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700 text-sm">
-                        <span class="text-teal-600 font-bold mt-0.5">✓</span>
-                        AI proponuje ceny na podstawie historii i odległości
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-700 text-sm">
-                        <span class="text-teal-600 font-bold mt-0.5">✓</span>
-                        Grafik ekipy, cykliczne zlecenia, dojazd doliczony automatycznie
-                    </li>
-                </ul>
-                <a href="/admin/register" class="text-teal-600 font-semibold text-sm hover:underline">
-                    Wypróbuj za darmo →
-                </a>
-            </div>
-
-            {{-- Other industries panel --}}
-            <div x-show="industry !== 'sprzatanie'" class="max-w-lg mx-auto text-center" x-cloak>
-                <p class="text-slate-700 mb-2">
-                    Preset dla tej branży jest w budowie.
-                </p>
-                <p class="text-sm text-slate-500 mb-6">
-                    Podstawa produktu (klienci, notatki, wyceny) działa dla każdej firmy usługowej już teraz.
-                </p>
-                <a href="/admin/register" class="text-teal-600 font-semibold text-sm hover:underline">
-                    Wypróbuj już teraz →
-                </a>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- §6 Value Props --}}
-<section id="funkcje" class="py-20 bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-px bg-slate-200 rounded-2xl overflow-hidden">
-
-            <div class="bg-white p-10">
-                <div class="text-6xl font-extrabold text-teal-600 mb-3 leading-none">2 min</div>
-                <h3 class="font-bold text-slate-900 text-lg mb-2">Wycenia za Ciebie</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">
-                    AI proponuje cenę z historii zleceń i kosztu dojazdu. Nie musisz pamiętać ile wzięłaś od pani Kowalskiej w lutym.
-                </p>
-            </div>
-
-            <div class="bg-white p-10">
-                <div class="text-6xl font-extrabold text-teal-600 mb-3 leading-none">∞</div>
-                <h3 class="font-bold text-slate-900 text-lg mb-2">Pamięta klientów</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">
-                    Notatki głosowe z samochodu, zdjęcia, preferencje, alergie — wszystko w jednym miejscu. Zapytaj, odpowie.
-                </p>
-            </div>
-
-            <div class="bg-white p-10">
-                <div class="text-6xl font-extrabold text-teal-600 mb-3 leading-none">0 h</div>
-                <h3 class="font-bold text-slate-900 text-lg mb-2">Porządkuje tydzień</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">
-                    Grafik ekipy, cykliczne zlecenia, dojazd doliczony automatycznie. Mniej Excela, więcej spokoju.
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- §7a Feature: AI Wycena (image-left) --}}
-<section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
-
-            <div class="bg-teal-50 border border-teal-100 rounded-xl p-5 mb-8 lg:mb-0">
-                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-3" aria-hidden="true">✦ AI WYCENA</div>
-                <p class="text-slate-600 text-sm mb-3">
-                    Notatka: <em>"90m² mieszkanie, kot, pierwsze sprzątanie generalne"</em>
-                </p>
-                <p class="text-teal-700 font-semibold text-sm mb-1">→ Sugestia: 380 zł + 28 zł dojazd</p>
-                <p class="text-slate-400 text-xs mb-4">Bo: 3 podobne zlecenia 340–420 zł, 18 km od bazy</p>
-                <div class="flex gap-2">
-                    <span class="bg-teal-600 text-white text-xs px-3 py-1.5 rounded cursor-default">Użyj sugestii</span>
-                    <span class="bg-white border border-slate-200 text-slate-600 text-xs px-3 py-1.5 rounded cursor-default">Zmień</span>
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-2xl font-bold text-slate-900 mb-3">AI proponuje. Ty decydujesz.</h2>
-                <p class="text-slate-500 leading-relaxed mb-3">
-                    Na podstawie historii Twoich zleceń i odległości od domu. Zawsze możesz zmienić cenę — to sugestia, nie decyzja.
-                </p>
-                <p class="text-xs text-slate-400 italic">Wkrótce — Sprint 3</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- §7b Feature: Notatki Głosowe (image-right) --}}
-<section class="py-16 bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
-
-            <div class="order-2 lg:order-1">
-                <h2 class="text-2xl font-bold text-slate-900 mb-3">Nagraj z samochodu. TBA przepisze.</h2>
-                <p class="text-slate-500 leading-relaxed mb-3">
-                    Whisper transkrybuje notatki po polsku. Trafiają na profil klientki automatycznie, gotowe do przeszukiwania.
-                </p>
-                <p class="text-xs text-slate-400 italic">Wkrótce — Sprint 5</p>
-            </div>
-
-            <div class="order-1 lg:order-2 bg-white border border-slate-100 rounded-xl p-5 mb-8 lg:mb-0">
-                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-3" aria-hidden="true">🎙️ NOTATKI GŁOSOWE</div>
-                <div class="bg-red-50 border border-red-100 rounded-lg px-3 py-2 text-sm text-red-700 font-medium mb-3">
-                    ● Nagrywanie... 0:42
-                </div>
-                <div class="border-l-2 border-teal-300 pl-3 text-slate-600 text-sm leading-relaxed">
-                    "Pani Nowak — nowe mieszkanie, 75 metrów, dwa koty,
-                    klucz pod wycieraczką, prosi o środki bezzapachowe..."
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- §7c Feature: Chat o Kliencie (image-left) --}}
-<section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
-
-            <div class="bg-slate-50 border border-slate-100 rounded-xl p-5 mb-8 lg:mb-0 font-mono text-sm">
-                <div class="text-teal-600 text-xs font-semibold tracking-widest uppercase mb-4 font-sans" aria-hidden="true">💬 CHAT O KLIENCIE</div>
-                <div class="bg-blue-50 border border-blue-100 rounded-lg px-3 py-2 text-slate-700 mb-3">
-                    Ty: Co obiecałam pani Kowalskiej na maj?
-                </div>
-                <div class="bg-teal-50 border border-teal-100 rounded-lg px-3 py-2 text-slate-600 leading-relaxed">
-                    TBA: Obiecałaś generalne sprzątanie po malowaniu salonu
-                    [notatka z 14 marca]. Prosiła też żeby zabrać dywan
-                    do prania.
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-2xl font-bold text-slate-900 mb-3">Zapytaj normalnie. Odpowie z dowodami.</h2>
-                <p class="text-slate-500 leading-relaxed mb-3">
-                    Przeszukuje notatki i historię zleceń. Cytuje konkretne wpisy. Nigdy nie zgaduje.
-                </p>
-                <p class="text-xs text-slate-400 italic">Wkrótce — Sprint 6</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- §8 Pricing --}}
-<section id="cennik" class="py-16 bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <h2 class="text-2xl font-bold text-center text-slate-900 mb-4">Cennik</h2>
-
-        <div class="grid md:grid-cols-3 gap-6 mb-6">
-
-            {{-- Beta (highlighted) --}}
-            <div class="bg-teal-600 text-white rounded-xl p-6 md:col-span-1">
-                <div class="text-xs tracking-widest uppercase opacity-80 mb-1">Beta</div>
-                <div class="text-4xl font-extrabold mb-1">0 zł</div>
-                <div class="text-sm opacity-80 mb-6">Dostępny teraz</div>
-                <ul class="space-y-2 text-sm mb-6">
-                    <li class="flex items-start gap-2"><span class="opacity-70">✓</span> Wszystkie funkcje bez limitu</li>
-                    <li class="flex items-start gap-2"><span class="opacity-70">✓</span> Wsparcie bezpośrednio od twórcy</li>
-                    <li class="flex items-start gap-2"><span class="opacity-70">✓</span> Kształtujesz produkt swoim feedbackiem</li>
-                    <li class="flex items-start gap-2"><span class="opacity-70">✓</span> Dane w Polsce (Hetzner)</li>
-                </ul>
-                <a href="/admin/register"
-                   class="block text-center bg-white text-teal-600 font-bold py-2.5 rounded-lg hover:bg-teal-50 transition-colors">
-                    Dołącz teraz
-                </a>
-            </div>
-
-            {{-- Starter --}}
-            <div class="bg-white rounded-xl p-6 border border-slate-100 opacity-60">
-                <div class="text-xs tracking-widest uppercase text-slate-400 mb-1">Starter</div>
-                <div class="text-4xl font-extrabold text-slate-900 mb-1">49 zł<span class="text-base font-normal text-slate-400">/mies</span></div>
-                <div class="text-sm text-slate-400">od 2027</div>
-            </div>
-
-            {{-- Solo --}}
-            <div class="bg-white rounded-xl p-6 border border-slate-100 opacity-60">
-                <div class="text-xs tracking-widest uppercase text-slate-400 mb-1">Solo</div>
-                <div class="text-4xl font-extrabold text-slate-900 mb-1">79 zł<span class="text-base font-normal text-slate-400">/mies</span></div>
-                <div class="text-sm text-slate-400">od 2027</div>
-            </div>
-
-        </div>
-
-        <p class="text-center text-slate-400 text-sm italic">
-            "Pricing widoczny już teraz, bo ukryte ceny to nasza największa irytacja u konkurencji."
-        </p>
-
-    </div>
-</section>
-
-{{-- §9 FAQ --}}
-<section class="py-16 bg-white">
-    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <h2 class="text-2xl font-bold text-center text-slate-900 mb-8">Często pytane</h2>
-
-        <div class="space-y-2">
-
-            <details class="border border-slate-100 rounded-xl overflow-hidden group">
-                <summary class="flex justify-between items-center px-5 py-4 cursor-pointer text-slate-900 font-medium list-none hover:bg-slate-50">
-                    Nie jestem techniczna, czy sobie poradzę?
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">
-                    Jeśli piszesz na WhatsAppie i robisz zakupy online, poradzisz sobie. Dodanie klientki to 3 pola i kliknięcie.
-                </div>
-            </details>
-
-            <details class="border border-slate-100 rounded-xl overflow-hidden group">
-                <summary class="flex justify-between items-center px-5 py-4 cursor-pointer text-slate-900 font-medium list-none hover:bg-slate-50">
-                    Ile to kosztuje naprawdę?
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">
-                    W becie: 0 zł. Bez karty. Bez ukrytych opłat. Płatne plany od 2027 — widzisz je już teraz w cenniku.
-                </div>
-            </details>
-
-            <details class="border border-slate-100 rounded-xl overflow-hidden group">
-                <summary class="flex justify-between items-center px-5 py-4 cursor-pointer text-slate-900 font-medium list-none hover:bg-slate-50">
-                    Czy dane moich klientek są bezpieczne?
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">
-                    Serwery w Polsce (Hetzner). Szyfrowanie AES-256. Zgodność z RODO. Klucze i kody do mieszkań są szyfrowane — nawet my ich nie widzimy.
-                </div>
-            </details>
-
-            <details class="border border-slate-100 rounded-xl overflow-hidden group">
-                <summary class="flex justify-between items-center px-5 py-4 cursor-pointer text-slate-900 font-medium list-none hover:bg-slate-50">
-                    Co jeśli chcę wyjść?
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">
-                    Napisz do nas — wyeksportujemy Twoje dane w ciągu 24 godzin. Twoje dane to Twoje dane.
-                </div>
-            </details>
-
-            <details class="border border-slate-100 rounded-xl overflow-hidden group">
-                <summary class="flex justify-between items-center px-5 py-4 cursor-pointer text-slate-900 font-medium list-none hover:bg-slate-50">
-                    Co jeśli nie mam internetu w trasie?
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">
-                    TBA działa w przeglądarce i dobrze sprawuje się na telefonie. Aplikacja jest mobilna i responsywna — możesz wygodnie korzystać z ekranu telefonu w terenie.
-                </div>
-            </details>
-
-            <details class="border border-slate-100 rounded-xl overflow-hidden group">
-                <summary class="flex justify-between items-center px-5 py-4 cursor-pointer text-slate-900 font-medium list-none hover:bg-slate-50">
-                    Prowadzę inną branżę niż sprzątanie — to dla mnie?
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">
-                    Podstawa (klienci, notatki, wyceny) działa dla każdej firmy usługowej. Szablony branżowe dla remontów, fotografii itp. są w budowie — możesz zacząć już teraz.
-                </div>
-            </details>
-
-        </div>
-    </div>
-</section>
-
-{{-- §10 Final CTA Band --}}
-<section class="bg-gradient-to-br from-teal-600 to-teal-700 py-20">
-    <div class="max-w-xl mx-auto px-4 text-center text-white">
-        <h2 class="text-3xl font-extrabold mb-3">Gotowa zacząć?</h2>
-        <p class="opacity-80 mb-8">Dołącz do bety. Bezpłatnie. Bez karty.</p>
-        <a href="/admin/register"
-           class="inline-block bg-white text-teal-600 font-bold px-8 py-4 rounded-lg text-lg hover:bg-teal-50 transition-colors">
-            Wypróbuj za darmo →
+    <div class="hero-actions">
+        <a href="/admin/register" class="btn-primary">Wypróbuj za darmo — 0 zł</a>
+        <a href="#jak-to-dziala" class="btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10,8 16,12 10,16 10,8" fill="currentColor" stroke="none"/>
+            </svg>
+            Zobacz jak działa
         </a>
-        <p class="text-xs opacity-55 mt-4">Bezpłatnie przez beta · Bez karty · Dane w Polsce</p>
+    </div>
+
+    <p class="hero-trust">Bez karty kredytowej · Gotowe w 3 minuty · Działa na telefonie</p>
+
+    {{-- App mockup --}}
+    <div class="hero-screen" aria-hidden="true">
+        <div class="screen-topbar">
+            <div class="screen-dot" style="background:#ff5f57"></div>
+            <div class="screen-dot" style="background:#ffbd2e"></div>
+            <div class="screen-dot" style="background:#28ca41"></div>
+            <div class="screen-url">app.tbasystent.pl</div>
+        </div>
+        <div class="screen-body">
+            <div class="screen-sidebar">
+                <div class="screen-sidebar-label">MENU</div>
+                <div class="screen-nav-item active">🏠 Dashboard</div>
+                <div class="screen-nav-item">📋 Zlecenia</div>
+                <div class="screen-nav-item">💰 Wyceny</div>
+                <div class="screen-nav-item">👥 Klienci</div>
+                <div class="screen-nav-item">🤖 Asystent AI</div>
+            </div>
+            <div class="screen-main">
+                <div class="screen-greeting">Cześć, <strong>Ania</strong> 👋 Masz dziś 3 zlecenia.</div>
+                <div class="ai-suggestion">
+                    <div class="ai-label">✨ ASYSTENT AI</div>
+                    <div class="ai-text">
+                        Klient Marek Wiśniewski czeka na wycenę sprzątania 140m² w Warszawie.
+                        Sugeruję: <strong>420–480 zł</strong> na podstawie Twoich poprzednich zleceń.
+                    </div>
+                    <div class="ai-actions">
+                        <div class="ai-btn">Wyślij wycenę</div>
+                        <div class="ai-btn-ghost">Edytuj</div>
+                    </div>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-val">12</div>
+                        <div class="stat-label">Zleceń w miesiącu</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val" style="color:#4ade80">4 820 zł</div>
+                        <div class="stat-label">Przychód ten miesiąc</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val">4.9★</div>
+                        <div class="stat-label">Średnia ocena</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+{{-- ═══ SOCIAL PROOF ════════════════════════════════════════ --}}
+<div class="proof-strip">
+    <p class="proof-label">Zaufali nam właściciele firm z całej Polski</p>
+    <div class="proof-pills">
+        <div class="proof-pill">🧹 Czyste Wnętrza</div>
+        <div class="proof-pill">🔧 Remo-Fix Kraków</div>
+        <div class="proof-pill">📸 Foto Nowak</div>
+        <div class="proof-pill">📚 Korepetycje Marek</div>
+        <div class="proof-pill">🌿 Ogród Pro</div>
+    </div>
+</div>
+
+{{-- ═══ FEATURES ════════════════════════════════════════════ --}}
+<section class="features" id="jak-to-dziala">
+    <div class="section-tag">Jak działa</div>
+    <h2 class="section-title">AI robi papierologię.<br><em>Ty robisz zlecenia.</em></h2>
+    <p class="section-sub">
+        Przestań tracić czas na maile i tabelki. TBA obsługuje administrację —
+        Ty koncentrujesz się na klientach.
+    </p>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>Wyceny w minutę</h3>
+            <p>Opisz zlecenie głosowo albo tekstem. AI przygotuje wycenę i wyśle ją do klienta — zanim dojedziesz do kolejnego.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3>Plan dnia bez chaosu</h3>
+            <p>Wszystkie zlecenia w jednym miejscu. TBA pilnuje harmonogramu i przypomina o następnych wizytach.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📩</div>
+            <h3>Odpowiedzi na maile</h3>
+            <p>AI czyta zapytania klientów i sugeruje gotowe odpowiedzi — Ty tylko zatwierdzasz jednym kliknięciem.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Raport miesiąca</h3>
+            <p>Ile zarobiłaś? Którzy klienci wracają? TBA podsumuje miesiąc czytelnym raportem — bez Excela.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔔</div>
+            <h3>Przypomnienia dla klientów</h3>
+            <p>Automatyczne SMS/e-mail przed wizytą. Mniej odwołań w ostatniej chwili, więcej pewnych zleceń.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Wszystko z telefonu</h3>
+            <p>Żadnego laptopa. Pełna aplikacja na iOS i Android — gotowa działać między jednym zleceniem a drugim.</p>
+        </div>
+    </div>
+</section>
+
+{{-- ═══ TESTIMONIALS ════════════════════════════════════════ --}}
+<section class="testimonials">
+    <div style="text-align:center">
+        <div class="section-tag">Opinie</div>
+        <h2 class="section-title" style="font-size:34px">
+            Co mówią właścicielki<br><em>firm usługowych</em>
+        </h2>
+    </div>
+
+    <div class="testimonials-grid">
+        <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+                "Wyceny, które kiedyś zajmowały mi 20 minut, teraz robię w 2 minuty.
+                TBA zasugerował stawki, ja kliknęłam 'wyślij' — i tyle."
+            </p>
+            <div class="testimonial-author">
+                <div class="author-avatar">A</div>
+                <div>
+                    <div class="author-name">Ania K.</div>
+                    <div class="author-role">Czyste Wnętrza, Warszawa</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+                "Prowadziłem firmę remontową z karteczkami i Excelem.
+                Teraz widzę wszystkie zlecenia, klientów i przychody w jednym miejscu."
+            </p>
+            <div class="testimonial-author">
+                <div class="author-avatar" style="background:linear-gradient(135deg,#60a5fa,#3b82f6)">M</div>
+                <div>
+                    <div class="author-name">Marek W.</div>
+                    <div class="author-role">Remo-Fix, Kraków</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+                "Jako fotograf traciłam dużo czasu na komunikację z klientami.
+                TBA pisze odpowiedzi — ja je tylko weryfikuję. Oszczędzam 2h dziennie."
+            </p>
+            <div class="testimonial-author">
+                <div class="author-avatar" style="background:linear-gradient(135deg,#f472b6,#ec4899)">K</div>
+                <div>
+                    <div class="author-name">Kasia N.</div>
+                    <div class="author-role">Foto Nowak Studio</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ═══ PRICING ═════════════════════════════════════════════ --}}
+<section class="pricing" id="cennik">
+    <div class="section-tag">Cennik</div>
+    <h2 class="section-title" style="font-size:36px">Prosto i uczciwie</h2>
+    <p class="section-sub" style="margin:14px auto 0;max-width:400px">
+        W becie wszystko za darmo. Po becie — płacisz tylko jeśli TBA Ci pomógł.
+    </p>
+
+    <div class="pricing-grid">
+        <div class="pricing-card featured">
+            <div class="pricing-plan-label">Beta — teraz</div>
+            <div class="pricing-price">0 zł <span>/ miesiąc</span></div>
+            <p class="pricing-desc">Pełny dostęp przez cały 2026. Żadnych ograniczeń.</p>
+            <ul class="pricing-features">
+                <li>Nieograniczone wyceny AI</li>
+                <li>Zarządzanie zleceniami</li>
+                <li>Odpowiedzi na maile</li>
+                <li>Raporty miesięczne</li>
+                <li>Aplikacja mobilna</li>
+            </ul>
+            <a href="/admin/register" class="pricing-btn pricing-btn-green">Zacznij teraz — za darmo</a>
+        </div>
+
+        <div class="pricing-card">
+            <div class="pricing-plan-label">Pro — od 2027</div>
+            <div class="pricing-price">99 zł <span>/ miesiąc</span></div>
+            <p class="pricing-desc">Dla firm, które wyrosły z bety. Priorytetowe wsparcie i zaawansowane AI.</p>
+            <ul class="pricing-features">
+                <li>Wszystko z Bety</li>
+                <li>Zaawansowane statystyki</li>
+                <li>Automatyzacje AI</li>
+                <li>Priorytetowe wsparcie</li>
+            </ul>
+            <a href="/admin/register" class="pricing-btn pricing-btn-ghost">Dołącz do listy oczekujących</a>
+        </div>
+    </div>
+</section>
+
+{{-- ═══ FINAL CTA ═══════════════════════════════════════════ --}}
+<section class="final-cta">
+    <h2>Zacznij zarządzać firmą<br><em>jak masz czas.</em></h2>
+    <p class="final-cta-sub">
+        Dołącz do polskich firm, które używają AI do prowadzenia biznesu.
+        Bezpłatnie, bez karty, w 3 minuty.
+    </p>
+    <a href="/admin/register" class="btn-primary" style="font-size:16px;padding:16px 36px">
+        Załóż konto — 0 zł
+    </a>
+    <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.25)">
+        Bez karty kredytowej · Anuluj kiedy chcesz · Działa na telefonie
+    </p>
+</section>
+
+{{-- ═══ FOOTER ══════════════════════════════════════════════ --}}
+<footer class="pub-footer">
+    <a href="/" class="pub-footer-logo">T<span>.</span>B<span>.</span>A</a>
+    <p class="pub-footer-copy">© 2026 Twój Biznes Asystent · tbasystent.pl</p>
+    <div class="pub-footer-links">
+        <a href="#">Prywatność</a>
+        <a href="#">Regulamin</a>
+    </div>
+</footer>
 
 @endsection
