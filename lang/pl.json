@@ -1,4 +1,6 @@
 {
+    "auth.layout.tagline": "Bezpłatnie przez beta · Bez karty · Dane w Polsce",
+
     "auth.register.step_account": "Konto",
     "auth.register.step_industry": "Branża",
     "auth.register.name": "Imię i nazwisko / Nazwa firmy",

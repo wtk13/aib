@@ -15,7 +15,7 @@
 
             {{-- Footer tagline --}}
             <p style="margin-top:20px;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6;">
-                Bezpłatnie przez beta &nbsp;·&nbsp; Bez karty &nbsp;·&nbsp; Dane w Polsce
+                {{ __('auth.layout.tagline') }}
             </p>
 
         </div>
