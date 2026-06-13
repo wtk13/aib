@@ -1,4 +1,4 @@
-.PHONY: up down fresh logs shell
+.PHONY: up down fresh logs shell theme
 
 up:
 	docker compose up -d --wait
@@ -17,3 +17,6 @@ logs:
 
 shell:
 	docker compose exec app sh
+
+theme:
+	bin/npm run theme:build

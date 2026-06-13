@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
 /* =============================================
    AIB — Filament Panel Theme
    Teal structural retheme

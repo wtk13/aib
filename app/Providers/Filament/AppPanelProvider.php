@@ -16,7 +16,10 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\Support\Assets\Css;
 use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentAsset;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -46,9 +49,13 @@ class AppPanelProvider extends PanelProvider
                 . '</div>'
             ))
             ->brandLogoHeight('2rem')
-            ->viteTheme('resources/css/filament/app/theme.css')
+            ->renderHook(
+                PanelsRenderHook::STYLES_AFTER,
+                fn () => new HtmlString('<link rel="stylesheet" href="' . asset('css/filament/app/theme.css') . '">')
+            )
             ->sidebarCollapsibleOnDesktop()
             ->pages([Dashboard::class, TenantSettingsPage::class])
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->resources([
                 ClientResource::class,
                 JobResource::class,

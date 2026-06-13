@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'app_domain' => env('APP_DOMAIN', 'aib.app'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

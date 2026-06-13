@@ -3,6 +3,10 @@
 /public/build
 /public/hot
 /public/storage
+/public/css/filament/filament/
+/public/css/filament/forms/
+/public/css/filament/support/
+/public/js/
 /storage/*.key
 /storage/pail
 /vendor
@@ -22,3 +26,4 @@ yarn-error.log
 /.vscode
 /.zed
 /memory/
+.superpowers
