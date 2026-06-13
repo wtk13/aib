@@ -8,9 +8,11 @@
 <meta property="og:title" content="TBA — Asystent dla firm usługowych">
 <meta property="og:description" content="AI asystent dla małych firm usługowych. Wyceny, maile, plan dnia — wszystko z telefonu.">
 <meta property="og:url" content="https://tbasystent.pl/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://tbasystent.pl/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TBA — Asystent dla firm usługowych">
 <meta name="twitter:description" content="AI asystent dla małych firm usługowych. Wyceny, maile, plan dnia — wszystko z telefonu.">
+<meta name="twitter:image" content="https://tbasystent.pl/og-image.png">
 <meta name="robots" content="index, follow">
 <style>
 /* ─── HERO ─────────────────────────────────────────────── */
@@ -47,6 +49,8 @@
     display: inline-block; transition: background .2s;
 }
 .btn-primary:hover { background: #22c55e; }
+.btn-primary:focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; }
+.btn-primary--lg { font-size: 16px; padding: 16px 36px; }
 .btn-secondary {
     border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
     padding: 14px 22px; font-size: 15px; color: rgba(255,255,255,0.7);
@@ -54,6 +58,7 @@
     transition: border-color .2s, color .2s;
 }
 .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+.btn-secondary:focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; }
 .hero-trust { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.3); }
 
 /* ─── APP MOCKUP ────────────────────────────────────────── */
@@ -168,17 +173,27 @@
 }
 .pricing-btn-green { background: #4ade80; color: #0d1117; transition: background .2s; }
 .pricing-btn-green:hover { background: #22c55e; }
+.pricing-btn-green:focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; }
 .pricing-btn-ghost { border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); transition: border-color .2s, color .2s; }
 .pricing-btn-ghost:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.9); }
+.pricing-btn-ghost:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 3px; }
 
 /* ─── FINAL CTA ─────────────────────────────────────────── */
 .final-cta {
     padding: 96px 48px; text-align: center;
     background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(74,222,128,0.07) 0%, transparent 70%);
 }
-.final-cta h2 { font-size: 48px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px; }
-.final-cta h2 em { font-style: normal; color: #4ade80; }
+.final-cta .section-title { font-size: 48px; margin-bottom: 16px; }
 .final-cta-sub { color: rgba(255,255,255,0.45); font-size: 16px; margin-bottom: 32px; }
+.final-cta-trust { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.25); }
+
+/* ─── MODIFIERS ─────────────────────────────────────────── */
+.section-title--sm { font-size: 34px; }
+.section-sub--centered { margin-top: 14px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.stat-val--accent { color: #4ade80; }
+.author-avatar--blue { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+.author-avatar--pink { background: linear-gradient(135deg, #f472b6, #ec4899); }
+.testimonials-header { text-align: center; }
 
 /* ─── FOOTER ────────────────────────────────────────────── */
 .pub-footer {
@@ -189,7 +204,7 @@
 .pub-footer-logo span { color: #4ade80; }
 .pub-footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
 .pub-footer-links { display: flex; gap: 20px; }
-.pub-footer-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; }
+.pub-footer-links-item { font-size: 12px; color: rgba(255,255,255,0.25); }
 
 /* ─── RESPONSIVE ────────────────────────────────────────── */
 @media (max-width: 1024px) {
@@ -280,7 +295,7 @@
                         <div class="stat-label">Zleceń w miesiącu</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-val" style="color:#4ade80">4 820 zł</div>
+                        <div class="stat-val stat-val--accent">4 820 zł</div>
                         <div class="stat-label">Przychód ten miesiąc</div>
                     </div>
                     <div class="stat-box">
@@ -294,7 +309,7 @@
 </section>
 
 {{-- ═══ SOCIAL PROOF ════════════════════════════════════════ --}}
-<div class="proof-strip">
+<section class="proof-strip" aria-label="Referencje">
     <p class="proof-label">Zaufali nam właściciele firm z całej Polski</p>
     <div class="proof-pills">
         <div class="proof-pill">🧹 Czyste Wnętrza</div>
@@ -303,7 +318,7 @@
         <div class="proof-pill">📚 Korepetycje Marek</div>
         <div class="proof-pill">🌿 Ogród Pro</div>
     </div>
-</div>
+</section>
 
 {{-- ═══ FEATURES ════════════════════════════════════════════ --}}
 <section class="features" id="jak-to-dziala">
@@ -343,16 +358,16 @@
         <div class="feature-card">
             <div class="feature-icon">📱</div>
             <h3>Wszystko z telefonu</h3>
-            <p>Żadnego laptopa. Pełna aplikacja na iOS i Android — gotowa działać między jednym zleceniem a drugim.</p>
+            <p>Żadnego laptopa. Działa na telefonie przez przeglądarkę — bez instalacji, gotowe między jednym zleceniem a drugim.</p>
         </div>
     </div>
 </section>
 
 {{-- ═══ TESTIMONIALS ════════════════════════════════════════ --}}
 <section class="testimonials">
-    <div style="text-align:center">
+    <div class="testimonials-header">
         <div class="section-tag">Opinie</div>
-        <h2 class="section-title" style="font-size:34px">
+        <h2 class="section-title section-title--sm">
             Co mówią właścicielki<br><em>firm usługowych</em>
         </h2>
     </div>
@@ -380,7 +395,7 @@
                 Teraz widzę wszystkie zlecenia, klientów i przychody w jednym miejscu."
             </p>
             <div class="testimonial-author">
-                <div class="author-avatar" style="background:linear-gradient(135deg,#60a5fa,#3b82f6)">M</div>
+                <div class="author-avatar author-avatar--blue">M</div>
                 <div>
                     <div class="author-name">Marek W.</div>
                     <div class="author-role">Remo-Fix, Kraków</div>
@@ -395,7 +410,7 @@
                 TBA pisze odpowiedzi — ja je tylko weryfikuję. Oszczędzam 2h dziennie."
             </p>
             <div class="testimonial-author">
-                <div class="author-avatar" style="background:linear-gradient(135deg,#f472b6,#ec4899)">K</div>
+                <div class="author-avatar author-avatar--pink">K</div>
                 <div>
                     <div class="author-name">Kasia N.</div>
                     <div class="author-role">Foto Nowak Studio</div>
@@ -408,8 +423,8 @@
 {{-- ═══ PRICING ═════════════════════════════════════════════ --}}
 <section class="pricing" id="cennik">
     <div class="section-tag">Cennik</div>
-    <h2 class="section-title" style="font-size:36px">Prosto i uczciwie</h2>
-    <p class="section-sub" style="margin-top:14px;max-width:400px;margin-left:auto;margin-right:auto">
+    <h2 class="section-title">Prosto i uczciwie</h2>
+    <p class="section-sub section-sub--centered">
         W becie wszystko za darmo. Po becie — płacisz tylko jeśli TBA Ci pomógł.
     </p>
 
@@ -423,7 +438,7 @@
                 <li>Zarządzanie zleceniami</li>
                 <li>Odpowiedzi na maile</li>
                 <li>Raporty miesięczne</li>
-                <li>Aplikacja mobilna</li>
+                <li>Działa na telefonie</li>
             </ul>
             <a href="/admin/register" class="pricing-btn pricing-btn-green">Zacznij teraz — za darmo</a>
         </div>
@@ -445,15 +460,15 @@
 
 {{-- ═══ FINAL CTA ═══════════════════════════════════════════ --}}
 <section class="final-cta">
-    <h2>Zacznij zarządzać firmą<br><em>jak masz czas.</em></h2>
+    <h2 class="section-title">Zacznij zarządzać firmą<br><em>jak masz czas.</em></h2>
     <p class="final-cta-sub">
         Dołącz do polskich firm, które używają AI do prowadzenia biznesu.
         Bezpłatnie, bez karty, w 3 minuty.
     </p>
-    <a href="/admin/register" class="btn-primary" style="font-size:16px;padding:16px 36px">
+    <a href="/admin/register" class="btn-primary btn-primary--lg">
         Załóż konto — 0 zł
     </a>
-    <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.25)">
+    <p class="final-cta-trust">
         Bez karty kredytowej · Anuluj kiedy chcesz · Działa na telefonie
     </p>
 </section>
@@ -463,8 +478,8 @@
     <a href="/" class="pub-footer-logo">T<span>.</span>B<span>.</span>A</a>
     <p class="pub-footer-copy">© 2026 Twój Biznes Asystent · tbasystent.pl</p>
     <div class="pub-footer-links">
-        <a href="#">Prywatność</a>
-        <a href="#">Regulamin</a>
+        <span class="pub-footer-links-item">Prywatność</span>
+        <span class="pub-footer-links-item">Regulamin</span>
     </div>
 </footer>
 

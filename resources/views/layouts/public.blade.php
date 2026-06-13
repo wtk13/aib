@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="content-language" content="pl">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d14">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -24,13 +25,14 @@
         .pub-nav-links { display: flex; gap: 28px; }
         .pub-nav-links a { color: rgba(255,255,255,0.65); font-size: 14px; text-decoration: none; transition: color .2s; }
         .pub-nav-links a:hover { color: #fff; }
+        .pub-nav-links a:focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; border-radius: 3px; }
         .pub-nav-cta {
             background: #4ade80; color: #0d1117; border-radius: 8px;
             padding: 8px 18px; font-size: 14px; font-weight: 700; text-decoration: none;
             transition: background .2s;
         }
         .pub-nav-cta:hover { background: #22c55e; }
-        .pub-nav-cta:focus { outline: 2px solid #4ade80; outline-offset: 3px; }
+        .pub-nav-cta:focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; }
         @media (max-width: 768px) {
             .pub-nav { padding: 0 20px; }
             .pub-nav-links { display: none; }

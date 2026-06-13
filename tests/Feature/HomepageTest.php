@@ -29,7 +29,7 @@ it('homepage contains features section', function () {
 it('homepage contains pricing section', function () {
     $this->get('/')
         ->assertSee('0 zł')
-        ->assertSee('Zacznij teraz');
+        ->assertSee('Zacznij teraz — za darmo');
 });
 
 it('homepage does not expose Filament panel', function () {
