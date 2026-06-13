@@ -40,6 +40,7 @@ class AppPanelProvider extends PanelProvider
             ->login(Login::class)
             ->registration(Register::class)
             ->colors(['primary' => Color::hex('#14b8a6')])
+            ->darkMode(false)
             ->font('Inter', provider: GoogleFontProvider::class)
             ->brandName('TBA')
             ->brandLogo(new HtmlString(

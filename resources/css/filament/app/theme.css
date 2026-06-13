@@ -80,48 +80,46 @@
     border-radius: 8px;
 }
 
-/* ── Auth simple layout — form field labels ── */
-.aib-auth-simple .fi-fo-field-wrp-label {
-    color: #374151 !important;
-    font-size: 12px !important;
-    font-weight: 500 !important;
-}
-
 /* ── Auth simple layout — chip preset selector ── */
 
-/* Override flex gap on the toggle-buttons container */
-.aib-auth-simple .fi-fo-toggle-buttons {
-    gap: 6px !important;
+.aib-auth-simple .fi-btn-group {
+    display: flex !important;
     flex-wrap: wrap !important;
+    gap: 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: none !important;
+    --tw-shadow: none !important;
+    border-radius: 0 !important;
+    width: auto !important;
 }
 
-/* Unselected chip: bordered pill, gray text */
-.aib-auth-simple .fi-fo-toggle-buttons .fi-btn {
+.aib-auth-simple .fi-btn-group .fi-btn {
+    flex: none !important;
+    background-color: #ffffff !important;
+    color: #64748b !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
     padding: 5px 12px !important;
     font-size: 11px !important;
     font-weight: 500 !important;
-    border-radius: 6px !important;
-    background: white !important;
-    color: #64748b !important;
-    box-shadow: none !important;
-    border: 1px solid #e2e8f0 !important;
     line-height: 1.5 !important;
     height: auto !important;
     min-height: auto !important;
     transition: border-color 0.15s, background-color 0.15s, color 0.15s;
 }
+.aib-auth-simple .fi-btn-group .fi-btn .fi-btn-label { color: inherit !important; }
 
-/* Selected chip: teal border + teal tint */
-.aib-auth-simple .fi-fo-toggle-buttons input[type="radio"]:checked + .fi-btn {
-    border-color: #0d9488 !important;
-    border-width: 1.5px !important;
+.aib-auth-simple .fi-btn-group input:checked + .fi-btn {
     background-color: #f0fdfa !important;
     color: #0d9488 !important;
-    font-weight: 600 !important;
+    border: 1.5px solid #0d9488 !important;
     box-shadow: none !important;
+    font-weight: 600 !important;
 }
 
-/* Auth action links (register/login sublinks) */
+/* ── Auth action links ── */
 .aib-auth-simple .fi-link {
     color: #0d9488 !important;
     font-weight: 500 !important;
