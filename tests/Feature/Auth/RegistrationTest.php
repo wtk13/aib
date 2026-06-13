@@ -5,7 +5,9 @@ use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
+use Filament\Notifications\Auth\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -20,6 +22,8 @@ it('registration page is accessible', function () {
 });
 
 it('can register a new tenant and user', function () {
+    Notification::fake();
+
     $preset = VerticalPreset::where('slug', 'cleaning')->firstOrFail();
 
     Livewire::test(Register::class)
@@ -33,11 +37,14 @@ it('can register a new tenant and user', function () {
 
     $user = Tenant::bypass(fn () => User::where('email', 'ania@example.com')->first());
     expect($user)->not->toBeNull();
+    expect($user->email_verified_at)->toBeNull();
 
     $tenant = Tenant::bypass(fn () => Tenant::find($user->tenant_id));
     expect($tenant)->not->toBeNull()
         ->and($tenant->preset_id)->toBe($preset->id)
         ->and($tenant->company_name)->toBe('Ania Cleaning');
+
+    Notification::assertSentTo($user, VerifyEmail::class);
 });
 
 it('registration fails with duplicate email', function () {

@@ -97,8 +97,6 @@ class Register extends FilamentRegister
             Tenant::setCurrent($tenant);
         }
 
-        $user->sendEmailVerificationNotification();
-
         return $user;
     }
 

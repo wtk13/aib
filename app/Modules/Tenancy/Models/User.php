@@ -9,11 +9,12 @@ use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use BelongsToTenant, HasFactory;
+    use BelongsToTenant, HasFactory, Notifiable;
 
     protected static function newFactory(): UserFactory
     {
@@ -28,6 +29,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->role === 'owner' && $this->hasVerifiedEmail();
+        return $this->role === 'owner';
     }
 }

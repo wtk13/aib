@@ -16,7 +16,7 @@ it('a user can log in to Filament under their tenant scope', function () {
     $preset = VerticalPreset::where('slug', 'cleaning')->first();
 
     $tenant = Tenant::factory()->create(['preset_id' => $preset?->id]);
-    $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create([
+    $user = Tenant::bypass(fn () => User::factory()->verified()->for($tenant, 'tenant')->create([
         'email' => 'login-test@aib.app',
         'password' => 'password',
     ]));
