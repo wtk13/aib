@@ -80,36 +80,44 @@
     border-radius: 8px;
 }
 
-/* ── Auth split layout — responsive classes ── */
-/* Brand panel: hidden on mobile, flex on lg+ */
-.aib-auth-brand-panel {
-    display: none;
-    width: 42%;
-    background-color: #0d9488;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 48px;
-    position: relative;
-    overflow: hidden;
+/* ── Auth simple layout — chip preset selector ── */
+
+/* Override flex gap on the toggle-buttons container */
+.aib-auth-simple .fi-fo-toggle-buttons {
+    gap: 6px !important;
+    flex-wrap: wrap !important;
 }
 
-@media (min-width: 1024px) {
-    .aib-auth-brand-panel {
-        display: flex;
-    }
+/* Unselected chip: bordered pill, gray text */
+.aib-auth-simple .fi-fo-toggle-buttons .fi-btn {
+    padding: 5px 12px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+    background: white !important;
+    color: #64748b !important;
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    line-height: 1.5 !important;
+    height: auto !important;
+    min-height: auto !important;
+    transition: border-color 0.15s, background-color 0.15s, color 0.15s;
 }
 
-/* Mobile brand: shown only below lg */
-.aib-auth-mobile-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 28px;
+/* Selected chip: teal border + teal tint */
+.aib-auth-simple .fi-fo-toggle-buttons input[type="radio"]:checked + .fi-btn {
+    border-color: #0d9488 !important;
+    border-width: 1.5px !important;
+    background-color: #f0fdfa !important;
+    color: #0d9488 !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
 }
 
-@media (min-width: 1024px) {
-    .aib-auth-mobile-brand {
-        display: none;
-    }
+/* Auth action links (register/login sublinks) */
+.aib-auth-simple .fi-link {
+    color: #0d9488 !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    text-decoration: none !important;
 }
