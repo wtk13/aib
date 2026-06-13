@@ -19,6 +19,12 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => 'password',
             'role' => 'owner',
+            'email_verified_at' => null,
         ];
+    }
+
+    public function verified(): static
+    {
+        return $this->state(['email_verified_at' => now()]);
     }
 }
