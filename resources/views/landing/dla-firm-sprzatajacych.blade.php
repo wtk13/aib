@@ -58,8 +58,7 @@
 .lp-features h2 { font-size: 36px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 48px; text-align: center; }
 .lp-features h2 em { font-style: normal; color: #4ade80; }
 .lp-feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 64px; }
-.lp-feature-row.reverse { direction: rtl; }
-.lp-feature-row.reverse > * { direction: ltr; }
+.lp-feature-row.reverse .feature-mockup { order: -1; }
 .feature-content h3 { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
 .feature-content h3 em { font-style: normal; color: #4ade80; }
 .feature-content p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 16px; }
@@ -88,16 +87,23 @@
 .breadcrumb a:hover { color: rgba(255,255,255,0.6); }
 .breadcrumb span { margin: 0 6px; }
 
+@media (max-width: 900px) {
+    .problems-grid { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 768px) {
     .lp-hero { padding: 56px 20px 48px; }
     .lp-hero h1 { font-size: 34px; }
     .problems-grid { grid-template-columns: 1fr; }
     .lp-problems, .lp-features { padding: 56px 20px; }
     .lp-feature-row { grid-template-columns: 1fr; gap: 28px; }
-    .lp-feature-row.reverse { direction: ltr; }
+    .lp-feature-row.reverse .feature-mockup { order: 0; }
     .lp-cta { padding: 56px 20px; }
     .lp-cta h2 { font-size: 30px; }
     .breadcrumb { padding: 14px 20px 0; }
+}
+@media (max-width: 400px) {
+    .lp-hero h1 { font-size: 26px; }
+    .lp-cta h2 { font-size: 24px; }
 }
 </style>
 @endsection

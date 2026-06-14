@@ -37,9 +37,24 @@
         }
         .pub-nav-cta:hover { background: #22c55e; }
         .pub-nav-cta:focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; }
+        .pub-nav-mobile-btn {
+            display: none; background: none; border: none; color: rgba(255,255,255,0.7);
+            cursor: pointer; padding: 8px; border-radius: 6px; line-height: 0;
+        }
+        .pub-nav-mobile-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
         @media (max-width: 768px) {
             .pub-nav { padding: 0 20px; }
-            .pub-nav-links { display: none; }
+            .pub-nav-mobile-btn { display: flex; align-items: center; }
+            .pub-nav-links {
+                display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0;
+                background: rgba(13,13,20,0.97); flex-direction: column;
+                padding: 24px 20px; gap: 0; z-index: 99;
+                border-top: 1px solid rgba(255,255,255,0.06);
+                overflow-y: auto;
+            }
+            .pub-nav-links.is-open { display: flex; }
+            .pub-nav-links a { font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .pub-nav-links a:last-child { border-bottom: none; }
             .pub-nav-cta { padding: 6px 14px; font-size: 13px; }
         }
 
@@ -65,7 +80,7 @@
     <nav aria-label="Główna nawigacja">
         <div class="pub-nav">
             <a href="/" class="pub-nav-logo">T<span>.</span>B<span>.</span>A</a>
-            <div class="pub-nav-links">
+            <div class="pub-nav-links" id="pub-nav-links">
                 <a href="/#jak-to-dziala">Jak działa</a>
                 <a href="/#cennik">Cennik</a>
                 <a href="/#faq">FAQ</a>
@@ -74,10 +89,39 @@
                 <a href="/polityka-prywatnosci">Polityka</a>
             </div>
             <a href="/admin/register" class="pub-nav-cta">Zacznij za darmo</a>
+            <button class="pub-nav-mobile-btn" id="pub-nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="pub-nav-links">
+                <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+                <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="display:none">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
         </div>
     </nav>
 
     @yield('content')
 
+<script>
+(function () {
+    var btn = document.getElementById('pub-nav-toggle');
+    var links = document.getElementById('pub-nav-links');
+    if (!btn || !links) return;
+    btn.addEventListener('click', function () {
+        var open = links.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.querySelector('.icon-menu').style.display = open ? 'none' : '';
+        btn.querySelector('.icon-close').style.display = open ? '' : 'none';
+    });
+    links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+            links.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.querySelector('.icon-menu').style.display = '';
+            btn.querySelector('.icon-close').style.display = 'none';
+        }
+    });
+}());
+</script>
 </body>
 </html>

@@ -41,9 +41,14 @@
 .article-cta p { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
 .btn-green { background: #4ade80; color: #0d1117; border-radius: 8px; padding: 12px 24px; font-size: 14px; font-weight: 800; text-decoration: none; display: inline-block; }
 .btn-green:hover { background: #22c55e; }
+.article-body table { width: 100%; border-collapse: collapse; display: block; overflow-x: auto; }
 @media (max-width: 768px) {
     .article-wrap { padding: 40px 20px 64px; }
     .article-wrap h1 { font-size: 28px; }
+}
+@media (max-width: 480px) {
+    .article-cta { padding: 20px 16px; }
+    .article-wrap h1 { font-size: 24px; }
 }
 </style>
 @endsection

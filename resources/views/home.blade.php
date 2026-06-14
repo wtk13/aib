@@ -322,6 +322,10 @@
     .final-cta { padding: 56px 20px; }
     .final-cta h2 { font-size: 32px; }
 }
+@media (max-width: 400px) {
+    .hero h1 { font-size: 26px; letter-spacing: -0.5px; }
+    .section-title { font-size: 24px; }
+}
 </style>
 @endsection
 

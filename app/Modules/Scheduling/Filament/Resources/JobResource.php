@@ -140,7 +140,10 @@ class JobResource extends Resource
                                 ->prefix('PLN')
                                 ->required(),
                         ])
-                        ->columns(4)
+                        ->columns([
+                            'default' => 2,
+                            'md'      => 4,
+                        ])
                         ->addActionLabel(__('job.payout.add'))
                         ->defaultItems(0)
                         ->reorderable(false),
