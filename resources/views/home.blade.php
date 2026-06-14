@@ -326,7 +326,7 @@
     <div class="features-header">
         <div class="section-tag">Jak działa</div>
         <h2 class="section-title">AI robi papierologię.<br><em>Ty robisz zlecenia.</em></h2>
-        <p class="section-sub">
+        <p class="section-sub section-sub--centered">
             Przestań tracić czas na maile i tabelki. TBA obsługuje administrację —
             Ty koncentrujesz się na klientach.
         </p>
