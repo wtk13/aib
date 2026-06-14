@@ -5,6 +5,7 @@ namespace App\Modules\Quoting\Models;
 use App\Modules\Tenancy\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QuoteStatusLog extends Model
 {
@@ -15,4 +16,9 @@ class QuoteStatusLog extends Model
     protected $fillable = ['quote_id', 'from_status', 'to_status', 'transitioned_by_user_id', 'transitioned_at', 'meta'];
 
     protected $casts = ['meta' => 'array', 'transitioned_at' => 'datetime'];
+
+    public function quote(): BelongsTo
+    {
+        return $this->belongsTo(Quote::class);
+    }
 }

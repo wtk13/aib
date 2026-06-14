@@ -5,6 +5,7 @@ namespace App\Modules\Quoting\Models;
 use App\Modules\Tenancy\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QuoteItem extends Model
 {
@@ -15,4 +16,9 @@ class QuoteItem extends Model
         'quantity', 'rate', 'discount_pct', 'vat_pct', 'line_total',
         'service_type_key', 'source',
     ];
+
+    public function quote(): BelongsTo
+    {
+        return $this->belongsTo(Quote::class);
+    }
 }

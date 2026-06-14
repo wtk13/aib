@@ -5,6 +5,7 @@ namespace App\Modules\Quoting\Models;
 use App\Modules\Tenancy\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QuoteShareToken extends Model
 {
@@ -16,4 +17,9 @@ class QuoteShareToken extends Model
         'expires_at' => 'datetime',
         'accepted_at' => 'datetime',
     ];
+
+    public function quote(): BelongsTo
+    {
+        return $this->belongsTo(Quote::class);
+    }
 }
