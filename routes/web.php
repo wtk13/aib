@@ -6,11 +6,21 @@ Route::view('/', 'home')->name('home');
 Route::view('/regulamin', 'regulamin')->name('regulamin');
 Route::view('/polityka-prywatnosci', 'polityka-prywatnosci')->name('polityka-prywatnosci');
 
+// Industry landing pages
+Route::view('/dla-firm-sprzatajacych', 'landing.dla-firm-sprzatajacych')->name('landing.sprzatanie');
+
+// Blog
+Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
+
 Route::redirect('/zacznij', '/admin/register', 301)->name('register.start');
 
 Route::get('/sitemap.xml', function () {
     $urls = [
-        ['loc' => url('/'), 'priority' => '1.0', 'changefreq' => 'monthly', 'lastmod' => '2026-06-14'],
+        ['loc' => url('/'),                           'priority' => '1.0', 'changefreq' => 'monthly', 'lastmod' => '2026-06-14'],
+        ['loc' => url('/dla-firm-sprzatajacych'),     'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => '2026-06-14'],
+        ['loc' => url('/blog'),                       'priority' => '0.7', 'changefreq' => 'weekly',  'lastmod' => '2026-06-14'],
+        ['loc' => url('/blog/jak-wyceniac-sprzatanie-mieszkania'), 'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => '2026-06-14'],
     ];
 
     return response()->view('sitemap', compact('urls'))

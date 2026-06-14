@@ -53,6 +53,7 @@
                 <a href="/#jak-to-dziala">Jak działa</a>
                 <a href="/#cennik">Cennik</a>
                 <a href="/#faq">FAQ</a>
+                <a href="/blog">Blog</a>
             </div>
             <a href="/admin/register" class="pub-nav-cta">Zacznij za darmo</a>
         </div>
