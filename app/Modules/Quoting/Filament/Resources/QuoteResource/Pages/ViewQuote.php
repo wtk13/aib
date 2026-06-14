@@ -3,9 +3,11 @@
 namespace App\Modules\Quoting\Filament\Resources\QuoteResource\Pages;
 
 use App\Modules\Quoting\Filament\Resources\QuoteResource;
+use App\Modules\Quoting\Services\QuoteShareService;
 use App\Modules\Quoting\Services\QuoteTransitionService;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -18,7 +20,15 @@ class ViewQuote extends ViewRecord
     protected function getHeaderActions(): array
     {
         $quote = $this->getRecord();
-        $actions = [EditAction::make()];
+        $actions = [
+            EditAction::make(),
+            Action::make('download_pdf')
+                ->label(__('quote.actions.generate_pdf'))
+                ->icon('heroicon-o-arrow-down-tray')
+                ->color('gray')
+                ->url(fn () => route('quote.pdf', $this->getRecord()))
+                ->openUrlInNewTab(),
+        ];
 
         if ($quote->status === 'draft') {
             $actions[] = Action::make('send')
@@ -43,6 +53,19 @@ class ViewQuote extends ViewRecord
                 ->color('danger')
                 ->requiresConfirmation()
                 ->action(fn () => app(QuoteTransitionService::class)->transition($quote, 'rejected'));
+
+            $actions[] = Action::make('share_link')
+                ->label(__('quote.actions.share_link'))
+                ->icon('heroicon-o-link')
+                ->color('gray')
+                ->action(function () {
+                    $link = app(QuoteShareService::class)->createLink($this->getRecord());
+                    Notification::make()
+                        ->title(__('quote.actions.share_link'))
+                        ->body($link)
+                        ->success()
+                        ->send();
+                });
         }
 
         return $actions;

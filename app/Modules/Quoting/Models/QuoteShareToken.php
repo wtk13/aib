@@ -11,7 +11,7 @@ class QuoteShareToken extends Model
 {
     use BelongsToTenant, HasFactory;
 
-    protected $fillable = ['quote_id', 'token', 'expires_at', 'accepted_at', 'accepted_ip', 'accepted_user_agent'];
+    protected $fillable = ['quote_id', 'tenant_id', 'token', 'expires_at', 'accepted_at', 'accepted_ip', 'accepted_user_agent'];
 
     protected $casts = [
         'expires_at' => 'datetime',
