@@ -4,7 +4,7 @@
 <title>Regulamin — TBA | tbasystent.pl</title>
 <meta name="description" content="Regulamin świadczenia usług drogą elektroniczną przez Twój Biznes Asystent (TBA).">
 <link rel="canonical" href="https://tbasystent.pl/regulamin">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, follow">
 <style>
 .legal-page {
     max-width: 760px; margin: 0 auto; padding: 64px 48px 96px;
@@ -168,13 +168,6 @@
 
 </div>
 
-<footer class="pub-footer">
-    <a href="/" class="pub-footer-logo">T<span>.</span>B<span>.</span>A</a>
-    <p class="pub-footer-copy">© 2026 Wojciech Rybiński · NIP 8133481592 · tbasystent.pl</p>
-    <div class="pub-footer-links">
-        <a href="/polityka-prywatnosci" class="pub-footer-links-item">Polityka prywatności</a>
-        <a href="/regulamin" class="pub-footer-links-item" style="color:#4ade80">Regulamin</a>
-    </div>
-</footer>
+@include('partials.public-footer')
 
 @endsection

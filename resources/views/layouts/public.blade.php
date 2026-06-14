@@ -5,6 +5,7 @@
     <meta http-equiv="content-language" content="pl">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0d14">
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -46,9 +47,9 @@
         <div class="pub-nav">
             <a href="/" class="pub-nav-logo">T<span>.</span>B<span>.</span>A</a>
             <div class="pub-nav-links">
-                <a href="/#jak-to-dziala">Funkcje</a>
+                <a href="/#jak-to-dziala">Jak działa</a>
                 <a href="/#cennik">Cennik</a>
-                <a href="/regulamin">Regulamin</a>
+                <a href="/#faq">FAQ</a>
             </div>
             <a href="/admin/register" class="pub-nav-cta">Zacznij za darmo</a>
         </div>

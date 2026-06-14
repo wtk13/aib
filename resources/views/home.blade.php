@@ -1,19 +1,115 @@
 @extends('layouts.public')
 
 @section('head')
-<title>TBA — Asystent dla firm usługowych | tbasystent.pl</title>
-<meta name="description" content="AI asystent dla małych firm usługowych — wyceny, maile, plan dnia. Bezpłatnie przez beta 2026.">
+<title>TBA — Program do zarządzania zleceniami i CRM AI dla małych firm usługowych</title>
+<meta name="description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. Bezpłatnie przez cały 2026 — gotowe w 3 minuty, działa na telefonie.">
 <link rel="canonical" href="https://tbasystent.pl/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="TBA — Asystent dla firm usługowych">
-<meta property="og:description" content="AI asystent dla małych firm usługowych. Wyceny, maile, plan dnia — wszystko z telefonu.">
+<meta property="og:site_name" content="Twój Biznes Asystent">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="TBA — CRM AI dla małych firm usługowych w Polsce">
+<meta property="og:description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. Bezpłatnie w 2026.">
 <meta property="og:url" content="https://tbasystent.pl/">
 <meta property="og:image" content="https://tbasystent.pl/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TBA — Asystent dla firm usługowych">
-<meta name="twitter:description" content="AI asystent dla małych firm usługowych. Wyceny, maile, plan dnia — wszystko z telefonu.">
+<meta name="twitter:title" content="TBA — CRM AI dla małych firm usługowych w Polsce">
+<meta name="twitter:description" content="Program do zarządzania zleceniami i klientami z AI. Bezpłatnie przez 2026.">
 <meta name="twitter:image" content="https://tbasystent.pl/og-image.png">
 <meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tbasystent.pl/#organization",
+      "name": "Twój Biznes Asystent",
+      "alternateName": "TBA",
+      "url": "https://tbasystent.pl",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://tbasystent.pl/og-image.png"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "kontakt@tbasystent.pl",
+        "contactType": "customer support",
+        "availableLanguage": "Polish"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Lekka 3/110",
+        "addressLocality": "Warszawa",
+        "postalCode": "01-910",
+        "addressCountry": "PL"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://tbasystent.pl/#software",
+      "name": "Twój Biznes Asystent (TBA)",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "url": "https://tbasystent.pl",
+      "description": "Program do zarządzania zleceniami, klientami i wycenami z AI. Dla małych firm usługowych w Polsce — sprzątanie, remonty, fotografia i inne.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "PLN",
+        "description": "Bezpłatnie w fazie beta do końca 2026"
+      },
+      "publisher": { "@id": "https://tbasystent.pl/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Czy TBA to program do zarządzania zleceniami dla małej firmy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tak — TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ile kosztuje TBA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "W fazie beta (cały rok 2026) TBA jest w pełni bezpłatny. Nie wymagamy karty kredytowej. Po zakończeniu bety poinformujemy o warunkach z co najmniej 30-dniowym wyprzedzeniem."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy TBA działa na telefonie?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tak — TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dla jakich branż działa TBA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TBA sprawdza się dla firm sprzątających, remontowych, fotograficznych, ogrodniczych, korepetytorów i każdej innej małej firmy usługowej, która obsługuje klientów i wystawia wyceny."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak AI pomaga w wycenach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TBA analizuje Twoje poprzednie zlecenia i sugeruje stawki dopasowane do zakresu pracy i klienta. Możesz edytować sugestię lub zatwierdzić jednym kliknięciem i wysłać wycenę mailem."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 /* ─── HERO ─────────────────────────────────────────────── */
 .hero {
@@ -178,6 +274,29 @@
 .pricing-btn-ghost:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.9); }
 .pricing-btn-ghost:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 3px; }
 
+/* ─── FAQ ───────────────────────────────────────────────── */
+.faq { padding: 80px 48px; max-width: 760px; margin: 0 auto; }
+.faq-list { margin-top: 40px; display: flex; flex-direction: column; gap: 2px; }
+.faq-item {
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;
+}
+.faq-item summary {
+    padding: 18px 22px; font-size: 15px; font-weight: 600; cursor: pointer;
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
+    color: rgba(255,255,255,0.85); transition: color .2s;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+    content: '+'; font-size: 20px; font-weight: 300; color: #4ade80; flex-shrink: 0;
+}
+.faq-item[open] summary::after { content: '−'; }
+.faq-item[open] { background: rgba(74,222,128,0.03); border-color: rgba(74,222,128,0.2); }
+.faq-item[open] summary { color: #fff; }
+.faq-answer { padding: 0 22px 18px; font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+@media (max-width: 768px) {
+    .faq { padding: 56px 20px; }
+}
+
 /* ─── FINAL CTA ─────────────────────────────────────────── */
 .final-cta {
     padding: 96px 48px; text-align: center;
@@ -240,11 +359,11 @@
         Beta — bezpłatne do końca 2026
     </div>
 
-    <h1>Prowadzisz firmę<br><em>między zleceniami.</em></h1>
+    <h1>CRM i AI asystent<br><em>dla małych firm usługowych</em></h1>
 
     <p class="hero-sub">
-        TBA to AI asystent, który robi papierkową robotę za Ciebie —
-        wyceny, maile, plan dnia. Wszystko z telefonu, w minutę.
+        Zarządzaj zleceniami, klientami i wycenami z telefonu.
+        TBA robi papierkową robotę za Ciebie — bezpłatnie przez cały 2026.
     </p>
 
     <div class="hero-actions">
@@ -334,32 +453,32 @@
 
     <div class="features-grid">
         <div class="feature-card">
-            <div class="feature-icon">💬</div>
+            <div class="feature-icon" aria-hidden="true">💬</div>
             <h3>Wyceny w minutę</h3>
             <p>Opisz zlecenie głosowo albo tekstem. AI przygotuje wycenę i wyśle ją do klienta — zanim dojedziesz do kolejnego.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">📅</div>
+            <div class="feature-icon" aria-hidden="true">📅</div>
             <h3>Plan dnia bez chaosu</h3>
             <p>Wszystkie zlecenia w jednym miejscu. TBA pilnuje harmonogramu i przypomina o następnych wizytach.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">📩</div>
+            <div class="feature-icon" aria-hidden="true">📩</div>
             <h3>Odpowiedzi na maile</h3>
             <p>AI czyta zapytania klientów i sugeruje gotowe odpowiedzi — Ty tylko zatwierdzasz jednym kliknięciem.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">📊</div>
+            <div class="feature-icon" aria-hidden="true">📊</div>
             <h3>Raport miesiąca</h3>
             <p>Ile zarobiłaś? Którzy klienci wracają? TBA podsumuje miesiąc czytelnym raportem — bez Excela.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">🔔</div>
+            <div class="feature-icon" aria-hidden="true">🔔</div>
             <h3>Przypomnienia dla klientów</h3>
             <p>Automatyczne SMS/e-mail przed wizytą. Mniej odwołań w ostatniej chwili, więcej pewnych zleceń.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">📱</div>
+            <div class="feature-icon" aria-hidden="true">📱</div>
             <h3>Wszystko z telefonu</h3>
             <p>Żadnego laptopa. Działa na telefonie przez przeglądarkę — bez instalacji, gotowe między jednym zleceniem a drugim.</p>
         </div>
@@ -461,6 +580,41 @@
     </div>
 </section>
 
+{{-- ═══ FAQ ═══════════════════════════════════════════════════ --}}
+<section class="faq" id="faq" aria-labelledby="faq-heading">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title section-title--sm" id="faq-heading">
+        Często zadawane<br><em>pytania</em>
+    </h2>
+
+    <div class="faq-list">
+        <details class="faq-item">
+            <summary>Czy TBA to program do zarządzania zleceniami dla małej firmy?</summary>
+            <p class="faq-answer">Tak — TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu. Nie musisz mieć konta w wielu aplikacjach — wszystko jest w jednym panelu.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Ile kosztuje TBA?</summary>
+            <p class="faq-answer">W fazie beta (cały rok 2026) TBA jest w pełni bezpłatny. Nie wymagamy karty kredytowej. Po zakończeniu bety poinformujemy z co najmniej 30-dniowym wyprzedzeniem o warunkach dalszego korzystania.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Dla jakich branż sprawdzi się TBA?</summary>
+            <p class="faq-answer">TBA sprawdza się dla firm sprzątających, remontowych, budowlanych, fotograficznych, ogrodniczych, korepetytorów i każdej innej małej firmy usługowej, która obsługuje klientów, wystawia wyceny i planuje harmonogram zleceń.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Jak AI pomaga w wycenach?</summary>
+            <p class="faq-answer">TBA analizuje Twoje poprzednie zlecenia i sugeruje stawki dopasowane do zakresu pracy i klienta. Możesz edytować sugestię lub zatwierdzić jednym kliknięciem i od razu wysłać wycenę mailem. Wycena zajmuje minutę zamiast dwudziestu.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Czy TBA działa na telefonie bez instalacji?</summary>
+            <p class="faq-answer">Tak — TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji ze sklepu. Wystarczy otworzyć stronę i zalogować się — wejście przez iPhone lub Android działa tak samo jak na komputerze.</p>
+        </details>
+    </div>
+</section>
+
 {{-- ═══ FINAL CTA ═══════════════════════════════════════════ --}}
 <section class="final-cta">
     <h2 class="section-title">Zacznij zarządzać firmą<br><em>jak masz czas.</em></h2>
@@ -476,17 +630,6 @@
     </p>
 </section>
 
-{{-- ═══ FOOTER ══════════════════════════════════════════════ --}}
-<footer class="pub-footer">
-    <a href="/" class="pub-footer-logo">T<span>.</span>B<span>.</span>A</a>
-    <div style="text-align:center">
-        <p class="pub-footer-copy">© 2026 <strong style="color:rgba(255,255,255,0.45)">Wojciech Rybiński</strong> · NIP 8133481592 · REGON 364036823</p>
-        <p class="pub-footer-copy" style="margin-top:2px">ul. Lekka 3/110, 01-910 Warszawa · <a href="mailto:kontakt@tbasystent.pl" style="color:rgba(255,255,255,0.35);text-decoration:none">kontakt@tbasystent.pl</a></p>
-    </div>
-    <div class="pub-footer-links">
-        <a href="/polityka-prywatnosci" class="pub-footer-links-item" style="text-decoration:none">Polityka prywatności</a>
-        <a href="/regulamin" class="pub-footer-links-item" style="text-decoration:none">Regulamin</a>
-    </div>
-</footer>
+@include('partials.public-footer')
 
 @endsection

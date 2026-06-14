@@ -10,8 +10,8 @@ it('homepage returns 200', function () {
 
 it('homepage contains the hero headline', function () {
     $this->get('/')
-        ->assertSee('Prowadzisz firmę')
-        ->assertSee('między zleceniami', false);
+        ->assertSee('CRM i AI asystent')
+        ->assertSee('firm usługowych', false);
 });
 
 it('homepage contains the primary CTA linking to registration', function () {
