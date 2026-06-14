@@ -44,8 +44,8 @@ class EmbedNoteJob extends TenantAwareJob
 
         if ($existing) {
             DB::statement(
-                'UPDATE note_embeddings SET embedding = ?, model = ? WHERE note_id = ?',
-                [$pgVector, EmbeddingService::MODEL, $this->noteId],
+                'UPDATE note_embeddings SET embedding = ?, model = ? WHERE note_id = ? AND tenant_id = ?',
+                [$pgVector, EmbeddingService::MODEL, $this->noteId, $note->tenant_id],
             );
         } else {
             DB::statement(

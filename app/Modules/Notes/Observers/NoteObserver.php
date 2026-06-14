@@ -20,7 +20,7 @@ class NoteObserver
         }
 
         // Skip silently if no API key is configured (e.g., test environment)
-        if (empty(config('services.openai.api_key'))) {
+        if (empty(config('services.openai.key'))) {
             return;
         }
 

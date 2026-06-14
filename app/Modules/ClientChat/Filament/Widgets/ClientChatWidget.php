@@ -6,6 +6,7 @@ use App\Modules\ClientChat\Models\ChatMessage;
 use App\Modules\ClientChat\Models\ChatSession;
 use App\Modules\ClientChat\Services\ClientChatService;
 use App\Modules\Tenancy\Models\Tenant;
+use Filament\Notifications\Notification;
 use Filament\Widgets\Widget;
 use Illuminate\Contracts\View\View;
 
@@ -77,23 +78,34 @@ class ClientChatWidget extends Widget
         $this->question = '';
         $this->loading = true;
 
-        /** @var ClientChatService $service */
-        $service = app(ClientChatService::class);
+        try {
+            /** @var ClientChatService $service */
+            $service = app(ClientChatService::class);
 
-        $session = $service->getOrCreateSession($this->clientId, $tenantId);
-        $this->sessionId = $session->id;
+            $session = $service->getOrCreateSession($this->clientId, $tenantId);
+            $this->sessionId = $session->id;
 
-        // Re-hydrate session from DB (getOrCreateSession may have just created it)
-        $sessionModel = ChatSession::find($this->sessionId);
-        $response = $service->ask($sessionModel, $question);
+            $response = $service->ask($session, $question);
 
-        $this->messages[] = [
-            'role'      => 'assistant',
-            'content'   => $response->content,
-            'citations' => $response->citations ?? [],
-        ];
+            $this->messages[] = [
+                'role'      => 'assistant',
+                'content'   => $response->content,
+                'citations' => $response->citations ?? [],
+            ];
+        } catch (\Throwable $e) {
+            $this->messages[] = [
+                'role'      => 'assistant',
+                'content'   => __('chat.error.ai_unavailable'),
+                'citations' => [],
+            ];
 
-        $this->loading = false;
+            Notification::make()
+                ->title(__('chat.error.ai_unavailable'))
+                ->danger()
+                ->send();
+        } finally {
+            $this->loading = false;
+        }
     }
 
     public function clearChat(): void

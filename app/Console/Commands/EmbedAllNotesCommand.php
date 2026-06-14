@@ -28,15 +28,19 @@ class EmbedAllNotesCommand extends Command
         $total = $query->count();
         $this->info("Dispatching embedding jobs for {$total} notes…");
 
-        $query->chunkById(100, function ($notes) {
-            foreach ($notes as $note) {
-                $tenant = Tenant::withoutGlobalScopes()->find($note->tenant_id);
-                if ($tenant) {
-                    Tenant::setCurrent($tenant);
-                    EmbedNoteJob::dispatch($note->id);
+        try {
+            $query->chunkById(100, function ($notes) {
+                foreach ($notes as $note) {
+                    $tenant = Tenant::withoutGlobalScopes()->find($note->tenant_id);
+                    if ($tenant) {
+                        Tenant::setCurrent($tenant);
+                        EmbedNoteJob::dispatch($note->id);
+                    }
                 }
-            }
-        });
+            });
+        } finally {
+            Tenant::clear();
+        }
 
         $this->info('Done. Jobs dispatched to queue.');
 

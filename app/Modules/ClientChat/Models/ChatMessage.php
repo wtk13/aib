@@ -12,7 +12,7 @@ class ChatMessage extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['session_id', 'role', 'content', 'citations', 'ai_usage_log_id'];
+    protected $fillable = ['tenant_id', 'session_id', 'role', 'content', 'citations', 'ai_usage_log_id'];
 
     protected $casts = ['citations' => 'array'];
 }

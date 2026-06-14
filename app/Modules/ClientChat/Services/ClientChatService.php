@@ -24,8 +24,20 @@ class ClientChatService
 
     public function ask(ChatSession $session, string $question): ChatMessage
     {
-        $client = Client::find($session->client_id);
+        $client = Client::where('id', $session->client_id)
+            ->where('tenant_id', $session->tenant_id)
+            ->firstOrFail();
         $tenantId = $session->tenant_id;
+
+        // Fetch prior history before storing the new user message (avoids sending it twice)
+        $prior = ChatMessage::where('session_id', $session->id)
+            ->orderByDesc('created_at')
+            ->limit(10)
+            ->get()
+            ->reverse()
+            ->map(fn ($m) => ['role' => $m->role, 'content' => $m->content])
+            ->values()
+            ->all();
 
         // Store user message
         ChatMessage::create([
@@ -39,13 +51,8 @@ class ClientChatService
         $notes = $this->rag->retrieve($session->client_id, $tenantId, $question);
         $context = $this->buildContext($client, $notes, $tenantId);
 
-        // Build conversation history (last 10 messages)
-        $history = ChatMessage::where('session_id', $session->id)
-            ->orderBy('created_at')
-            ->limit(20)
-            ->get()
-            ->map(fn ($m) => ['role' => $m->role, 'content' => $m->content])
-            ->all();
+        // Final message list: prior history + current question
+        $history = array_merge($prior, [['role' => 'user', 'content' => $question]]);
 
         $system = file_get_contents(base_path('app/Prompts/chat_v1.md'))."\n\n".$context;
 
@@ -127,10 +134,13 @@ class ClientChatService
         // Client info
         $parts[] = "## Client\nName: {$client->name}";
 
-        // Notes
+        // Notes wrapped in XML delimiters to prevent prompt injection
         if (! empty($notes)) {
-            $noteLines = array_map(fn ($n) => "[notatka #{$n['id']}] ({$n['created_at']}): {$n['body']}", $notes);
-            $parts[] = '## Notatki (najnowsze/najbardziej trafne)'."\n".implode("\n", $noteLines);
+            $noteXml = array_map(
+                fn ($n) => "<note id=\"{$n['id']}\" date=\"{$n['created_at']}\">{$n['body']}</note>",
+                $notes,
+            );
+            $parts[] = '## Notatki (najnowsze/najbardziej trafne)'."\n".implode("\n", $noteXml);
         }
 
         // Recent jobs
