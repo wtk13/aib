@@ -109,12 +109,6 @@
     </div>
   </div>
 
-  @if($quote->internal_note)
-    <div style="margin-top:20px;padding:10px;background:#f8fafc;border-left:3px solid #14b8a6;font-size:10px">
-      {{ $quote->internal_note }}
-    </div>
-  @endif
-
   <div class="footer">
     Wycena wygenerowana przez TBA · tbasystent.pl · {{ now()->format('d.m.Y H:i') }}
   </div>

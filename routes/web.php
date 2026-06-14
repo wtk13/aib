@@ -16,4 +16,5 @@ Route::get('/wycena/{token}', [\App\Modules\Quoting\Http\Controllers\PublicQuote
     ->name('quote.public');
 
 Route::post('/wycena/{token}/accept', [\App\Modules\Quoting\Http\Controllers\PublicQuoteController::class, 'accept'])
-    ->name('quote.public.accept');
+    ->name('quote.public.accept')
+    ->middleware('throttle:10,1');

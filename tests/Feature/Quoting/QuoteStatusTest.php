@@ -47,7 +47,7 @@ it('can transition quote from draft to sent', function () {
     expect($quote->status)->toBe('sent');
     expect($quote->sent_at)->not->toBeNull();
 
-    $log = QuoteStatusLog::first();
+    $log = QuoteStatusLog::where('quote_id', $quote->id)->first();
     expect($log)->not->toBeNull();
     expect($log->from_status)->toBe('draft');
     expect($log->to_status)->toBe('sent');
@@ -64,7 +64,7 @@ it('can transition quote from sent to accepted', function () {
     expect($quote->status)->toBe('accepted');
     expect($quote->decided_at)->not->toBeNull();
 
-    $log = QuoteStatusLog::first();
+    $log = QuoteStatusLog::where('quote_id', $quote->id)->first();
     expect($log)->not->toBeNull();
     expect($log->from_status)->toBe('sent');
     expect($log->to_status)->toBe('accepted');
@@ -81,7 +81,7 @@ it('can transition quote from sent to rejected', function () {
     expect($quote->status)->toBe('rejected');
     expect($quote->decided_at)->not->toBeNull();
 
-    $log = QuoteStatusLog::first();
+    $log = QuoteStatusLog::where('quote_id', $quote->id)->first();
     expect($log)->not->toBeNull();
     expect($log->from_status)->toBe('sent');
     expect($log->to_status)->toBe('rejected');

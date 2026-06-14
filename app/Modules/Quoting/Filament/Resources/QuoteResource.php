@@ -104,11 +104,6 @@ class QuoteResource extends Resource
                                 ->numeric()
                                 ->default(0)
                                 ->suffix('%'),
-                            TextInput::make('vat_pct')
-                                ->label(__('quote.fields.vat_pct'))
-                                ->numeric()
-                                ->default(23)
-                                ->suffix('%'),
                             TextInput::make('line_total')
                                 ->label(__('quote.fields.line_total'))
                                 ->numeric()
@@ -116,7 +111,7 @@ class QuoteResource extends Resource
                                 ->disabled()
                                 ->dehydrated(false),
                         ])
-                        ->columns(8)
+                        ->columns(7)
                         ->addActionLabel('+ ' . __('quote.add_item'))
                         ->defaultItems(0)
                         ->reorderable(false),
