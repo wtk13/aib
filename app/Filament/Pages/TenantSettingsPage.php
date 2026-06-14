@@ -44,11 +44,12 @@ class TenantSettingsPage extends Page implements HasForms
             ?? new TenantSettings(['tenant_id' => $tenantId, 'locale' => 'pl']);
 
         $this->form->fill([
-            'is_vat_payer' => $settings->is_vat_payer ?? false,
-            'default_vat_rate' => $settings->default_vat_rate ?? 23,
-            'locale' => $settings->locale ?? 'pl',
-            'addr_line1' => $settings->originAddress?->line1 ?? '',
-            'addr_city' => $settings->originAddress?->city ?? '',
+            'is_vat_payer'          => $settings->is_vat_payer ?? false,
+            'default_vat_rate'      => $settings->default_vat_rate ?? 23,
+            'locale'                => $settings->locale ?? 'pl',
+            'fuel_rate_pln_per_km'  => $settings->fuel_rate_pln_per_km ?? 1.80,
+            'addr_line1'            => $settings->originAddress?->line1 ?? '',
+            'addr_city'             => $settings->originAddress?->city ?? '',
         ]);
     }
 
@@ -66,6 +67,13 @@ class TenantSettingsPage extends Page implements HasForms
                             ->label(__('settings.fields.address_city'))
                             ->maxLength(100)
                             ->dehydrated(false),
+                        TextInput::make('fuel_rate_pln_per_km')
+                            ->label(__('settings.fields.fuel_rate'))
+                            ->numeric()
+                            ->suffix('PLN/km')
+                            ->step(0.1)
+                            ->minValue(0)
+                            ->default(1.80),
                     ]),
                 Section::make(__('settings.section.billing'))
                     ->schema([
@@ -97,6 +105,7 @@ class TenantSettingsPage extends Page implements HasForms
 
         $settings->is_vat_payer = $data['is_vat_payer'] ?? false;
         $settings->default_vat_rate = $data['default_vat_rate'] ?? 23;
+        $settings->fuel_rate_pln_per_km = max(0, (float) ($data['fuel_rate_pln_per_km'] ?? 1.80));
 
         $allowedLocales = ['pl', 'en'];
         $settings->locale = in_array($data['locale'] ?? '', $allowedLocales, true) ? $data['locale'] : 'pl';

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Modules\AI\Services\AnthropicClient;
+use App\Modules\Notes\Services\WhisperService;
 use App\Modules\Employees\Filament\Resources\EmployeeResource\Widgets\EmployeeEarningsStatsWidget;
 use App\Modules\Employees\Filament\Resources\EmployeeResource\Widgets\EmployeeReportWidget;
 use App\Modules\Presets\Events\VerticalPresetUpdated;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(AnthropicClient::class, fn () => new AnthropicClient(new Client(['timeout' => 30.0, 'connect_timeout' => 5.0])));
+        $this->app->singleton(WhisperService::class, fn () => new WhisperService(new Client(['timeout' => 60.0, 'connect_timeout' => 5.0])));
     }
 
     public function boot(): void

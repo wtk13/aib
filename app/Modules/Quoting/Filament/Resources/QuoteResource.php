@@ -2,8 +2,12 @@
 
 namespace App\Modules\Quoting\Filament\Resources;
 
+use App\Modules\Crm\Models\Client;
+use App\Modules\Integrations\Distance\DistanceService;
 use App\Modules\Quoting\Filament\Resources\QuoteResource\Pages;
 use App\Modules\Quoting\Models\Quote;
+use App\Modules\Tenancy\Models\Tenant;
+use App\Modules\Tenancy\Models\TenantSettings;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -11,6 +15,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -49,7 +55,62 @@ class QuoteResource extends Resource
                         ->relationship('client', 'name')
                         ->searchable()
                         ->preload(false)
-                        ->required(),
+                        ->required()
+                        ->live()
+                        ->afterStateUpdated(function (?int $state, Get $get, Set $set): void {
+                            if (! $state) {
+                                return;
+                            }
+
+                            $client = Client::with('address')->find($state);
+                            $tenant = Tenant::current();
+
+                            if (! $client || ! $tenant || ! $client->address) {
+                                return;
+                            }
+
+                            $settings = TenantSettings::find($tenant->id);
+
+                            if (! $settings?->origin_address_id) {
+                                return;
+                            }
+
+                            $originAddress = $settings->originAddress;
+
+                            if (! $originAddress) {
+                                return;
+                            }
+
+                            $fuelRate = (float) ($settings->fuel_rate_pln_per_km ?? 1.80);
+                            $distance = app(DistanceService::class)->getDistance(
+                                $tenant->id,
+                                $originAddress,
+                                $client->address,
+                                $fuelRate,
+                            );
+
+                            if (! $distance) {
+                                return;
+                            }
+
+                            $items = collect($get('items') ?? [])
+                                ->filter(fn (array $i) => ($i['source'] ?? 'manual') !== 'commute')
+                                ->values()
+                                ->all();
+
+                            $items[] = [
+                                'description'  => __('quote.line.commute'),
+                                'unit'         => 'flat',
+                                'quantity'     => 1,
+                                'rate'         => round($distance->commuteCostPln, 2),
+                                'discount_pct' => 0,
+                                'vat_pct'      => 23,
+                                'line_total'   => round($distance->commuteCostPln, 2),
+                                'source'       => 'commute',
+                            ];
+
+                            $set('items', $items);
+                        }),
                     Select::make('job_id')
                         ->label(__('quote.fields.job'))
                         ->relationship('job', 'starts_at')

@@ -49,4 +49,8 @@ return [
         'pln_usd_rate' => env('ANTHROPIC_PLN_USD_RATE', 4.0),
     ],
 
+    'openai' => [
+        'key' => env('OPENAI_API_KEY'),
+    ],
+
 ];

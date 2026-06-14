@@ -5,6 +5,14 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/audio/notes/{id}', function (int $id) {
+        $note = \App\Modules\Notes\Models\Note::withoutGlobalScopes()->findOrFail($id);
+        abort_unless(auth()->user()->tenant_id === $note->tenant_id, 403);
+        abort_if(empty($note->audio_path), 404);
+
+        return \Illuminate\Support\Facades\Storage::disk('local')->response($note->audio_path);
+    })->name('note.audio');
+
     Route::get('/admin/quotes/{id}/pdf', function (int $id) {
         $quote = \App\Modules\Quoting\Models\Quote::withoutGlobalScopes()->findOrFail($id);
         abort_unless(auth()->user()->tenant_id === $quote->tenant_id, 403);
