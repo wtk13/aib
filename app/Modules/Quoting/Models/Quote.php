@@ -20,7 +20,7 @@ class Quote extends Model
     protected $fillable = [
         'client_id', 'job_id', 'number', 'status',
         'issued_at', 'valid_until', 'subtotal', 'vat_rate', 'total',
-        'internal_note',
+        'internal_note', 'sent_at', 'decided_at', 'expired_at',
     ];
 
     protected $casts = [
@@ -28,6 +28,9 @@ class Quote extends Model
         'valid_until' => 'date',
         'subtotal' => 'decimal:2',
         'total' => 'decimal:2',
+        'sent_at' => 'datetime',
+        'decided_at' => 'datetime',
+        'expired_at' => 'datetime',
     ];
 
     public function client(): BelongsTo

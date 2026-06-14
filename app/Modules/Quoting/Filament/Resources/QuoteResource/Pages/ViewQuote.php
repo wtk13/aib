@@ -3,6 +3,8 @@
 namespace App\Modules\Quoting\Filament\Resources\QuoteResource\Pages;
 
 use App\Modules\Quoting\Filament\Resources\QuoteResource;
+use App\Modules\Quoting\Services\QuoteTransitionService;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -15,7 +17,35 @@ class ViewQuote extends ViewRecord
 
     protected function getHeaderActions(): array
     {
-        return [EditAction::make()];
+        $quote = $this->getRecord();
+        $actions = [EditAction::make()];
+
+        if ($quote->status === 'draft') {
+            $actions[] = Action::make('send')
+                ->label(__('quote.actions.send'))
+                ->icon('heroicon-o-paper-airplane')
+                ->color('warning')
+                ->requiresConfirmation()
+                ->action(fn () => app(QuoteTransitionService::class)->transition($quote, 'sent'));
+        }
+
+        if ($quote->status === 'sent') {
+            $actions[] = Action::make('accept')
+                ->label(__('quote.actions.accept'))
+                ->icon('heroicon-o-check-circle')
+                ->color('success')
+                ->requiresConfirmation()
+                ->action(fn () => app(QuoteTransitionService::class)->transition($quote, 'accepted'));
+
+            $actions[] = Action::make('reject')
+                ->label(__('quote.actions.reject'))
+                ->icon('heroicon-o-x-circle')
+                ->color('danger')
+                ->requiresConfirmation()
+                ->action(fn () => app(QuoteTransitionService::class)->transition($quote, 'rejected'));
+        }
+
+        return $actions;
     }
 
     public function infolist(Infolist $infolist): Infolist
