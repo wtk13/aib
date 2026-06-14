@@ -198,5 +198,14 @@
     "settings.nav_label": "Ustawienia",
     "settings.saved": "Ustawienia zapisane",
     "settings.section.billing": "Rozliczenia i lokalizacja",
-    "settings.section.location": "Baza i dojazdy"
+    "settings.section.location": "Baza i dojazdy",
+    "chat.heading": "Asystent AI – klient",
+    "chat.send": "Wyślij",
+    "chat.clear": "Wyczyść rozmowę",
+    "chat.placeholder": "Zapytaj o klienta…",
+    "chat.disclaimer": "AI odpowiada na podstawie notatek. Może się mylić – zawsze weryfikuj.",
+    "chat.thinking": "Analizuję…",
+    "chat.empty_state": "Zadaj pytanie o klienta, a AI przeszuka notatki i zlecenia.",
+    "chat.citation": "notatka #:id",
+    "chat.error.ai_unavailable": "Usługa AI jest chwilowo niedostępna. Spróbuj ponownie za chwilę."
 }

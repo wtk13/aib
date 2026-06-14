@@ -2,6 +2,7 @@
 
 namespace App\Modules\Crm\Filament\Resources\ClientResource\Pages;
 
+use App\Modules\ClientChat\Filament\Widgets\ClientChatWidget;
 use App\Modules\Crm\Filament\Resources\ClientResource;
 use App\Modules\Crm\Models\Client;
 use Filament\Actions;
@@ -14,6 +15,21 @@ class ViewClient extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [Actions\EditAction::make()];
+    }
+
+    protected function getFooterWidgets(): array
+    {
+        return [ClientChatWidget::class];
+    }
+
+    public function getFooterWidgetsColumns(): int|string|array
+    {
+        return 1;
+    }
+
+    public function getWidgetData(): array
+    {
+        return ['clientId' => $this->getRecord()->id];
     }
 
     protected function mutateFormDataBeforeFill(array $data): array

@@ -198,5 +198,14 @@
     "settings.nav_label": "Settings",
     "settings.saved": "Settings saved",
     "settings.section.billing": "Billing & localisation",
-    "settings.section.location": "Home base & travel"
+    "settings.section.location": "Home base & travel",
+    "chat.heading": "AI Assistant – client",
+    "chat.send": "Send",
+    "chat.clear": "Clear conversation",
+    "chat.placeholder": "Ask about this client…",
+    "chat.disclaimer": "AI answers based on notes. It may be wrong – always verify.",
+    "chat.thinking": "Thinking…",
+    "chat.empty_state": "Ask a question about the client and the AI will search notes and jobs.",
+    "chat.citation": "note #:id",
+    "chat.error.ai_unavailable": "AI service is temporarily unavailable. Please try again shortly."
 }
