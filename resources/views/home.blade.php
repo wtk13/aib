@@ -193,6 +193,7 @@
 .stat-val--accent { color: #4ade80; }
 .author-avatar--blue { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
 .author-avatar--pink { background: linear-gradient(135deg, #f472b6, #ec4899); }
+.features-header { text-align: center; }
 .testimonials-header { text-align: center; }
 
 /* ─── FOOTER ────────────────────────────────────────────── */
@@ -322,12 +323,14 @@
 
 {{-- ═══ FEATURES ════════════════════════════════════════════ --}}
 <section class="features" id="jak-to-dziala">
-    <div class="section-tag">Jak działa</div>
-    <h2 class="section-title">AI robi papierologię.<br><em>Ty robisz zlecenia.</em></h2>
-    <p class="section-sub">
-        Przestań tracić czas na maile i tabelki. TBA obsługuje administrację —
-        Ty koncentrujesz się na klientach.
-    </p>
+    <div class="features-header">
+        <div class="section-tag">Jak działa</div>
+        <h2 class="section-title">AI robi papierologię.<br><em>Ty robisz zlecenia.</em></h2>
+        <p class="section-sub">
+            Przestań tracić czas na maile i tabelki. TBA obsługuje administrację —
+            Ty koncentrujesz się na klientach.
+        </p>
+    </div>
 
     <div class="features-grid">
         <div class="feature-card">
