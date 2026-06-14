@@ -203,5 +203,11 @@
     "quote.public.accept_prompt": "Czy akceptujesz tę wycenę?",
     "quote.public.accept_btn": "Akceptuję wycenę",
     "quote.public.accepted_msg": "Wycena przyjęta. Dziękujemy!",
-    "quote.public.status_label": "Status wyceny:"
+    "quote.public.status_label": "Status wyceny:",
+
+    "pricing.actions.suggest": "Sugestia AI",
+    "pricing.fields.service_type": "Typ usługi",
+    "pricing.errors.select_client_first": "Najpierw wybierz klienta",
+    "pricing.errors.ai_unavailable": "Usługa AI chwilowo niedostępna",
+    "pricing.suggestion_applied": "Sugestia zastosowana — PLN :total"
 }

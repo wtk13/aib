@@ -199,5 +199,11 @@
     "quote.public.accept_prompt": "Do you accept this quote?",
     "quote.public.accept_btn": "I accept this quote",
     "quote.public.accepted_msg": "Quote accepted. Thank you!",
-    "quote.public.status_label": "Quote status:"
+    "quote.public.status_label": "Quote status:",
+
+    "pricing.actions.suggest": "AI Suggestion",
+    "pricing.fields.service_type": "Service type",
+    "pricing.errors.select_client_first": "Please select a client first",
+    "pricing.errors.ai_unavailable": "AI service temporarily unavailable",
+    "pricing.suggestion_applied": "Suggestion applied — PLN :total"
 }
