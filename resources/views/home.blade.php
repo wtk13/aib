@@ -195,16 +195,6 @@
 .stat-val { font-size: 18px; font-weight: 800; }
 .stat-label { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
 
-/* ─── SOCIAL PROOF STRIP ────────────────────────────────── */
-.proof-strip {
-    padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;
-}
-.proof-label { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
-.proof-pills { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
-.proof-pill {
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 8px; padding: 8px 18px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.25);
-}
 
 /* ─── FEATURES ──────────────────────────────────────────── */
 .features { padding: 96px 48px; }
@@ -222,25 +212,6 @@
 .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
 .feature-card p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
 
-/* ─── TESTIMONIALS ──────────────────────────────────────── */
-.testimonials {
-    padding: 80px 48px; background: rgba(255,255,255,0.015);
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
-.testimonial-card {
-    background: #161622; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px;
-}
-.testimonial-stars { color: #4ade80; font-size: 13px; margin-bottom: 10px; }
-.testimonial-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 14px; font-style: italic; }
-.testimonial-author { display: flex; align-items: center; gap: 10px; }
-.author-avatar {
-    width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0;
-    background: linear-gradient(135deg, #4ade80, #22c55e); color: #0d1117;
-}
-.author-name { font-size: 13px; font-weight: 700; }
-.author-role { font-size: 11px; color: rgba(255,255,255,0.4); }
 
 /* ─── PRICING ───────────────────────────────────────────── */
 .pricing { padding: 80px 48px; text-align: center; }
@@ -310,10 +281,7 @@
 .section-title--sm { font-size: 34px; }
 .section-sub--centered { margin-top: 14px; max-width: 400px; margin-left: auto; margin-right: auto; }
 .stat-val--accent { color: #4ade80; }
-.author-avatar--blue { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
-.author-avatar--pink { background: linear-gradient(135deg, #f472b6, #ec4899); }
 .features-header { text-align: center; }
-.testimonials-header { text-align: center; }
 
 /* ─── FOOTER ────────────────────────────────────────────── */
 .pub-footer {
@@ -428,17 +396,6 @@
     </div>
 </section>
 
-{{-- ═══ SOCIAL PROOF ════════════════════════════════════════ --}}
-<section class="proof-strip" aria-label="Referencje">
-    <p class="proof-label">Zaufali nam właściciele firm z całej Polski</p>
-    <div class="proof-pills">
-        <div class="proof-pill">🧹 Czyste Wnętrza</div>
-        <div class="proof-pill">🔧 Remo-Fix Kraków</div>
-        <div class="proof-pill">📸 Foto Nowak</div>
-        <div class="proof-pill">📚 Korepetycje Marek</div>
-        <div class="proof-pill">🌿 Ogród Pro</div>
-    </div>
-</section>
 
 {{-- ═══ FEATURES ════════════════════════════════════════════ --}}
 <section class="features" id="jak-to-dziala">
@@ -485,62 +442,6 @@
     </div>
 </section>
 
-{{-- ═══ TESTIMONIALS ════════════════════════════════════════ --}}
-<section class="testimonials">
-    <div class="testimonials-header">
-        <div class="section-tag">Opinie</div>
-        <h2 class="section-title section-title--sm">
-            Co mówią właścicielki<br><em>firm usługowych</em>
-        </h2>
-    </div>
-
-    <div class="testimonials-grid">
-        <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-                "Wyceny, które kiedyś zajmowały mi 20 minut, teraz robię w 2 minuty.
-                TBA zasugerował stawki, ja kliknęłam 'wyślij' — i tyle."
-            </p>
-            <div class="testimonial-author">
-                <div class="author-avatar">A</div>
-                <div>
-                    <div class="author-name">Ania K.</div>
-                    <div class="author-role">Czyste Wnętrza, Warszawa</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-                "Prowadziłem firmę remontową z karteczkami i Excelem.
-                Teraz widzę wszystkie zlecenia, klientów i przychody w jednym miejscu."
-            </p>
-            <div class="testimonial-author">
-                <div class="author-avatar author-avatar--blue">M</div>
-                <div>
-                    <div class="author-name">Marek W.</div>
-                    <div class="author-role">Remo-Fix, Kraków</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-                "Jako fotograf traciłam dużo czasu na komunikację z klientami.
-                TBA pisze odpowiedzi — ja je tylko weryfikuję. Oszczędzam 2h dziennie."
-            </p>
-            <div class="testimonial-author">
-                <div class="author-avatar author-avatar--pink">K</div>
-                <div>
-                    <div class="author-name">Kasia N.</div>
-                    <div class="author-role">Foto Nowak Studio</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 {{-- ═══ PRICING ═════════════════════════════════════════════ --}}
 <section class="pricing" id="cennik">
