@@ -1,21 +1,23 @@
 @extends('layouts.public')
 
 @section('head')
-<title>TBA — Program do zarządzania zleceniami i CRM AI dla małych firm usługowych</title>
-<meta name="description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. 30 dni za darmo, potem 50 zł/mies. Działa na telefonie.">
+<title>Program do zarządzania zleceniami dla firm usługowych | TBA</title>
+<meta name="description" content="CRM z AI dla firm sprzątających i usługowych. Zarządzaj zleceniami, wycenami i klientami z telefonu. Pierwsze 30 dni za darmo — bez karty kredytowej.">
 <link rel="canonical" href="https://tbasystent.pl/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Twój Biznes Asystent">
 <meta property="og:locale" content="pl_PL">
-<meta property="og:title" content="TBA — CRM AI dla małych firm usługowych w Polsce">
-<meta property="og:description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. 30 dni za darmo, potem 50 zł/mies.">
+<meta property="og:title" content="Program do zarządzania zleceniami dla firm usługowych | TBA">
+<meta property="og:description" content="CRM z AI dla firm sprzątających i usługowych. Zarządzaj zleceniami, wycenami i klientami z telefonu. 30 dni za darmo, potem 50 zł/mies.">
 <meta property="og:url" content="https://tbasystent.pl/">
 <meta property="og:image" content="https://tbasystent.pl/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TBA — program do zarządzania zleceniami dla małych firm usługowych w Polsce">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TBA — CRM AI dla małych firm usługowych w Polsce">
-<meta name="twitter:description" content="Program do zarządzania zleceniami i klientami z AI. 30 dni za darmo, potem 50 zł/mies.">
+<meta name="twitter:site" content="@tbasystent">
+<meta name="twitter:title" content="Program do zarządzania zleceniami dla firm usługowych | TBA">
+<meta name="twitter:description" content="CRM z AI dla firm sprzątających i usługowych. 30 dni za darmo, potem 50 zł/mies.">
 <meta name="twitter:image" content="https://tbasystent.pl/og-image.png">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
@@ -30,7 +32,20 @@
       "url": "https://tbasystent.pl",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://tbasystent.pl/og-image.png"
+        "@id": "https://tbasystent.pl/#logo",
+        "url": "https://tbasystent.pl/og-image.png",
+        "contentUrl": "https://tbasystent.pl/og-image.png",
+        "width": 1200,
+        "height": 630
+      },
+      "sameAs": [
+        "https://www.facebook.com/tbasystent",
+        "https://www.linkedin.com/company/tbasystent"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Polska",
+        "@id": "https://www.wikidata.org/wiki/Q36"
       },
       "contactPoint": {
         "@type": "ContactPoint",
@@ -52,12 +67,16 @@
       "name": "Twój Biznes Asystent (TBA)",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web, iOS, Android",
+      "inLanguage": "pl-PL",
       "url": "https://tbasystent.pl",
       "description": "Program do zarządzania zleceniami, klientami i wycenami z AI. Dla małych firm usługowych w Polsce — sprzątanie, remonty, fotografia i inne.",
+      "featureList": "Zarządzanie zleceniami, CRM dla małych firm, Wyceny AI, Harmonogram zleceń, Notatki głosowe, Przypomnienia dla klientów",
+      "screenshot": "https://tbasystent.pl/og-image.png",
       "offers": {
         "@type": "Offer",
         "price": "50",
         "priceCurrency": "PLN",
+        "priceValidUntil": "2027-01-01",
         "description": "30 dni bezpłatnie, potem 50 zł miesięcznie"
       },
       "publisher": { "@id": "https://tbasystent.pl/#organization" }
@@ -70,7 +89,7 @@
           "name": "Czy TBA to program do zarządzania zleceniami dla małej firmy?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Tak — TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu."
+            "text": "Tak — TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu. Nie musisz mieć konta w wielu aplikacjach — wszystko jest w jednym panelu."
           }
         },
         {
@@ -78,23 +97,15 @@
           "name": "Ile kosztuje TBA?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pierwsze 30 dni są w pełni bezpłatne — bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili."
+            "text": "Pierwsze 30 dni są w pełni bezpłatne — bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili — bez zobowiązań, bez ukrytych opłat."
           }
         },
         {
           "@type": "Question",
-          "name": "Czy TBA działa na telefonie?",
+          "name": "Dla jakich branż sprawdzi się TBA?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Tak — TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Dla jakich branż działa TBA?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "TBA sprawdza się dla firm sprzątających, remontowych, fotograficznych, ogrodniczych, korepetytorów i każdej innej małej firmy usługowej, która obsługuje klientów i wystawia wyceny."
+            "text": "TBA sprawdza się dla firm sprzątających, remontowych, budowlanych, fotograficznych, ogrodniczych, korepetytorów i każdej innej małej firmy usługowej, która obsługuje klientów, wystawia wyceny i planuje harmonogram zleceń."
           }
         },
         {
@@ -102,7 +113,15 @@
           "name": "Jak AI pomaga w wycenach?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "TBA analizuje Twoje poprzednie zlecenia i sugeruje stawki dopasowane do zakresu pracy i klienta. Możesz edytować sugestię lub zatwierdzić jednym kliknięciem i wysłać wycenę mailem."
+            "text": "TBA analizuje Twoje poprzednie zlecenia i sugeruje stawki dopasowane do zakresu pracy i klienta. Możesz edytować sugestię lub zatwierdzić jednym kliknięciem i od razu wysłać wycenę mailem. Wycena zajmuje minutę zamiast dwudziestu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy TBA działa na telefonie bez instalacji?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tak — TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji ze sklepu. Wystarczy otworzyć stronę i zalogować się — wejście przez iPhone lub Android działa tak samo jak na komputerze."
           }
         }
       ]
@@ -327,7 +346,7 @@
         30 dni za darmo · potem 50 zł/mies.
     </div>
 
-    <h1>Twój Biznes Asystent<br><em>dla małych firm usługowych</em></h1>
+    <h1>Program do zarządzania zleceniami i CRM<br><em>dla małych firm usługowych</em></h1>
 
     <p class="hero-sub">
         Zarządzaj zleceniami, klientami i wycenami z telefonu.

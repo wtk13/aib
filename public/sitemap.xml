@@ -6,16 +6,4 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://tbasystent.pl/regulamin</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://tbasystent.pl/polityka-prywatnosci</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
 </urlset>

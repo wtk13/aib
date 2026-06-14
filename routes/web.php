@@ -6,6 +6,17 @@ Route::view('/', 'home')->name('home');
 Route::view('/regulamin', 'regulamin')->name('regulamin');
 Route::view('/polityka-prywatnosci', 'polityka-prywatnosci')->name('polityka-prywatnosci');
 
+Route::redirect('/zacznij', '/admin/register', 301)->name('register.start');
+
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        ['loc' => url('/'), 'priority' => '1.0', 'changefreq' => 'monthly', 'lastmod' => '2026-06-14'],
+    ];
+
+    return response()->view('sitemap', compact('urls'))
+        ->header('Content-Type', 'application/xml; charset=utf-8');
+})->name('sitemap');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/audio/notes/{id}', function (int $id) {
         $note = \App\Modules\Notes\Models\Note::withoutGlobalScopes()->findOrFail($id);
