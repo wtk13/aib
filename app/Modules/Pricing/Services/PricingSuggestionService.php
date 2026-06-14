@@ -92,7 +92,7 @@ class PricingSuggestionService
 
             $suggestion = PricingSuggestion::create([
                 'tenant_id' => $tenantId,
-                'quote_id' => 0,
+                'quote_id' => null,
                 'suggested_total' => $parsed['suggested_total'],
                 'breakdown' => $parsed['breakdown'],
                 'reasoning' => $parsed['reasoning'] ?? null,

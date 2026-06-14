@@ -3,6 +3,7 @@
 namespace App\Modules\Quoting\Filament\Resources\QuoteResource\Pages;
 
 use App\Modules\Crm\Models\Client;
+use App\Modules\Pricing\Services\PricingSuggestionFeedbackRecorder;
 use App\Modules\Pricing\Services\PricingSuggestionService;
 use App\Modules\Quoting\Filament\Resources\QuoteResource;
 use App\Modules\Quoting\Models\Quote;
@@ -43,6 +44,7 @@ class CreateQuote extends CreateRecord
 
         if ($this->cachedSuggestion) {
             $this->cachedSuggestion->update(['quote_id' => $this->record->id]);
+            app(PricingSuggestionFeedbackRecorder::class)->record($this->cachedSuggestion, (float) $this->record->total);
             $this->cachedSuggestion = null;
         }
     }

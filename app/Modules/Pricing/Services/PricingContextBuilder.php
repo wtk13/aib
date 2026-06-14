@@ -21,8 +21,12 @@ class PricingContextBuilder
 
         $serviceTypes = [];
         if ($tenant !== null) {
-            $preset = $tenant->preset();
-            $serviceTypes = $preset->serviceTypes();
+            try {
+                $preset = $tenant->preset();
+                $serviceTypes = $preset->serviceTypes();
+            } catch (\RuntimeException) {
+                $serviceTypes = [];
+            }
         }
 
         $pastQuotes = Quote::where('client_id', $this->client->id)

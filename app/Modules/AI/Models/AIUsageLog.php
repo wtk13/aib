@@ -12,6 +12,8 @@ class AIUsageLog extends Model
 {
     use BelongsToTenant, HasFactory;
 
+    protected $table = 'ai_usage_logs';
+
     public $timestamps = false;
 
     protected $fillable = [
