@@ -23,8 +23,17 @@ class WhisperService
 
         $absolutePath = Storage::disk('local')->path($storagePath);
 
+        // Guard against path traversal: ensure resolved path stays within storage root
+        $storageRoot = realpath(Storage::disk('local')->path(''));
+        $realPath = realpath($absolutePath);
+        if ($realPath === false || $storageRoot === false || ! str_starts_with($realPath, $storageRoot.DIRECTORY_SEPARATOR)) {
+            Log::warning('WhisperService: path traversal attempt', ['path' => $storagePath]);
+
+            return null;
+        }
+
         if (! file_exists($absolutePath)) {
-            Log::warning('WhisperService: audio file not found', ['path' => $absolutePath]);
+            Log::warning('WhisperService: audio file not found', ['path' => $storagePath]);
 
             return null;
         }

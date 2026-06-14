@@ -20,7 +20,7 @@ class ResolveTenantFromSubdomain
             $tenant = Tenant::bypass(fn () => Tenant::where('slug', $subdomain)->first());
 
             if (! $tenant) {
-                abort(404, "Tenant '{$subdomain}' not found.");
+                abort(404);
             }
 
             Tenant::setCurrent($tenant);

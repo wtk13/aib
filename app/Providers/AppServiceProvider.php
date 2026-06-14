@@ -36,6 +36,15 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Prevent cross-tenant session hijacking: SESSION_DOMAIN must never be set to a wildcard
+        // like ".tbasystent.pl" in a subdomain-per-tenant architecture.
+        if (app()->environment('production') && config('session.domain') !== null) {
+            throw new \RuntimeException(
+                'SESSION_DOMAIN must be null in multi-tenant subdomain mode. '.
+                'Setting it to ".tbasystent.pl" would allow cross-tenant cookie access.'
+            );
+        }
+
         Event::listen(VerticalPresetUpdated::class, BustPresetCache::class);
 
         Note::observe(NoteObserver::class);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnforceNoindex;
+use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\SetLocaleMiddleware;
 use App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->redirectGuestsTo('/admin/login');
+        $middleware->appendToGroup('web', SecurityHeaders::class);
         $middleware->appendToGroup('web', ResolveTenantFromSubdomain::class);
         $middleware->appendToGroup('web', SetLocaleMiddleware::class);
         $middleware->append(EnforceNoindex::class);

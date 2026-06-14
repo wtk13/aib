@@ -134,12 +134,13 @@ class ClientChatService
         // Client info
         $parts[] = "## Client\nName: {$client->name}";
 
-        // Notes wrapped in XML delimiters to prevent prompt injection
+        // Notes wrapped in XML delimiters; body is XML-escaped and length-capped to prevent injection
         if (! empty($notes)) {
-            $noteXml = array_map(
-                fn ($n) => "<note id=\"{$n['id']}\" date=\"{$n['created_at']}\">{$n['body']}</note>",
-                $notes,
-            );
+            $noteXml = array_map(function ($n) {
+                $safeBody = htmlspecialchars(mb_substr((string) $n['body'], 0, 1000), ENT_XML1 | ENT_QUOTES, 'UTF-8');
+
+                return "<note id=\"{$n['id']}\" date=\"{$n['created_at']}\">{$safeBody}</note>";
+            }, $notes);
             $parts[] = '## Notatki (najnowsze/najbardziej trafne)'."\n".implode("\n", $noteXml);
         }
 

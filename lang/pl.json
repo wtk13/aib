@@ -207,5 +207,6 @@
     "chat.thinking": "Analizuję…",
     "chat.empty_state": "Zadaj pytanie o klienta, a AI przeszuka notatki i zlecenia.",
     "chat.citation": "notatka #:id",
-    "chat.error.ai_unavailable": "Usługa AI jest chwilowo niedostępna. Spróbuj ponownie za chwilę."
+    "chat.error.ai_unavailable": "Usługa AI jest chwilowo niedostępna. Spróbuj ponownie za chwilę.",
+    "chat.error.rate_limit": "Przekroczono limit wiadomości. Poczekaj chwilę przed wysłaniem kolejnego pytania."
 }

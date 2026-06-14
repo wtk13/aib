@@ -207,5 +207,6 @@
     "chat.thinking": "Thinking…",
     "chat.empty_state": "Ask a question about the client and the AI will search notes and jobs.",
     "chat.citation": "note #:id",
-    "chat.error.ai_unavailable": "AI service is temporarily unavailable. Please try again shortly."
+    "chat.error.ai_unavailable": "AI service is temporarily unavailable. Please try again shortly.",
+    "chat.error.rate_limit": "Message limit reached. Please wait a moment before sending another question."
 }
