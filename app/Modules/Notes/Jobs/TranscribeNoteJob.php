@@ -5,6 +5,7 @@ namespace App\Modules\Notes\Jobs;
 use App\Jobs\TenantAwareJob;
 use App\Modules\Notes\Models\Note;
 use App\Modules\Notes\Services\WhisperService;
+use RuntimeException;
 
 class TranscribeNoteJob extends TenantAwareJob
 {
@@ -31,14 +32,20 @@ class TranscribeNoteJob extends TenantAwareJob
         $transcript = app(WhisperService::class)->transcribe($note->audio_path);
 
         if ($transcript === null) {
-            $note->update(['status' => 'transcription_failed']);
-
-            return;
+            // Throw so the queue driver retries up to $tries times with $backoff delay.
+            // The failed() hook marks the note only after all retries are exhausted.
+            throw new RuntimeException("Whisper transcription returned null for note {$this->noteId}");
         }
 
         $note->update([
             'body'   => $transcript,
             'status' => 'ready',
         ]);
+    }
+
+    public function failed(\Throwable $exception): void
+    {
+        $note = Note::find($this->noteId);
+        $note?->update(['status' => 'transcription_failed']);
     }
 }

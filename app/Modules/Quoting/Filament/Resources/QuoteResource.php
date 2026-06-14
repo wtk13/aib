@@ -9,6 +9,7 @@ use App\Modules\Quoting\Models\Quote;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\TenantSettings;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -81,7 +82,7 @@ class QuoteResource extends Resource
                                 return;
                             }
 
-                            $fuelRate = (float) ($settings->fuel_rate_pln_per_km ?? 1.80);
+                            $fuelRate = (float) ($settings->fuel_rate_pln_per_km ?? 0);
                             $distance = app(DistanceService::class)->getDistance(
                                 $tenant->id,
                                 $originAddress,
@@ -171,6 +172,9 @@ class QuoteResource extends Resource
                                 ->prefix('PLN')
                                 ->disabled()
                                 ->dehydrated(false),
+                            Hidden::make('source')
+                                ->default('manual')
+                                ->dehydrateStateUsing(fn (?string $state): string => $state ?? 'manual'),
                         ])
                         ->columns(7)
                         ->addActionLabel('+ ' . __('quote.add_item'))

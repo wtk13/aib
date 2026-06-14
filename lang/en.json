@@ -1,5 +1,8 @@
 {
+    "auth.layout.tagline": "Bezpłatnie przez beta · Bez karty · Dane w Polsce",
+    "auth.login.heading": "Sign in to your account",
     "auth.register.email": "Email address",
+    "auth.register.heading": "Create your account",
     "auth.register.industry": "Select your industry",
     "auth.register.name": "Full name / Company name",
     "auth.register.password": "Password",
@@ -193,7 +196,7 @@
     "settings.fields.is_vat_payer": "VAT payer",
     "settings.fields.locale": "Language",
     "settings.nav_label": "Settings",
-    "settings.saved": "Save settings",
+    "settings.saved": "Settings saved",
     "settings.section.billing": "Billing & localisation",
     "settings.section.location": "Home base & travel"
 }

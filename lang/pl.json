@@ -196,7 +196,7 @@
     "settings.fields.is_vat_payer": "Płatnik VAT",
     "settings.fields.locale": "Język",
     "settings.nav_label": "Ustawienia",
-    "settings.saved": "Zapisz ustawienia",
+    "settings.saved": "Ustawienia zapisane",
     "settings.section.billing": "Rozliczenia i lokalizacja",
     "settings.section.location": "Baza i dojazdy"
 }

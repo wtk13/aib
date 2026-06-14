@@ -4,6 +4,7 @@ namespace App\Modules\Crm\Filament\Resources\ClientResource\RelationManagers;
 
 use App\Modules\Notes\Jobs\TranscribeNoteJob;
 use App\Modules\Notes\Models\Note;
+use App\Modules\Tenancy\Models\Tenant;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -18,8 +19,6 @@ use Illuminate\Support\Facades\Auth;
 class NoteRelationManager extends RelationManager
 {
     protected static string $relationship = 'notes';
-
-    public string $audioSearch = '';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
@@ -41,7 +40,7 @@ class NoteRelationManager extends RelationManager
             FileUpload::make('audio_path')
                 ->label(__('note.fields.audio'))
                 ->disk('local')
-                ->directory('notes/audio')
+                ->directory('notes/audio/'.Tenant::currentId())
                 ->acceptedFileTypes(['audio/mpeg', 'audio/mp4', 'audio/ogg', 'audio/webm', 'audio/wav', 'audio/x-m4a'])
                 ->maxSize(50 * 1024)
                 ->dehydrated(true)
@@ -60,7 +59,8 @@ class NoteRelationManager extends RelationManager
                     ->state(fn (Note $record): string => match ($record->status) {
                         'transcribing'         => __('note.status.transcribing'),
                         'transcription_failed' => __('note.status.transcription_failed'),
-                        default                => $record->audio_path ? '[audio]' : '',
+                        'ready'                => $record->audio_path ? __('note.status.ready') : '',
+                        default                => '',
                     })
                     ->width('120px'),
                 TextColumn::make('body')

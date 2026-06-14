@@ -47,7 +47,7 @@ class TenantSettingsPage extends Page implements HasForms
             'is_vat_payer'          => $settings->is_vat_payer ?? false,
             'default_vat_rate'      => $settings->default_vat_rate ?? 23,
             'locale'                => $settings->locale ?? 'pl',
-            'fuel_rate_pln_per_km'  => $settings->fuel_rate_pln_per_km ?? 1.80,
+            'fuel_rate_pln_per_km'  => (float) ($settings->fuel_rate_pln_per_km ?? 0),
             'addr_line1'            => $settings->originAddress?->line1 ?? '',
             'addr_city'             => $settings->originAddress?->city ?? '',
         ]);
@@ -105,7 +105,7 @@ class TenantSettingsPage extends Page implements HasForms
 
         $settings->is_vat_payer = $data['is_vat_payer'] ?? false;
         $settings->default_vat_rate = $data['default_vat_rate'] ?? 23;
-        $settings->fuel_rate_pln_per_km = max(0, (float) ($data['fuel_rate_pln_per_km'] ?? 1.80));
+        $settings->fuel_rate_pln_per_km = max(0, (float) ($data['fuel_rate_pln_per_km'] ?? 0));
 
         $allowedLocales = ['pl', 'en'];
         $settings->locale = in_array($data['locale'] ?? '', $allowedLocales, true) ? $data['locale'] : 'pl';

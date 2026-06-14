@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->redirectGuestsTo('/admin/login');
         $middleware->appendToGroup('web', ResolveTenantFromSubdomain::class);
         $middleware->appendToGroup('web', SetLocaleMiddleware::class);
         $middleware->append(EnforceNoindex::class);

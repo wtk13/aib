@@ -29,6 +29,8 @@ class WhisperService
             return null;
         }
 
+        $handle = fopen($absolutePath, 'r');
+
         try {
             $response = $this->http->post('https://api.openai.com/v1/audio/transcriptions', [
                 'headers' => [
@@ -40,7 +42,7 @@ class WhisperService
                     ['name' => 'response_format', 'contents' => 'text'],
                     [
                         'name'     => 'file',
-                        'contents' => fopen($absolutePath, 'r'),
+                        'contents' => $handle,
                         'filename' => basename($absolutePath),
                     ],
                 ],
@@ -51,6 +53,10 @@ class WhisperService
             Log::warning('WhisperService: transcription failed', ['error' => $e->getMessage()]);
 
             return null;
+        } finally {
+            if (is_resource($handle)) {
+                fclose($handle);
+            }
         }
     }
 }
