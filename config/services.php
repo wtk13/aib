@@ -44,4 +44,8 @@ return [
         'base_url' => env('GUS_BASE_URL', 'https://wyszukiwarkaregon.stat.gov.pl/api/'),
     ],
 
+    'anthropic' => [
+        'key' => env('ANTHROPIC_API_KEY'),
+    ],
+
 ];
