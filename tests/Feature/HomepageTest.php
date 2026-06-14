@@ -10,7 +10,7 @@ it('homepage returns 200', function () {
 
 it('homepage contains the hero headline', function () {
     $this->get('/')
-        ->assertSee('CRM i AI asystent')
+        ->assertSee('Twój Biznes Asystent')
         ->assertSee('firm usługowych', false);
 });
 

@@ -327,7 +327,7 @@
         30 dni za darmo · potem 50 zł/mies.
     </div>
 
-    <h1>CRM i AI asystent<br><em>dla małych firm usługowych</em></h1>
+    <h1>Twój Biznes Asystent<br><em>dla małych firm usługowych</em></h1>
 
     <p class="hero-sub">
         Zarządzaj zleceniami, klientami i wycenami z telefonu.
