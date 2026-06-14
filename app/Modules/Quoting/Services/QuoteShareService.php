@@ -22,7 +22,8 @@ class QuoteShareService
 
     public function findValidToken(string $token): ?QuoteShareToken
     {
-        return QuoteShareToken::where('token', $token)
+        return QuoteShareToken::withoutGlobalScopes()
+            ->where('token', $token)
             ->where(fn ($q) => $q->whereNull('expires_at')->orWhere('expires_at', '>', now()))
             ->whereNull('accepted_at')
             ->first();

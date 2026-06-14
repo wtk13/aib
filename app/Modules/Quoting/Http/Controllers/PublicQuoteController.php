@@ -14,7 +14,12 @@ class PublicQuoteController
         $shareToken = $service->findValidToken($token);
         abort_if(! $shareToken, 404);
 
-        $quote = Quote::withoutGlobalScopes()->with(['client', 'items'])->find($shareToken->quote_id);
+        $quote = Quote::withoutGlobalScopes()
+            ->with([
+                'client',
+                'items' => fn ($q) => $q->withoutGlobalScopes()->orderBy('position'),
+            ])
+            ->find($shareToken->quote_id);
         abort_if(! $quote, 404);
 
         $unitLabels = [
