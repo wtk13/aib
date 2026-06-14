@@ -335,14 +335,14 @@
 <section class="hero">
     <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        30 dni za darmo · potem 50 zł/mies.
+        TBA — <strong>T</strong>wój <strong>B</strong>iznes <strong>A</strong>systent
     </div>
 
     <h1>Program do zarządzania zleceniami i CRM<br><em>dla małych firm usługowych</em></h1>
 
     <p class="hero-sub">
         Zarządzaj zleceniami, klientami i wycenami z telefonu.
-        TBA robi papierkową robotę za Ciebie — pierwsze 30 dni za darmo.
+        Twój Biznes Asystent robi papierkową robotę za Ciebie — pierwsze 30 dni za darmo.
     </p>
 
     <div class="hero-actions">
