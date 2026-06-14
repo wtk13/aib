@@ -181,5 +181,6 @@
     "quote.actions.accept": "Oznacz jako przyjętą",
     "quote.actions.reject": "Oznacz jako odrzuconą",
     "quote.actions.generate_pdf": "Pobierz PDF",
-    "quote.actions.share_link": "Link do udostępnienia"
+    "quote.actions.share_link": "Link do udostępnienia",
+    "quote.add_item": "Dodaj pozycję"
 }

@@ -9,6 +9,7 @@ use App\Filament\Pages\TenantSettingsPage;
 use App\Http\Middleware\SetLocaleMiddleware;
 use App\Modules\Crm\Filament\Resources\ClientResource;
 use App\Modules\Employees\Filament\Resources\EmployeeResource;
+use App\Modules\Quoting\Filament\Resources\QuoteResource;
 use App\Modules\Scheduling\Filament\Resources\JobResource;
 use App\Modules\Tenancy\Middleware\ResolveTenantFromSubdomain;
 use Filament\FontProviders\GoogleFontProvider;
@@ -63,6 +64,7 @@ class AppPanelProvider extends PanelProvider
                 ClientResource::class,
                 JobResource::class,
                 EmployeeResource::class,
+                QuoteResource::class,
             ])
             ->middleware([
                 EncryptCookies::class,

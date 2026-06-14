@@ -177,5 +177,6 @@
     "quote.actions.accept": "Mark as accepted",
     "quote.actions.reject": "Mark as rejected",
     "quote.actions.generate_pdf": "Download PDF",
-    "quote.actions.share_link": "Share link"
+    "quote.actions.share_link": "Share link",
+    "quote.add_item": "Add item"
 }
