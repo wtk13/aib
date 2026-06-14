@@ -3,6 +3,7 @@
 namespace App\Modules\Quoting\Filament\Resources\QuoteResource\Pages;
 
 use App\Modules\Crm\Models\Client;
+use App\Modules\Pricing\Models\PricingSuggestion;
 use App\Modules\Pricing\Services\PricingSuggestionFeedbackRecorder;
 use App\Modules\Pricing\Services\PricingSuggestionService;
 use App\Modules\Quoting\Filament\Resources\QuoteResource;
@@ -20,7 +21,7 @@ class CreateQuote extends CreateRecord
 {
     protected static string $resource = QuoteResource::class;
 
-    public mixed $cachedSuggestion = null;
+    public ?int $cachedSuggestionId = null;
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
@@ -42,10 +43,15 @@ class CreateQuote extends CreateRecord
         $record = $this->getRecord();
         app(QuoteTotalsService::class)->recalculate($record);
 
-        if ($this->cachedSuggestion) {
-            $this->cachedSuggestion->update(['quote_id' => $this->record->id]);
-            app(PricingSuggestionFeedbackRecorder::class)->record($this->cachedSuggestion, (float) $this->record->total);
-            $this->cachedSuggestion = null;
+        $suggestion = $this->cachedSuggestionId
+            ? PricingSuggestion::find($this->cachedSuggestionId)
+            : null;
+
+        if ($suggestion) {
+            $suggestion->update(['quote_id' => $this->record->id]);
+            $suggestion->refresh();
+            app(PricingSuggestionFeedbackRecorder::class)->record($suggestion, (float) $this->record->total);
+            $this->cachedSuggestionId = null;
         }
     }
 
@@ -85,6 +91,8 @@ class CreateQuote extends CreateRecord
                         return;
                     }
 
+                    $this->cachedSuggestionId = null;
+
                     $suggestion = app(PricingSuggestionService::class)->suggest(
                         $client,
                         null,
@@ -100,7 +108,7 @@ class CreateQuote extends CreateRecord
                         return;
                     }
 
-                    $this->cachedSuggestion = $suggestion;
+                    $this->cachedSuggestionId = $suggestion->id;
 
                     $items = collect($suggestion->breakdown)->map(fn (array $item) => [
                         'description'  => $item['description'] ?? '',

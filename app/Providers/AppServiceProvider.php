@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(AnthropicClient::class, fn () => new AnthropicClient(new Client));
+        $this->app->singleton(AnthropicClient::class, fn () => new AnthropicClient(new Client(['timeout' => 30.0, 'connect_timeout' => 5.0])));
     }
 
     public function boot(): void

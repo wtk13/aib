@@ -46,6 +46,7 @@ return [
 
     'anthropic' => [
         'key' => env('ANTHROPIC_API_KEY'),
+        'pln_usd_rate' => env('ANTHROPIC_PLN_USD_RATE', 4.0),
     ],
 
 ];

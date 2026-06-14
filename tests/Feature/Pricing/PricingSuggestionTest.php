@@ -29,8 +29,8 @@ it('context builder includes client name and custom fields', function () {
 
     $client->update(['custom_fields' => ['area_m2' => 80, 'property_type' => 'apartment']]);
 
-    $builder = new PricingContextBuilder($client);
-    $context = $builder->build();
+    $builder = new PricingContextBuilder();
+    $context = $builder->build($client);
 
     expect($context['client']['name'])->toBe('Pani Kowalska');
     expect($context['client']['area_m2'])->toBe(80);
@@ -39,8 +39,8 @@ it('context builder includes client name and custom fields', function () {
 it('context builder marks cold_start true when no past quotes', function () {
     [$tenant, $client] = pricingContext();
 
-    $builder = new PricingContextBuilder($client);
-    $context = $builder->build();
+    $builder = new PricingContextBuilder();
+    $context = $builder->build($client);
 
     expect($context['cold_start'])->toBeTrue();
 });
@@ -51,7 +51,7 @@ it('suggestion service returns null when anthropic client returns null', functio
     $mockClient = Mockery::mock(AnthropicClient::class);
     $mockClient->shouldReceive('messages')->andReturn(null);
 
-    $service = new PricingSuggestionService($mockClient);
+    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder());
 
     $result = $service->suggest($client);
 
@@ -78,7 +78,7 @@ it('suggestion service creates PricingSuggestion from valid response', function 
         'latency_ms' => 200,
     ]);
 
-    $service = new PricingSuggestionService($mockClient);
+    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder());
 
     $suggestion = $service->suggest($client);
 
@@ -98,7 +98,7 @@ it('suggestion service returns null on invalid JSON', function () {
         'latency_ms' => 100,
     ]);
 
-    $service = new PricingSuggestionService($mockClient);
+    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder());
 
     $result = $service->suggest($client);
 

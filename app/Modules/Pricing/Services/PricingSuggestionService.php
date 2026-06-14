@@ -17,6 +17,7 @@ class PricingSuggestionService
 
     public function __construct(
         private readonly AnthropicClient $anthropic,
+        private readonly PricingContextBuilder $contextBuilder,
     ) {}
 
     public function suggest(
@@ -25,8 +26,7 @@ class PricingSuggestionService
         ?string $serviceTypeKey = null,
     ): ?PricingSuggestion {
         try {
-            $contextBuilder = new PricingContextBuilder($client, $job, $serviceTypeKey);
-            $context = $contextBuilder->build();
+            $context = $this->contextBuilder->build($client, $job, $serviceTypeKey);
 
             $systemPrompt = file_get_contents(app_path('Prompts/pricing_v1.md'));
             if ($systemPrompt === false) {
@@ -71,21 +71,23 @@ class PricingSuggestionService
                 return null;
             }
 
-            // Cost: Haiku pricing approx. × 4 PLN/USD
-            $costPln = ($result['input_tokens'] / 1_000_000 * 1.0)
-                + ($result['output_tokens'] / 1_000_000 * 5.0);
+            // Cost: Haiku pricing (input $1/M, output $5/M) converted to PLN
+            $costUsd = ($result['input_tokens'] / 1_000_000 * 1.0)
+                     + ($result['output_tokens'] / 1_000_000 * 5.0);
+            $costPln = round($costUsd * config('services.anthropic.pln_usd_rate', 4.0), 6);
 
             $tenantId = Tenant::currentId();
 
             $usageLog = AIUsageLog::create([
                 'tenant_id' => $tenantId,
+                'user_id' => auth()->id(),
                 'feature' => 'pricing_suggestion',
                 'provider' => 'anthropic',
                 'model' => self::MODEL,
                 'prompt_version' => self::PROMPT_VERSION,
                 'input_tokens' => $result['input_tokens'],
                 'output_tokens' => $result['output_tokens'],
-                'cost_pln' => round($costPln, 6),
+                'cost_pln' => $costPln,
                 'latency_ms' => $result['latency_ms'],
                 'status' => 'ok',
             ]);

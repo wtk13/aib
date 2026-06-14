@@ -9,13 +9,7 @@ use App\Modules\Tenancy\Models\Tenant;
 
 class PricingContextBuilder
 {
-    public function __construct(
-        private readonly Client $client,
-        private readonly ?Job $job = null,
-        private readonly ?string $serviceTypeKey = null,
-    ) {}
-
-    public function build(): array
+    public function build(Client $client, ?Job $job = null, ?string $serviceTypeKey = null): array
     {
         $tenant = Tenant::current();
 
@@ -29,7 +23,7 @@ class PricingContextBuilder
             }
         }
 
-        $pastQuotes = Quote::where('client_id', $this->client->id)
+        $pastQuotes = Quote::where('client_id', $client->id)
             ->whereIn('status', ['accepted', 'sent'])
             ->orderByDesc('issued_at')
             ->limit(5)
@@ -40,12 +34,12 @@ class PricingContextBuilder
 
         return [
             'client' => [
-                'name' => $this->client->name,
-                'custom_fields' => $this->client->custom_fields ?? [],
-                'area_m2' => $this->client->custom_fields['area_m2'] ?? null,
-                'property_type' => $this->client->custom_fields['property_type'] ?? null,
+                'name' => $client->name,
+                'custom_fields' => $client->custom_fields ?? [],
+                'area_m2' => $client->custom_fields['area_m2'] ?? null,
+                'property_type' => $client->custom_fields['property_type'] ?? null,
             ],
-            'service_type_key' => $this->serviceTypeKey ?? ($this->job?->service_type_key),
+            'service_type_key' => $serviceTypeKey ?? ($job?->service_type_key),
             'service_types' => $serviceTypes,
             'past_quotes' => $pastQuotes->map(fn (Quote $q) => [
                 'id' => $q->id,
