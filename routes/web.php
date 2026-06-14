@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/quotes/{quote}/pdf', function (\App\Modules\Quoting\Models\Quote $quote) {
+    Route::get('/admin/quotes/{id}/pdf', function (int $id) {
+        $quote = \App\Modules\Quoting\Models\Quote::withoutGlobalScopes()->findOrFail($id);
         abort_unless(auth()->user()->tenant_id === $quote->tenant_id, 403);
 
         return app(\App\Modules\Quoting\Services\QuotePdfService::class)->download($quote);
