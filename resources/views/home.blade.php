@@ -302,17 +302,6 @@
 .stat-val--accent { color: #4ade80; }
 .features-header { text-align: center; }
 
-/* ─── FOOTER ────────────────────────────────────────────── */
-.pub-footer {
-    padding: 28px 48px; border-top: 1px solid rgba(255,255,255,0.06);
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-}
-.pub-footer-logo { font-weight: 900; font-size: 15px; letter-spacing: -0.5px; color: #fff; text-decoration: none; }
-.pub-footer-logo span { color: #4ade80; }
-.pub-footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
-.pub-footer-links { display: flex; gap: 20px; }
-.pub-footer-links-item { font-size: 12px; color: rgba(255,255,255,0.25); }
-
 /* ─── RESPONSIVE ────────────────────────────────────────── */
 @media (max-width: 1024px) {
     .features-grid { grid-template-columns: repeat(2, 1fr); }
@@ -332,7 +321,6 @@
     .pricing { padding: 56px 20px; }
     .final-cta { padding: 56px 20px; }
     .final-cta h2 { font-size: 32px; }
-    .pub-footer { padding: 20px; flex-direction: column; text-align: center; }
 }
 </style>
 @endsection

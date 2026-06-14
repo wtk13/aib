@@ -42,6 +42,22 @@
             .pub-nav-links { display: none; }
             .pub-nav-cta { padding: 6px 14px; font-size: 13px; }
         }
+
+        /* ─── FOOTER ─────────────────────────────────────────── */
+        .pub-footer {
+            padding: 28px 48px; border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        }
+        .pub-footer-logo { font-weight: 900; font-size: 15px; letter-spacing: -0.5px; color: #fff; text-decoration: none; }
+        .pub-footer-logo span { color: #4ade80; }
+        .pub-footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); margin: 0; }
+        .pub-footer-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+        .pub-footer-links-item { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color .2s; }
+        .pub-footer-links-item:hover { color: rgba(255,255,255,0.7); }
+        @media (max-width: 768px) {
+            .pub-footer { padding: 20px; flex-direction: column; text-align: center; }
+            .pub-footer-links { justify-content: center; }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -54,6 +70,8 @@
                 <a href="/#cennik">Cennik</a>
                 <a href="/#faq">FAQ</a>
                 <a href="/blog">Blog</a>
+                <a href="/regulamin">Regulamin</a>
+                <a href="/polityka-prywatnosci">Polityka</a>
             </div>
             <a href="/admin/register" class="pub-nav-cta">Zacznij za darmo</a>
         </div>
