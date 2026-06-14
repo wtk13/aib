@@ -12,11 +12,13 @@ class SetLocaleMiddleware
     {
         $locale = 'pl';
 
+        $allowedLocales = ['pl', 'en'];
+
         if (auth()->check() && property_exists(auth()->user(), 'tenant_id')) {
             $setting = \DB::table('tenant_settings')
                 ->where('tenant_id', auth()->user()->tenant_id)
                 ->value('locale');
-            $locale = $setting ?? 'pl';
+            $locale = in_array($setting, $allowedLocales, true) ? $setting : 'pl';
         }
 
         app()->setLocale($locale);

@@ -51,16 +51,16 @@ it('can load the settings page', function () {
         ->assertSuccessful();
 });
 
-it('can save fuel rate in settings', function () {
+it('can save locale in settings', function () {
     $tenant = Tenant::factory()->create();
     $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
     Tenant::setCurrent($tenant);
 
     Livewire::actingAs($user)
         ->test(TenantSettingsPage::class)
-        ->fillForm(['fuel_rate_pln_per_km' => '2.50'])
+        ->fillForm(['locale' => 'en'])
         ->call('save')
         ->assertHasNoFormErrors();
 
-    expect(TenantSettings::find($tenant->id)?->fuel_rate_pln_per_km)->toBe('2.50');
+    expect(TenantSettings::find($tenant->id)?->locale)->toBe('en');
 });

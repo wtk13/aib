@@ -21,27 +21,30 @@
 }
 
 /* ── Sidebar nav items — default ── */
-.fi-sidebar-item-button {
-    color: rgba(255, 255, 255, 0.75) !important;
-}
-
 .fi-sidebar-item-button:hover {
     background-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.fi-sidebar-item-label {
+    color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.fi-sidebar-item-icon {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.fi-sidebar-item-button:hover .fi-sidebar-item-label,
+.fi-sidebar-item-button:hover .fi-sidebar-item-icon {
     color: rgba(255, 255, 255, 1) !important;
 }
 
 /* ── Sidebar nav items — active ── */
 .fi-sidebar-item.fi-active .fi-sidebar-item-button {
     background-color: rgba(255, 255, 255, 0.18) !important;
-    color: rgba(255, 255, 255, 1) !important;
 }
 
-/* ── Sidebar icons ── */
-.fi-sidebar-item-button svg {
-    color: rgba(255, 255, 255, 0.75) !important;
-}
-
-.fi-sidebar-item.fi-active .fi-sidebar-item-button svg {
+.fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-sidebar-item-icon {
     color: rgba(255, 255, 255, 1) !important;
 }
 

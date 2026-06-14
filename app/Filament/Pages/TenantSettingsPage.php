@@ -39,12 +39,11 @@ class TenantSettingsPage extends Page implements HasForms
 
     public function mount(): void
     {
-        $tenantId = Tenant::currentId();
+        $tenantId = Tenant::currentId() ?? abort(403);
         $settings = TenantSettings::find($tenantId)
-            ?? new TenantSettings(['tenant_id' => $tenantId, 'fuel_rate_pln_per_km' => '1.80', 'locale' => 'pl']);
+            ?? new TenantSettings(['tenant_id' => $tenantId, 'locale' => 'pl']);
 
         $this->form->fill([
-            'fuel_rate_pln_per_km' => $settings->fuel_rate_pln_per_km,
             'is_vat_payer' => $settings->is_vat_payer ?? false,
             'default_vat_rate' => $settings->default_vat_rate ?? 23,
             'locale' => $settings->locale ?? 'pl',
@@ -61,15 +60,12 @@ class TenantSettingsPage extends Page implements HasForms
                     ->schema([
                         TextInput::make('addr_line1')
                             ->label(__('settings.fields.address_line1'))
+                            ->maxLength(255)
                             ->dehydrated(false),
                         TextInput::make('addr_city')
                             ->label(__('settings.fields.address_city'))
+                            ->maxLength(100)
                             ->dehydrated(false),
-                        TextInput::make('fuel_rate_pln_per_km')
-                            ->label(__('settings.fields.fuel_rate'))
-                            ->numeric()
-                            ->suffix('PLN/km')
-                            ->default('1.80'),
                     ]),
                 Section::make(__('settings.section.billing'))
                     ->schema([
@@ -94,18 +90,19 @@ class TenantSettingsPage extends Page implements HasForms
     {
         $data = $this->form->getState();
         $raw = $this->form->getRawState();
-        $tenantId = Tenant::currentId();
+        $tenantId = Tenant::currentId() ?? abort(403);
 
         $settings = TenantSettings::find($tenantId)
             ?? new TenantSettings(['tenant_id' => $tenantId]);
 
-        $settings->fuel_rate_pln_per_km = $data['fuel_rate_pln_per_km'];
         $settings->is_vat_payer = $data['is_vat_payer'] ?? false;
         $settings->default_vat_rate = $data['default_vat_rate'] ?? 23;
-        $settings->locale = $data['locale'] ?? 'pl';
 
-        $line1 = $raw['addr_line1'] ?? '';
-        $city = $raw['addr_city'] ?? '';
+        $allowedLocales = ['pl', 'en'];
+        $settings->locale = in_array($data['locale'] ?? '', $allowedLocales, true) ? $data['locale'] : 'pl';
+
+        $line1 = mb_substr(trim($raw['addr_line1'] ?? ''), 0, 255);
+        $city = mb_substr(trim($raw['addr_city'] ?? ''), 0, 100);
 
         if (! empty($line1)) {
             if ($settings->originAddress) {

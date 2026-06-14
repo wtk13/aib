@@ -37,7 +37,7 @@ class GeocodingService
                 }
 
                 $result = $data['results'][0]['geometry']['location'];
-                cache()->forever($cacheKey, $result);
+                cache()->put($cacheKey, $result, now()->addDays(90));
             } catch (\Exception $e) {
                 Log::warning('Geocoding failed: '.$e->getMessage(), ['query' => $query]);
 

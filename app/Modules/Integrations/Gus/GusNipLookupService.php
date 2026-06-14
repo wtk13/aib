@@ -20,6 +20,10 @@ class GusNipLookupService
 
     public function lookup(string $nip): ?array
     {
+        if (! preg_match('/^\d{10}$/', $nip)) {
+            return null;
+        }
+
         $cacheKey = 'gus:nip:'.$nip;
 
         $cached = Cache::get($cacheKey);

@@ -28,13 +28,17 @@ class ResolveTenantFromSubdomain
             return $next($request);
         }
 
-        // Fallback for requests on the root domain: resolve from authenticated user
-        if (auth()->check() && auth()->user()->hasAttribute('tenant_id')) {
-            $tenant = Tenant::bypass(fn () => Tenant::find(auth()->user()->tenant_id));
-            if ($tenant) {
-                Tenant::setCurrent($tenant);
+        // Fallback for requests on the root domain: resolve from authenticated user.
+        // Wrapped in bypass() to avoid TenantScope chicken-and-egg when loading the User model.
+        Tenant::bypass(function () {
+            $user = auth()->user();
+            if ($user && isset($user->tenant_id)) {
+                $tenant = Tenant::find($user->tenant_id);
+                if ($tenant) {
+                    Tenant::setCurrent($tenant);
+                }
             }
-        }
+        });
 
         return $next($request);
     }

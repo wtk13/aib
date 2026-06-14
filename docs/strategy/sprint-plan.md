@@ -153,7 +153,33 @@ Photo OCR of WhatsApp screenshots, payments, invoicing, team mode, route optimiz
 
 ---
 
-## 5. Sprint 3 — AI Pricing (Weeks 6–7) ← Next
+## 4.5. Sprint 2.1 — Pracownicy (inter-sprint, ~1 day) ← Next
+
+**Theme:** "Ania wie ile kosztuje ją każde zlecenie pod względem wypłat."
+**Goal:** Firma może zarządzać listą pracowników. Do każdego zlecenia można przypisać ilu pracowników uczestniczyło, ile godzin przepracowali (opcjonalnie) i ile im wypłacić. Szefowa też jest pracownikiem.
+
+**Demo:** Ania tworzy pracowników (siebie + 2 panie). Do zlecenia sprzątania generalnego przypisuje je, wpisuje kwoty wypłat. Widzi razem ile kosztuje zlecenie osobowo.
+
+### Stories
+
+| # | Story | Acceptance |
+|---|---|---|
+| S2.1.1 | Pracownicy — model + migracja | Tabela `employees`: `tenant_id`, `name`, `is_active`. Trait `BelongsToTenant`. |
+| S2.1.2 | Pracownicy — Filament resource | Lista/Create/Edit: imię, is_active. Nav label "Pracownicy". |
+| S2.1.3 | job_employees — model + migracja | Tabela `job_employees`: `job_id`, `employee_id`, `hours_worked` (nullable decimal), `payout_pln` (decimal). |
+| S2.1.4 | Repeater w formularzu Zlecenia | Sekcja "Rozliczenie pracowników" z Repeaterem: wybór pracownika, opcjonalne godziny, kwota PLN. Można dodać wielu. |
+| S2.1.5 | i18n PL + EN | Klucze dla employee.* i job.section.payout w obu plikach lang. |
+
+### Decyzje projektowe
+
+- Pracownik ≠ User — osobna encja, brak logowania. Właścicielka dodaje siebie jako pracownika ręcznie.
+- Stawka nie jest przechowywana na pracowniku — wpisuje się kwotę przy każdym zleceniu (stawka "z palca").
+- `hours_worked` jest opcjonalne — wypłata może być ryczałtowa, bez godzin.
+- Nie liczymy automatycznie godziny × stawka → kwota; użytkownik wpisuje kwotę bezpośrednio.
+
+---
+
+## 5. Sprint 3 — AI Pricing (Weeks 6–7)
 
 **Theme:** "Ania wpisuje notatkę z wizyty → TBA proponuje cenę, która ma sens."
 **Goal:** Assessment → AI price proposal. After visiting a new client, Ania adds a note; TBA reads notes + client data + history and proposes 3 prices (one-time, monthly, weekly), each including commute cost. Quote is generated from the accepted suggestion.

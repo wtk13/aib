@@ -3,6 +3,7 @@
 namespace App\Modules\Scheduling\Models;
 
 use App\Modules\Crm\Models\Client;
+use App\Modules\Employees\Models\JobEmployee;
 use App\Modules\Tenancy\Concerns\BelongsToTenant;
 use Database\Factories\JobFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,5 +44,11 @@ class Job extends Model
     public function occurrences(): HasMany
     {
         return $this->hasMany(JobOccurrence::class);
+    }
+
+    /** @return HasMany<JobEmployee, $this> */
+    public function jobEmployees(): HasMany
+    {
+        return $this->hasMany(JobEmployee::class);
     }
 }

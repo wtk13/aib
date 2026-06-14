@@ -37,6 +37,7 @@ class TodayJobsWidget extends BaseWidget
                 TextColumn::make('status')
                     ->label(__('job.fields.status'))
                     ->badge()
+                    ->formatStateUsing(fn (?string $state): string => $state ? __('job.status.'.$state) : '')
                     ->color(fn (?string $state): string => match ($state) {
                         'completed' => 'success',
                         default => 'warning',

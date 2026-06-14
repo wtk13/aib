@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Modules\Employees\Filament\Resources\EmployeeResource\Widgets\EmployeeEarningsStatsWidget;
+use App\Modules\Employees\Filament\Resources\EmployeeResource\Widgets\EmployeeReportWidget;
 use App\Modules\Presets\Events\VerticalPresetUpdated;
 use App\Modules\Presets\Listeners\BustPresetCache;
 use App\Modules\Tenancy\Auth\TenantAwareUserProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
                 $config['model']
             )
         );
+
+        Livewire::component('employee-earnings-stats-widget', EmployeeEarningsStatsWidget::class);
+        Livewire::component('employee-report-widget', EmployeeReportWidget::class);
     }
 }
