@@ -182,5 +182,26 @@
     "quote.actions.reject": "Oznacz jako odrzuconą",
     "quote.actions.generate_pdf": "Pobierz PDF",
     "quote.actions.share_link": "Link do udostępnienia",
-    "quote.add_item": "Dodaj pozycję"
+    "quote.add_item": "Dodaj pozycję",
+
+    "quote.pdf_filename": "wycena-:number.pdf",
+    "quote.pdf.issuer": "Wystawca",
+    "quote.pdf.client": "Klient",
+    "quote.pdf.col_description": "Opis",
+    "quote.pdf.col_unit": "J.m.",
+    "quote.pdf.col_quantity": "Ilość",
+    "quote.pdf.col_rate": "Cena",
+    "quote.pdf.col_discount": "Rabat",
+    "quote.pdf.col_vat": "VAT",
+    "quote.pdf.col_line_total": "Wartość",
+    "quote.pdf.subtotal": "Netto",
+    "quote.pdf.total": "RAZEM",
+    "quote.pdf.footer": "Wycena wygenerowana przez TBA · tbasystent.pl",
+    "quote.pdf.valid_until_label": "Ważna do:",
+    "quote.pdf.date_label": "Data:",
+    "quote.public.client_label": "Klient:",
+    "quote.public.accept_prompt": "Czy akceptujesz tę wycenę?",
+    "quote.public.accept_btn": "Akceptuję wycenę",
+    "quote.public.accepted_msg": "Wycena przyjęta. Dziękujemy!",
+    "quote.public.status_label": "Status wyceny:"
 }

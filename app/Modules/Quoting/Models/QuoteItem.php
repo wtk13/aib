@@ -17,6 +17,15 @@ class QuoteItem extends Model
         'service_type_key', 'source',
     ];
 
+    protected $casts = [
+        'quantity'     => 'decimal:2',
+        'rate'         => 'decimal:2',
+        'discount_pct' => 'decimal:2',
+        'vat_pct'      => 'integer',
+        'line_total'   => 'decimal:2',
+        'position'     => 'integer',
+    ];
+
     public function quote(): BelongsTo
     {
         return $this->belongsTo(Quote::class);

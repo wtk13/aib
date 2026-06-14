@@ -44,20 +44,20 @@
     </div>
     <div style="text-align:right">
       <div class="quote-title">WYCENA {{ $quote->number }}</div>
-      <div class="quote-meta">Data: {{ $quote->issued_at?->format('d.m.Y') }}</div>
+      <div class="quote-meta">{{ __('quote.pdf.date_label') }} {{ $quote->issued_at?->format('d.m.Y') }}</div>
       @if($quote->valid_until)
-        <div class="quote-meta">Ważna do: {{ $quote->valid_until->format('d.m.Y') }}</div>
+        <div class="quote-meta">{{ __('quote.pdf.valid_until_label') }} {{ $quote->valid_until->format('d.m.Y') }}</div>
       @endif
     </div>
   </div>
 
   <div class="parties">
     <div class="party-block">
-      <div class="party-label">Wystawca</div>
+      <div class="party-label">{{ __('quote.pdf.issuer') }}</div>
       <div class="party-name">{{ $tenantName }}</div>
     </div>
     <div class="party-block">
-      <div class="party-label">Klient</div>
+      <div class="party-label">{{ __('quote.pdf.client') }}</div>
       <div class="party-name">{{ $quote->client?->name }}</div>
       @if($quote->client?->email)
         <div style="font-size:10px;color:#555">{{ $quote->client->email }}</div>
@@ -68,13 +68,13 @@
   <table>
     <thead>
       <tr>
-        <th style="width:40%">Opis</th>
-        <th class="text-right">J.m.</th>
-        <th class="text-right">Ilość</th>
-        <th class="text-right">Cena</th>
-        <th class="text-right">Rabat</th>
-        <th class="text-right">VAT</th>
-        <th class="text-right">Wartość</th>
+        <th style="width:40%">{{ __('quote.pdf.col_description') }}</th>
+        <th class="text-right">{{ __('quote.pdf.col_unit') }}</th>
+        <th class="text-right">{{ __('quote.pdf.col_quantity') }}</th>
+        <th class="text-right">{{ __('quote.pdf.col_rate') }}</th>
+        <th class="text-right">{{ __('quote.pdf.col_discount') }}</th>
+        <th class="text-right">{{ __('quote.pdf.col_vat') }}</th>
+        <th class="text-right">{{ __('quote.pdf.col_line_total') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -95,7 +95,7 @@
   <div class="totals">
     <div class="totals-box">
       <div class="totals-row">
-        <span>Netto</span>
+        <span>{{ __('quote.pdf.subtotal') }}</span>
         <span>{{ number_format((float)$quote->subtotal, 2, ',', ' ') }} zł</span>
       </div>
       <div class="totals-row">
@@ -103,14 +103,14 @@
         <span>{{ number_format((float)($quote->total - $quote->subtotal), 2, ',', ' ') }} zł</span>
       </div>
       <div class="totals-row total-row">
-        <span>RAZEM</span>
+        <span>{{ __('quote.pdf.total') }}</span>
         <span>{{ number_format((float)$quote->total, 2, ',', ' ') }} zł</span>
       </div>
     </div>
   </div>
 
   <div class="footer">
-    Wycena wygenerowana przez TBA · tbasystent.pl · {{ now()->format('d.m.Y H:i') }}
+    {{ __('quote.pdf.footer') }} · {{ now()->format('d.m.Y H:i') }}
   </div>
 </div>
 </body>

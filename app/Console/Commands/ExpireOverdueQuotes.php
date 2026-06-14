@@ -19,8 +19,10 @@ class ExpireOverdueQuotes extends Command
             Quote::withoutGlobalScopes()
                 ->where('status', 'sent')
                 ->where('valid_until', '<', now()->startOfDay())
-                ->each(function (Quote $quote) use ($service) {
-                    $service->transition($quote, 'expired', ['reason' => 'cron']);
+                ->chunkById(100, function ($quotes) use ($service) {
+                    foreach ($quotes as $quote) {
+                        $service->transition($quote, 'expired', ['reason' => 'cron']);
+                    }
                 });
         });
 

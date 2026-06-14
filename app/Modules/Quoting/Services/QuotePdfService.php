@@ -3,7 +3,6 @@
 namespace App\Modules\Quoting\Services;
 
 use App\Modules\Quoting\Models\Quote;
-use App\Modules\Tenancy\Models\Tenant;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuotePdfService
@@ -12,7 +11,7 @@ class QuotePdfService
     {
         $quote->load(['client', 'items', 'tenant']);
 
-        $tenant = $quote->tenant ?? Tenant::find($quote->tenant_id);
+        $tenant = $quote->tenant;
         $tenantName = $tenant?->name ?? 'TBA';
 
         $unitLabels = [
@@ -31,8 +30,7 @@ class QuotePdfService
     public function download(Quote $quote): \Symfony\Component\HttpFoundation\Response
     {
         $content = $this->generate($quote);
-        $filename = 'wycena-' . $quote->number . '.pdf';
-        $filename = str_replace('/', '-', $filename);
+        $filename = __('quote.pdf_filename', ['number' => str_replace('/', '-', $quote->number)]);
 
         return response($content, 200, [
             'Content-Type' => 'application/pdf',

@@ -26,16 +26,16 @@
   <div class="card">
     <div class="brand">T.B.A</div>
     <h1>Wycena {{ $quote->number }}</h1>
-    <div class="meta">Data: {{ $quote->issued_at?->format('d.m.Y') }}
-      @if($quote->valid_until) · Ważna do: {{ $quote->valid_until->format('d.m.Y') }} @endif
+    <div class="meta">{{ __('quote.pdf.date_label') }} {{ $quote->issued_at?->format('d.m.Y') }}
+      @if($quote->valid_until) · {{ __('quote.pdf.valid_until_label') }} {{ $quote->valid_until->format('d.m.Y') }} @endif
     </div>
     <div style="margin-top:12px;font-size:14px">
-      <strong>Klient:</strong> {{ $quote->client?->name }}
+      <strong>{{ __('quote.public.client_label') }}</strong> {{ $quote->client?->name }}
     </div>
 
     <table>
       <thead><tr>
-        <th>Opis</th><th>Ilość</th><th>Cena</th><th>Wartość</th>
+        <th>{{ __('quote.pdf.col_description') }}</th><th>{{ __('quote.pdf.col_quantity') }}</th><th>{{ __('quote.pdf.col_rate') }}</th><th>{{ __('quote.pdf.col_line_total') }}</th>
       </tr></thead>
       <tbody>
         @foreach($quote->items as $item)
@@ -49,7 +49,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="3" style="text-align:right;font-weight:600;padding-top:12px">Netto:</td>
+          <td colspan="3" style="text-align:right;font-weight:600;padding-top:12px">{{ __('quote.pdf.subtotal') }}:</td>
           <td style="text-align:right;padding-top:12px">{{ number_format((float)$quote->subtotal, 2, ',', ' ') }} zł</td>
         </tr>
         <tr>
@@ -57,7 +57,7 @@
           <td style="text-align:right">{{ number_format((float)($quote->total - $quote->subtotal), 2, ',', ' ') }} zł</td>
         </tr>
         <tr class="total-row">
-          <td colspan="3" style="text-align:right;padding-top:8px;border-top:2px solid #14b8a6">RAZEM:</td>
+          <td colspan="3" style="text-align:right;padding-top:8px;border-top:2px solid #14b8a6">{{ __('quote.pdf.total') }}:</td>
           <td style="text-align:right;padding-top:8px;border-top:2px solid #14b8a6">{{ number_format((float)$quote->total, 2, ',', ' ') }} zł</td>
         </tr>
       </tfoot>
@@ -65,18 +65,18 @@
   </div>
 
   @if(session('accepted') || $shareToken->accepted_at)
-    <div class="accepted-banner">Wycena przyjęta. Dziękujemy!</div>
+    <div class="accepted-banner">{{ __('quote.public.accepted_msg') }}</div>
   @elseif($quote->status === 'sent')
     <div class="card" style="text-align:center">
-      <p style="font-size:14px;color:#6b7280;margin-bottom:12px">Czy akceptujesz tę wycenę?</p>
+      <p style="font-size:14px;color:#6b7280;margin-bottom:12px">{{ __('quote.public.accept_prompt') }}</p>
       <form method="POST" action="{{ route('quote.public.accept', $token) }}">
         @csrf
-        <button class="accept-btn" type="submit">Akceptuję wycenę</button>
+        <button class="accept-btn" type="submit">{{ __('quote.public.accept_btn') }}</button>
       </form>
     </div>
   @else
     <div style="text-align:center;font-size:13px;color:#6b7280;padding:8px">
-      Status wyceny: {{ __('quote.status.' . $quote->status) }}
+      {{ __('quote.public.status_label') }} {{ __('quote.status.' . $quote->status) }}
     </div>
   @endif
 </div>
