@@ -2,20 +2,20 @@
 
 @section('head')
 <title>TBA — Program do zarządzania zleceniami i CRM AI dla małych firm usługowych</title>
-<meta name="description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. Bezpłatnie przez cały 2026 — gotowe w 3 minuty, działa na telefonie.">
+<meta name="description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. 30 dni za darmo, potem 50 zł/mies. Działa na telefonie.">
 <link rel="canonical" href="https://tbasystent.pl/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Twój Biznes Asystent">
 <meta property="og:locale" content="pl_PL">
 <meta property="og:title" content="TBA — CRM AI dla małych firm usługowych w Polsce">
-<meta property="og:description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. Bezpłatnie w 2026.">
+<meta property="og:description" content="Program do zarządzania zleceniami, klientami i wycenami z AI. Dla firm sprzątających, remontowych i usługowych. 30 dni za darmo, potem 50 zł/mies.">
 <meta property="og:url" content="https://tbasystent.pl/">
 <meta property="og:image" content="https://tbasystent.pl/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TBA — CRM AI dla małych firm usługowych w Polsce">
-<meta name="twitter:description" content="Program do zarządzania zleceniami i klientami z AI. Bezpłatnie przez 2026.">
+<meta name="twitter:description" content="Program do zarządzania zleceniami i klientami z AI. 30 dni za darmo, potem 50 zł/mies.">
 <meta name="twitter:image" content="https://tbasystent.pl/og-image.png">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
@@ -56,9 +56,9 @@
       "description": "Program do zarządzania zleceniami, klientami i wycenami z AI. Dla małych firm usługowych w Polsce — sprzątanie, remonty, fotografia i inne.",
       "offers": {
         "@type": "Offer",
-        "price": "0",
+        "price": "50",
         "priceCurrency": "PLN",
-        "description": "Bezpłatnie w fazie beta do końca 2026"
+        "description": "30 dni bezpłatnie, potem 50 zł miesięcznie"
       },
       "publisher": { "@id": "https://tbasystent.pl/#organization" }
     },
@@ -78,7 +78,7 @@
           "name": "Ile kosztuje TBA?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "W fazie beta (cały rok 2026) TBA jest w pełni bezpłatny. Nie wymagamy karty kredytowej. Po zakończeniu bety poinformujemy o warunkach z co najmniej 30-dniowym wyprzedzeniem."
+            "text": "Pierwsze 30 dni są w pełni bezpłatne — bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili."
           }
         },
         {
@@ -356,18 +356,18 @@
 <section class="hero">
     <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        Beta — bezpłatne do końca 2026
+        30 dni za darmo · potem 50 zł/mies.
     </div>
 
     <h1>CRM i AI asystent<br><em>dla małych firm usługowych</em></h1>
 
     <p class="hero-sub">
         Zarządzaj zleceniami, klientami i wycenami z telefonu.
-        TBA robi papierkową robotę za Ciebie — bezpłatnie przez cały 2026.
+        TBA robi papierkową robotę za Ciebie — pierwsze 30 dni za darmo.
     </p>
 
     <div class="hero-actions">
-        <a href="/admin/register" class="btn-primary">Wypróbuj za darmo — 0 zł</a>
+        <a href="/admin/register" class="btn-primary">Wypróbuj 30 dni za darmo</a>
         <a href="#jak-to-dziala" class="btn-secondary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                 <circle cx="12" cy="12" r="10"/>
@@ -377,7 +377,7 @@
         </a>
     </div>
 
-    <p class="hero-trust">Bez karty kredytowej · Gotowe w 3 minuty · Działa na telefonie</p>
+    <p class="hero-trust">30 dni za darmo · Bez karty kredytowej · Potem 50 zł/mies.</p>
 
     {{-- App mockup --}}
     <div class="hero-screen" aria-hidden="true">
@@ -547,35 +547,36 @@
     <div class="section-tag">Cennik</div>
     <h2 class="section-title">Prosto i uczciwie</h2>
     <p class="section-sub section-sub--centered">
-        W becie wszystko za darmo. Po becie — płacisz tylko jeśli TBA Ci pomógł.
+        30 dni za darmo bez karty kredytowej. Potem płaski abonament — bez niespodzianek.
     </p>
 
     <div class="pricing-grid">
-        <div class="pricing-card featured">
-            <div class="pricing-plan-label">Beta — teraz</div>
-            <div class="pricing-price">0 zł <span>/ miesiąc</span></div>
-            <p class="pricing-desc">Pełny dostęp przez cały 2026. Żadnych ograniczeń.</p>
+        <div class="pricing-card">
+            <div class="pricing-plan-label">Trial — pierwsze 30 dni</div>
+            <div class="pricing-price">0 zł <span>/ 30 dni</span></div>
+            <p class="pricing-desc">Pełny dostęp bez ograniczeń. Bez karty kredytowej. Anuluj kiedy chcesz.</p>
             <ul class="pricing-features">
-                <li>Nieograniczone wyceny AI</li>
-                <li>Zarządzanie zleceniami</li>
-                <li>Odpowiedzi na maile</li>
-                <li>Raporty miesięczne</li>
+                <li>Wszystkie funkcje bez limitu</li>
+                <li>Wyceny i zlecenia AI</li>
+                <li>Zarządzanie klientami</li>
+                <li>Notatki głosowe</li>
                 <li>Działa na telefonie</li>
             </ul>
-            <a href="/admin/register" class="pricing-btn pricing-btn-green">Zacznij teraz — za darmo</a>
+            <a href="/admin/register" class="pricing-btn pricing-btn-ghost">Zacznij bezpłatny trial</a>
         </div>
 
-        <div class="pricing-card">
-            <div class="pricing-plan-label">Pro — od 2027</div>
-            <div class="pricing-price">99 zł <span>/ miesiąc</span></div>
-            <p class="pricing-desc">Dla firm, które wyrosły z bety. Priorytetowe wsparcie i zaawansowane AI.</p>
+        <div class="pricing-card featured">
+            <div class="pricing-plan-label">Standard — po trialu</div>
+            <div class="pricing-price">50 zł <span>/ miesiąc</span></div>
+            <p class="pricing-desc">Pełny dostęp do wszystkich funkcji. Bez umów, anuluj w każdej chwili.</p>
             <ul class="pricing-features">
-                <li>Wszystko z Bety</li>
-                <li>Zaawansowane statystyki</li>
-                <li>Automatyzacje AI</li>
-                <li>Priorytetowe wsparcie</li>
+                <li>Wszystkie funkcje bez limitu</li>
+                <li>Wyceny i zlecenia AI</li>
+                <li>Zarządzanie klientami</li>
+                <li>Notatki głosowe</li>
+                <li>Wsparcie e-mail</li>
             </ul>
-            <a href="/admin/register" class="pricing-btn pricing-btn-ghost">Dołącz do listy oczekujących</a>
+            <a href="/admin/register" class="pricing-btn pricing-btn-green">Zacznij 30 dni za darmo</a>
         </div>
     </div>
 </section>
@@ -595,7 +596,7 @@
 
         <details class="faq-item">
             <summary>Ile kosztuje TBA?</summary>
-            <p class="faq-answer">W fazie beta (cały rok 2026) TBA jest w pełni bezpłatny. Nie wymagamy karty kredytowej. Po zakończeniu bety poinformujemy z co najmniej 30-dniowym wyprzedzeniem o warunkach dalszego korzystania.</p>
+            <p class="faq-answer">Pierwsze 30 dni są w pełni bezpłatne — bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili — bez zobowiązań, bez ukrytych opłat.</p>
         </details>
 
         <details class="faq-item">
@@ -620,13 +621,13 @@
     <h2 class="section-title">Zacznij zarządzać firmą<br><em>jak masz czas.</em></h2>
     <p class="final-cta-sub">
         Dołącz do polskich firm, które używają AI do prowadzenia biznesu.
-        Bezpłatnie, bez karty, w 3 minuty.
+        Pierwsze 30 dni za darmo — bez karty kredytowej.
     </p>
     <a href="/admin/register" class="btn-primary btn-primary--lg">
-        Załóż konto — 0 zł
+        Zacznij 30 dni za darmo
     </a>
     <p class="final-cta-trust">
-        Bez karty kredytowej · Anuluj kiedy chcesz · Działa na telefonie
+        30 dni bezpłatnie · Potem 50 zł/mies. · Anuluj kiedy chcesz
     </p>
 </section>
 

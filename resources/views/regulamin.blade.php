@@ -70,7 +70,7 @@
         <li><strong>Usługa / TBA</strong> – aplikacja internetowa „Twój Biznes Asystent" (TBA) dostępna pod adresem tbasystent.pl i powiązanymi subdomenami, umożliwiająca zarządzanie zleceniami, wycenami i komunikacją z klientami z wykorzystaniem sztucznej inteligencji.</li>
         <li><strong>Użytkownik</strong> – osoba fizyczna prowadząca działalność gospodarczą lub osoba prawna, która dokonała rejestracji konta i korzysta z Usługi.</li>
         <li><strong>Konto</strong> – indywidualne konto Użytkownika w Usłudze, chronione loginem i hasłem.</li>
-        <li><strong>Okres Beta</strong> – faza testów Usługi, w której dostęp jest bezpłatny. Usługodawca ogłosi zakończenie Okresu Beta z co najmniej 30-dniowym wyprzedzeniem.</li>
+        <li><strong>Okres próbny</strong> – pierwsze 30 dni od rejestracji konta, w których dostęp do Usługi jest bezpłatny i nieograniczony. Po upływie okresu próbnego Usługa przechodzi na plan płatny (§ 6).</li>
         <li><strong>Dane</strong> – informacje wprowadzane przez Użytkownika do Usługi, w tym dane klientów, wyceny i notatki.</li>
         <li><strong>Regulamin</strong> – niniejszy dokument.</li>
     </ol>
@@ -103,15 +103,17 @@
     <ol>
         <li>Usługa obejmuje m.in.: zarządzanie zleceniami i klientami, tworzenie wycen z pomocą AI, rejestrowanie notatek i nagrań głosowych, planowanie harmonogramu, generowanie raportów.</li>
         <li>Usługodawca dąży do dostępności Usługi 24/7, lecz nie gwarantuje jej nieprzerwanego działania. Planowane przerwy techniczne będą komunikowane z wyprzedzeniem.</li>
-        <li><strong>Usługa jest udostępniana w Okresie Beta w stanie, w jakim się znajduje (as-is).</strong> Mogą w niej wystąpić błędy. Usługodawca nie ponosi odpowiedzialności za szkody wynikłe z awarii lub błędów Usługi w Okresie Beta.</li>
+        <li>Usługa jest udostępniana <strong>w stanie, w jakim się znajduje (as-is)</strong>. Mogą w niej wystąpić błędy. Usługodawca nie ponosi odpowiedzialności za szkody wynikłe z awarii lub błędów Usługi.</li>
         <li>Usługodawca zastrzega prawo do modyfikacji zakresu Usługi, wycofania funkcji lub zawieszenia dostępu z uzasadnionych przyczyn technicznych lub prawnych.</li>
     </ol>
 
-    <h2>§ 6. Bezpłatny Okres Beta</h2>
+    <h2>§ 6. Okres próbny i opłaty</h2>
     <ol>
-        <li>W Okresie Beta Usługa jest w pełni bezpłatna. Nie pobierane są żadne opłaty abonamentowe ani jednorazowe.</li>
-        <li>Usługodawca poinformuje Użytkownika o planowanym zakończeniu Okresu Beta i warunkach korzystania z Usługi po jego zakończeniu z co najmniej 30-dniowym wyprzedzeniem.</li>
-        <li>Użytkownik ma prawo do eksportu swoich Danych przed zakończeniem Okresu Beta lub przed usunięciem konta.</li>
+        <li>Każde nowe konto otrzymuje bezpłatny okres próbny trwający 30 dni od daty rejestracji. W tym czasie dostęp do wszystkich funkcji Usługi jest pełny i nieograniczony.</li>
+        <li>Po upływie okresu próbnego dostęp do Usługi jest płatny według aktualnego cennika opublikowanego na stronie tbasystent.pl. Aktualny abonament wynosi <strong>50 zł netto miesięcznie</strong>.</li>
+        <li>Opłaty są pobierane z góry za każdy miesiąc rozliczeniowy. Usługodawca poinformuje Użytkownika o konieczności dokonania płatności przed upływem okresu próbnego.</li>
+        <li>Usługodawca zastrzega prawo zmiany cennika z co najmniej 30-dniowym wyprzedzeniem. O zmianie cen Użytkownik zostanie powiadomiony drogą e-mail.</li>
+        <li>Użytkownik ma prawo do eksportu swoich Danych przed zakończeniem subskrypcji lub usunięciem konta.</li>
     </ol>
 
     <h2>§ 7. Obowiązki Użytkownika</h2>

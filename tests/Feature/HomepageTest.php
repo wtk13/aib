@@ -16,7 +16,7 @@ it('homepage contains the hero headline', function () {
 
 it('homepage contains the primary CTA linking to registration', function () {
     $this->get('/')
-        ->assertSee('Wypróbuj za darmo')
+        ->assertSee('30 dni za darmo')
         ->assertSee('/admin/register', false);
 });
 
@@ -28,8 +28,8 @@ it('homepage contains features section', function () {
 
 it('homepage contains pricing section', function () {
     $this->get('/')
-        ->assertSee('0 zł')
-        ->assertSee('Zacznij teraz — za darmo');
+        ->assertSee('50 zł')
+        ->assertSee('30 dni za darmo');
 });
 
 it('homepage does not expose Filament panel', function () {
