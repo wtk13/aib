@@ -205,5 +205,5 @@
     "pricing.fields.service_type": "Service type",
     "pricing.errors.select_client_first": "Please select a client first",
     "pricing.errors.ai_unavailable": "AI service temporarily unavailable",
-    "pricing.suggestion_applied": "Suggestion applied — PLN :total"
+    "pricing.suggestion_applied": "Suggestion applied — :total"
 }

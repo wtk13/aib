@@ -126,7 +126,7 @@ class CreateQuote extends CreateRecord
                     ]);
 
                     Notification::make()
-                        ->title(__('pricing.suggestion_applied', ['total' => number_format($suggestion->suggested_total, 2)]))
+                        ->title(__('pricing.suggestion_applied', ['total' => number_format((float) $suggestion->suggested_total, 2, ',', ' ') . ' PLN']))
                         ->success()
                         ->send();
                 }),

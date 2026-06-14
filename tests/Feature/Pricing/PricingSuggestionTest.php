@@ -159,3 +159,57 @@ it('feedback recorder sets decision adjusted for diff between 15 and 50 percent'
 
     expect($feedback->decision)->toBe('adjusted');
 });
+
+it('context builder cold_start is true with exactly one past quote', function () {
+    [$tenant, $client] = pricingContext();
+
+    // Create exactly one past quote
+    $quote = Quote::create([
+        'client_id'  => $client->id,
+        'number'     => '2026/06/001',
+        'status'     => 'accepted',
+        'issued_at'  => now(),
+        'subtotal'   => 400,
+        'total'      => 492,
+        'vat_rate'   => 23,
+    ]);
+
+    $ctx = app(PricingContextBuilder::class)->build($client);
+
+    expect($ctx['cold_start'])->toBeTrue()
+        ->and($ctx['past_quotes'])->toHaveCount(1);
+});
+
+it('context builder cold_start is false with two or more past quotes', function () {
+    [$tenant, $client] = pricingContext();
+
+    foreach (['2026/06/001', '2026/06/002'] as $number) {
+        Quote::create([
+            'client_id'  => $client->id,
+            'number'     => $number,
+            'status'     => 'accepted',
+            'issued_at'  => now(),
+            'subtotal'   => 400,
+            'total'      => 492,
+            'vat_rate'   => 23,
+        ]);
+    }
+
+    $ctx = app(PricingContextBuilder::class)->build($client);
+
+    expect($ctx['cold_start'])->toBeFalse();
+});
+
+it('feedback recorder sets decision manual when diff >= 50%', function () {
+    [$tenant, $client] = pricingContext();
+
+    $suggestion = PricingSuggestion::create([
+        'suggested_total' => 400.00,
+        'breakdown'       => [],
+    ]);
+
+    app(PricingSuggestionFeedbackRecorder::class)->record($suggestion, 700.00);
+
+    $feedback = PricingSuggestionFeedback::where('suggestion_id', $suggestion->id)->first();
+    expect($feedback->decision)->toBe('manual');
+});

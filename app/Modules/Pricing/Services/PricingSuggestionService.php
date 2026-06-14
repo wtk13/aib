@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class PricingSuggestionService
 {
-    private const MODEL = 'claude-haiku-4-5-20251001';
+    protected const MODEL = 'claude-haiku-4-5-20251001';
     private const PROMPT_VERSION = 'pricing_v1';
 
     public function __construct(
