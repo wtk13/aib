@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
+Route::view('/regulamin', 'regulamin')->name('regulamin');
+Route::view('/polityka-prywatnosci', 'polityka-prywatnosci')->name('polityka-prywatnosci');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/audio/notes/{id}', function (int $id) {

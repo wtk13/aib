@@ -46,8 +46,9 @@
         <div class="pub-nav">
             <a href="/" class="pub-nav-logo">T<span>.</span>B<span>.</span>A</a>
             <div class="pub-nav-links">
-                <a href="#jak-to-dziala">Funkcje</a>
-                <a href="#cennik">Cennik</a>
+                <a href="/#jak-to-dziala">Funkcje</a>
+                <a href="/#cennik">Cennik</a>
+                <a href="/regulamin">Regulamin</a>
             </div>
             <a href="/admin/register" class="pub-nav-cta">Zacznij za darmo</a>
         </div>
