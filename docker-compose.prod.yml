@@ -1,0 +1,84 @@
+# Production compose — uruchom: docker compose -f docker-compose.prod.yml --env-file .env.production up -d
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+      args:
+        PHP_VERSION: "${PHP_VERSION:-8.4}"
+    restart: unless-stopped
+    env_file: .env.production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  horizon:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+      args:
+        PHP_VERSION: "${PHP_VERSION:-8.4}"
+    command: php artisan horizon
+    restart: unless-stopped
+    env_file: .env.production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  nginx:
+    image: "nginx:${NGINX_VERSION:-1.25-alpine}"
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html:ro
+      - ./docker/nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+  postgres:
+    image: "pgvector/pgvector:${POSTGRES_VERSION:-pg16}"
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      POSTGRES_DB: "${DB_DATABASE}"
+      POSTGRES_USER: "${DB_USERNAME}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: "redis:${REDIS_VERSION:-7.2-alpine}"
+    restart: unless-stopped
+    command: redis-server --requirepass "${REDIS_PASSWORD}"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  chromium:
+    image: "${CHROMIUM_IMAGE:-ghcr.io/browserless/chromium:1.61.0}"
+    restart: unless-stopped
+    mem_limit: 512m
+    environment:
+      CONCURRENT: 2
+      TIMEOUT: 60000
+    profiles:
+      - pdf
+
+volumes:
+  postgres_data:
+  redis_data:
