@@ -49,6 +49,7 @@
     "presets.cleaning.property_type.office": "Office",
     "presets.cleaning.property_type.retail": "Retail unit",
 
+    "presets.cleaning.name": "Cleaning",
     "presets.cleaning.services.basic": "Basic cleaning",
     "presets.cleaning.services.deep": "Deep cleaning",
     "presets.cleaning.services.post_renovation": "Post-renovation cleaning",
@@ -80,6 +81,7 @@
     "job.status.completed": "Completed",
     "job.status.cancelled": "Cancelled",
     "job.status.skipped": "Skipped",
+    "job.status.rescheduled": "Rescheduled",
     "job.occurrences.title": "Occurrences",
 
     "settings.nav_label": "Settings",
@@ -107,5 +109,35 @@
     "job.occurrences.complete": "Mark complete",
     "job.occurrences.skip": "Skip",
     "job.occurrences.reschedule": "Reschedule",
-    "job.occurrences.completed_at": "Completed at"
+    "job.occurrences.completed_at": "Completed at",
+
+    "job.section.payout": "Employee payouts",
+    "job.payout.employee": "Employee",
+    "job.payout.hours_worked": "Hours worked",
+    "job.payout.payout_pln": "Amount (PLN)",
+    "job.payout.add": "Add employee",
+
+    "employee.nav_label": "Employees",
+    "employee.model_label": "Employee",
+    "employee.model_label_plural": "Employees",
+    "employee.fields.name": "Full name",
+    "employee.fields.is_active": "Active",
+
+    "employee.stats.this_month": "This month",
+    "employee.stats.this_year": "This year",
+    "employee.stats.all_time": "All time",
+    "employee.stats.jobs": "jobs",
+
+    "employee.report.daily_history": "Job history",
+    "employee.report.monthly_history": "Monthly summary",
+    "employee.report.date": "Date",
+    "employee.report.client": "Client",
+    "employee.report.service": "Service",
+    "employee.report.hours": "Hours",
+    "employee.report.payout": "Amount",
+    "employee.report.month": "Month",
+    "employee.report.job_count": "Jobs",
+    "employee.report.total_hours": "Total hours",
+    "employee.report.total_payout": "Total amount",
+    "employee.report.no_history": "No history yet"
 }

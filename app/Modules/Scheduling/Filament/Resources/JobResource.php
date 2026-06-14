@@ -2,11 +2,13 @@
 
 namespace App\Modules\Scheduling\Filament\Resources;
 
+use App\Modules\Employees\Models\Employee;
 use App\Modules\Scheduling\Filament\Resources\JobResource\Pages;
 use App\Modules\Scheduling\Filament\Resources\JobResource\RelationManagers;
 use App\Modules\Scheduling\Models\Job;
 use App\Modules\Tenancy\Models\Tenant;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -113,6 +115,36 @@ class JobResource extends Resource
                         ->rows(2)
                         ->columnSpanFull(),
                 ]),
+            Section::make(__('job.section.payout'))
+                ->collapsed()
+                ->schema([
+                    Repeater::make('jobEmployees')
+                        ->relationship()
+                        ->label('')
+                        ->schema([
+                            Select::make('employee_id')
+                                ->label(__('job.payout.employee'))
+                                ->options(fn () => Employee::where('is_active', true)->orderBy('name')->pluck('name', 'id'))
+                                ->required()
+                                ->columnSpan(2),
+                            TextInput::make('hours_worked')
+                                ->label(__('job.payout.hours_worked'))
+                                ->numeric()
+                                ->minValue(0)
+                                ->step(0.5)
+                                ->nullable(),
+                            TextInput::make('payout_pln')
+                                ->label(__('job.payout.payout_pln'))
+                                ->numeric()
+                                ->minValue(0)
+                                ->prefix('PLN')
+                                ->required(),
+                        ])
+                        ->columns(4)
+                        ->addActionLabel(__('job.payout.add'))
+                        ->defaultItems(0)
+                        ->reorderable(false),
+                ]),
         ]);
     }
 
@@ -134,6 +166,7 @@ class JobResource extends Resource
                 TextColumn::make('status')
                     ->label(__('job.fields.status'))
                     ->badge()
+                    ->formatStateUsing(fn (?string $state): string => $state ? __('job.status.'.$state) : '')
                     ->color(fn (?string $state): string => match ($state) {
                         'completed' => 'success',
                         'cancelled', 'skipped' => 'danger',

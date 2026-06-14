@@ -53,6 +53,7 @@
     "presets.cleaning.property_type.office": "Biuro",
     "presets.cleaning.property_type.retail": "Lokal usługowy",
 
+    "presets.cleaning.name": "Sprzątanie",
     "presets.cleaning.services.basic": "Sprzątanie podstawowe",
     "presets.cleaning.services.deep": "Sprzątanie gruntowne",
     "presets.cleaning.services.post_renovation": "Sprzątanie poremontowe",
@@ -84,6 +85,7 @@
     "job.status.completed": "Zrealizowane",
     "job.status.cancelled": "Anulowane",
     "job.status.skipped": "Pominięte",
+    "job.status.rescheduled": "Przełożone",
     "job.occurrences.title": "Realizacje",
 
     "settings.nav_label": "Ustawienia",
@@ -111,5 +113,35 @@
     "job.occurrences.complete": "Zrealizuj",
     "job.occurrences.skip": "Pomiń",
     "job.occurrences.reschedule": "Przesuń termin",
-    "job.occurrences.completed_at": "Zrealizowano"
+    "job.occurrences.completed_at": "Zrealizowano",
+
+    "job.section.payout": "Rozliczenie pracowników",
+    "job.payout.employee": "Pracownik",
+    "job.payout.hours_worked": "Godziny pracy",
+    "job.payout.payout_pln": "Kwota (PLN)",
+    "job.payout.add": "Dodaj pracownika",
+
+    "employee.nav_label": "Pracownicy",
+    "employee.model_label": "Pracownik",
+    "employee.model_label_plural": "Pracownicy",
+    "employee.fields.name": "Imię i nazwisko",
+    "employee.fields.is_active": "Aktywny",
+
+    "employee.stats.this_month": "Ten miesiąc",
+    "employee.stats.this_year": "Ten rok",
+    "employee.stats.all_time": "Łącznie",
+    "employee.stats.jobs": "zlec.",
+
+    "employee.report.daily_history": "Historia zleceń",
+    "employee.report.monthly_history": "Podsumowanie miesięczne",
+    "employee.report.date": "Data",
+    "employee.report.client": "Klient",
+    "employee.report.service": "Usługa",
+    "employee.report.hours": "Godz.",
+    "employee.report.payout": "Kwota",
+    "employee.report.month": "Miesiąc",
+    "employee.report.job_count": "Zlecenia",
+    "employee.report.total_hours": "Razem godz.",
+    "employee.report.total_payout": "Razem kwota",
+    "employee.report.no_history": "Brak historii"
 }
