@@ -16,10 +16,10 @@ class QuotePdfService
         $tenantName = $tenant?->name ?? 'TBA';
 
         $unitLabels = [
-            'm2' => 'm²',
-            'h' => 'godz.',
-            'piece' => 'szt.',
-            'flat' => 'ryczałt',
+            'm2' => __('quote.unit.m2'),
+            'h' => __('quote.unit.h'),
+            'piece' => __('quote.unit.piece'),
+            'flat' => __('quote.unit.flat'),
         ];
 
         $pdf = Pdf::loadView('pdf.quote', compact('quote', 'tenant', 'tenantName', 'unitLabels'))
