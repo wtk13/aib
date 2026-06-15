@@ -2,11 +2,7 @@
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: docker/app/Dockerfile
-      args:
-        PHP_VERSION: "${PHP_VERSION:-8.4}"
+    image: "${APP_IMAGE:-ghcr.io/rybinski/aib/app:latest}"
     restart: unless-stopped
     env_file: .env.production
     depends_on:
@@ -16,11 +12,7 @@ services:
         condition: service_healthy
 
   horizon:
-    build:
-      context: .
-      dockerfile: docker/app/Dockerfile
-      args:
-        PHP_VERSION: "${PHP_VERSION:-8.4}"
+    image: "${APP_IMAGE:-ghcr.io/rybinski/aib/app:latest}"
     command: php artisan horizon
     restart: unless-stopped
     env_file: .env.production
