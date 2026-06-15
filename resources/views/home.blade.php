@@ -2,7 +2,7 @@
 
 @section('head')
 <title>Program do zarządzania zleceniami dla firm usługowych | TBA</title>
-<meta name="description" content="CRM z AI dla firm sprzątających i usługowych. Zarządzaj zleceniami, wycenami i klientami z telefonu. Pierwsze 30 dni za darmo — bez karty kredytowej.">
+<meta name="description" content="CRM z AI dla firm sprzątających i usługowych. Zarządzaj zleceniami, wycenami i klientami z telefonu. Pierwsze 30 dni za darmo - bez karty kredytowej.">
 <link rel="canonical" href="https://tbasystent.pl/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Twój Biznes Asystent">
@@ -13,7 +13,7 @@
 <meta property="og:image" content="https://tbasystent.pl/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="TBA — program do zarządzania zleceniami dla małych firm usługowych w Polsce">
+<meta property="og:image:alt" content="TBA - program do zarządzania zleceniami dla małych firm usługowych w Polsce">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@tbasystent">
 <meta name="twitter:title" content="Program do zarządzania zleceniami dla firm usługowych | TBA">
@@ -69,7 +69,7 @@
       "operatingSystem": "Web, iOS, Android",
       "inLanguage": "pl-PL",
       "url": "https://tbasystent.pl",
-      "description": "Program do zarządzania zleceniami, klientami i wycenami z AI. Dla małych firm usługowych w Polsce — sprzątanie, remonty, fotografia i inne.",
+      "description": "Program do zarządzania zleceniami, klientami i wycenami z AI. Dla małych firm usługowych w Polsce - sprzątanie, remonty, fotografia i inne.",
       "featureList": "Zarządzanie zleceniami, CRM dla małych firm, Wyceny AI, Harmonogram zleceń, Notatki głosowe, Przypomnienia dla klientów",
       "screenshot": "https://tbasystent.pl/og-image.png",
       "offers": {
@@ -89,7 +89,7 @@
           "name": "Czy TBA to program do zarządzania zleceniami dla małej firmy?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Tak — TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu. Nie musisz mieć konta w wielu aplikacjach — wszystko jest w jednym panelu."
+            "text": "Tak - TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu. Nie musisz mieć konta w wielu aplikacjach - wszystko jest w jednym panelu."
           }
         },
         {
@@ -97,7 +97,7 @@
           "name": "Ile kosztuje TBA?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pierwsze 30 dni są w pełni bezpłatne — bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili — bez zobowiązań, bez ukrytych opłat."
+            "text": "Pierwsze 30 dni są w pełni bezpłatne - bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili - bez zobowiązań, bez ukrytych opłat."
           }
         },
         {
@@ -121,7 +121,7 @@
           "name": "Czy TBA działa na telefonie bez instalacji?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Tak — TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji ze sklepu. Wystarczy otworzyć stronę i zalogować się — wejście przez iPhone lub Android działa tak samo jak na komputerze."
+            "text": "Tak - TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji ze sklepu. Wystarczy otworzyć stronę i zalogować się - wejście przez iPhone lub Android działa tak samo jak na komputerze."
           }
         }
       ]
@@ -142,13 +142,11 @@
     overflow: hidden;
 }
 .hero-badge {
-    display: inline-flex; align-items: center; gap: 6px;
+    display: inline-block;
     background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25);
     border-radius: 20px; padding: 5px 14px;
     font-size: 12px; color: #4ade80; margin-bottom: 28px; letter-spacing: 0.5px;
-}
-.hero-badge-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
-.hero h1 {
+}.hero h1 {
     font-size: 62px; font-weight: 900; line-height: 1.05; letter-spacing: -2px;
     margin-bottom: 22px; max-width: 720px; margin-left: auto; margin-right: auto;
 }
@@ -334,15 +332,14 @@
 {{-- ═══ HERO ═══════════════════════════════════════════════ --}}
 <section class="hero">
     <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        TBA — <strong>T</strong>wój <strong>B</strong>iznes <strong>A</strong>systent
+        TBA - <strong>T</strong>wój <strong>B</strong>iznes <strong>A</strong>systent
     </div>
 
     <h1>Program do zarządzania zleceniami i CRM<br><em>dla małych firm usługowych</em></h1>
 
     <p class="hero-sub">
         Zarządzaj zleceniami, klientami i wycenami z telefonu.
-        Twój Biznes Asystent robi papierkową robotę za Ciebie — pierwsze 30 dni za darmo.
+        Twój Biznes Asystent robi papierkową robotę za Ciebie - pierwsze 30 dni za darmo.
     </p>
 
     <div class="hero-actions">
@@ -414,7 +411,7 @@
         <div class="section-tag">Jak działa</div>
         <h2 class="section-title">AI robi papierologię.<br><em>Ty robisz zlecenia.</em></h2>
         <p class="section-sub section-sub--centered">
-            Przestań tracić czas na maile i tabelki. TBA obsługuje administrację —
+            Przestań tracić czas na maile i tabelki. TBA obsługuje administrację -
             Ty koncentrujesz się na klientach.
         </p>
     </div>
@@ -423,7 +420,7 @@
         <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">💬</div>
             <h3>Wyceny w minutę</h3>
-            <p>Opisz zlecenie głosowo albo tekstem. AI przygotuje wycenę i wyśle ją do klienta — zanim dojedziesz do kolejnego.</p>
+            <p>Opisz zlecenie głosowo albo tekstem. AI przygotuje wycenę i wyśle ją do klienta - zanim dojedziesz do kolejnego.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">📅</div>
@@ -433,12 +430,12 @@
         <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">📩</div>
             <h3>Odpowiedzi na maile</h3>
-            <p>AI czyta zapytania klientów i sugeruje gotowe odpowiedzi — Ty tylko zatwierdzasz jednym kliknięciem.</p>
+            <p>AI czyta zapytania klientów i sugeruje gotowe odpowiedzi - Ty tylko zatwierdzasz jednym kliknięciem.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">📊</div>
             <h3>Raport miesiąca</h3>
-            <p>Ile zarobiłaś? Którzy klienci wracają? TBA podsumuje miesiąc czytelnym raportem — bez Excela.</p>
+            <p>Ile zarobiłaś? Którzy klienci wracają? TBA podsumuje miesiąc czytelnym raportem - bez Excela.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">🔔</div>
@@ -448,7 +445,7 @@
         <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">📱</div>
             <h3>Wszystko z telefonu</h3>
-            <p>Żadnego laptopa. Działa na telefonie przez przeglądarkę — bez instalacji, gotowe między jednym zleceniem a drugim.</p>
+            <p>Żadnego laptopa. Działa na telefonie przez przeglądarkę - bez instalacji, gotowe między jednym zleceniem a drugim.</p>
         </div>
     </div>
 </section>
@@ -459,12 +456,12 @@
     <div class="section-tag">Cennik</div>
     <h2 class="section-title">Prosto i uczciwie</h2>
     <p class="section-sub section-sub--centered">
-        30 dni za darmo bez karty kredytowej. Potem płaski abonament — bez niespodzianek.
+        30 dni za darmo bez karty kredytowej. Potem płaski abonament - bez niespodzianek.
     </p>
 
     <div class="pricing-grid">
         <div class="pricing-card">
-            <div class="pricing-plan-label">Trial — pierwsze 30 dni</div>
+            <div class="pricing-plan-label">Trial - pierwsze 30 dni</div>
             <div class="pricing-price">0 zł <span>/ 30 dni</span></div>
             <p class="pricing-desc">Pełny dostęp bez ograniczeń. Bez karty kredytowej. Anuluj kiedy chcesz.</p>
             <ul class="pricing-features">
@@ -478,7 +475,7 @@
         </div>
 
         <div class="pricing-card featured">
-            <div class="pricing-plan-label">Standard — po trialu</div>
+            <div class="pricing-plan-label">Standard - po trialu</div>
             <div class="pricing-price">50 zł <span>/ miesiąc</span></div>
             <p class="pricing-desc">Pełny dostęp do wszystkich funkcji. Bez umów, anuluj w każdej chwili.</p>
             <ul class="pricing-features">
@@ -503,12 +500,12 @@
     <div class="faq-list">
         <details class="faq-item">
             <summary>Czy TBA to program do zarządzania zleceniami dla małej firmy?</summary>
-            <p class="faq-answer">Tak — TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu. Nie musisz mieć konta w wielu aplikacjach — wszystko jest w jednym panelu.</p>
+            <p class="faq-answer">Tak - TBA to CRM i AI asystent zaprojektowany dla polskich małych firm usługowych. Zarządzasz zleceniami, klientami i wycenami w jednym miejscu, z telefonu. Nie musisz mieć konta w wielu aplikacjach - wszystko jest w jednym panelu.</p>
         </details>
 
         <details class="faq-item">
             <summary>Ile kosztuje TBA?</summary>
-            <p class="faq-answer">Pierwsze 30 dni są w pełni bezpłatne — bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili — bez zobowiązań, bez ukrytych opłat.</p>
+            <p class="faq-answer">Pierwsze 30 dni są w pełni bezpłatne - bez karty kredytowej. Po tym czasie dostęp kosztuje 50 zł miesięcznie. Możesz zrezygnować w każdej chwili - bez zobowiązań, bez ukrytych opłat.</p>
         </details>
 
         <details class="faq-item">
@@ -523,7 +520,7 @@
 
         <details class="faq-item">
             <summary>Czy TBA działa na telefonie bez instalacji?</summary>
-            <p class="faq-answer">Tak — TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji ze sklepu. Wystarczy otworzyć stronę i zalogować się — wejście przez iPhone lub Android działa tak samo jak na komputerze.</p>
+            <p class="faq-answer">Tak - TBA działa przez przeglądarkę na telefonie, tablecie i komputerze. Nie trzeba instalować żadnej aplikacji ze sklepu. Wystarczy otworzyć stronę i zalogować się - wejście przez iPhone lub Android działa tak samo jak na komputerze.</p>
         </details>
     </div>
 </section>
@@ -533,7 +530,7 @@
     <h2 class="section-title">Zacznij zarządzać firmą<br><em>jak masz czas.</em></h2>
     <p class="final-cta-sub">
         Dołącz do polskich firm, które używają AI do prowadzenia biznesu.
-        Pierwsze 30 dni za darmo — bez karty kredytowej.
+        Pierwsze 30 dni za darmo - bez karty kredytowej.
     </p>
     <a href="/admin/register" class="btn-primary btn-primary--lg">
         Zacznij 30 dni za darmo
