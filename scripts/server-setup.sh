@@ -7,7 +7,7 @@
 set -euo pipefail
 
 REPO="https://github.com/wtk13/aib.git"
-APP_DIR="/opt/aib"
+APP_DIR="/var/www/aib"
 DEPLOY_KEY_PATH="/root/.ssh/github_actions"
 
 echo "==> [1/6] System update"
