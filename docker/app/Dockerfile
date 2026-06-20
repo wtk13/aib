@@ -20,4 +20,5 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 
+ENV COMPOSER_MEMORY_LIMIT=-1
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
