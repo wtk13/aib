@@ -152,7 +152,7 @@ jobs:
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             APP_IMAGE=ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
-              docker compose -f docker-compose.prod.yml --env-file .env.production pull app horizon
+              docker compose -f docker-compose.prod.yml --env-file .env.production pull app horizon scheduler
 
             APP_IMAGE=ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
               docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build --remove-orphans
@@ -165,6 +165,9 @@ jobs:
 
             docker compose -f docker-compose.prod.yml --env-file .env.production exec -T app \
               php artisan migrate --force
+
+            docker compose -f docker-compose.prod.yml --env-file .env.production exec -T app \
+              php artisan db:seed --class=CleaningPresetSeeder --force
 
             docker compose -f docker-compose.prod.yml --env-file .env.production exec -T app \
               php artisan optimize

@@ -22,6 +22,17 @@ services:
       redis:
         condition: service_healthy
 
+  scheduler:
+    image: "${APP_IMAGE:-ghcr.io/rybinski/aib/app:latest}"
+    command: sh -c "while true; do php artisan schedule:run --no-interaction; sleep 60; done"
+    restart: unless-stopped
+    env_file: .env.production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
   nginx:
     image: "nginx:${NGINX_VERSION:-1.25-alpine}"
     restart: unless-stopped
