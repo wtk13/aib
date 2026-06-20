@@ -157,13 +157,8 @@ jobs:
             APP_IMAGE=ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
               docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build --remove-orphans
 
-            docker run --rm \
-              -v /var/www/aib/public:/output \
-              ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
-              sh -c "cp -r /var/www/html/public/. /output/"
-
-            APP_IMAGE=ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
-              docker compose -f docker-compose.prod.yml --env-file .env.production restart nginx
+            docker compose -f docker-compose.prod.yml --env-file .env.production exec -T app \
+              php artisan optimize:clear
 
             docker compose -f docker-compose.prod.yml --env-file .env.production exec -T app \
               php artisan migrate --force
@@ -173,5 +168,13 @@ jobs:
 
             docker compose -f docker-compose.prod.yml --env-file .env.production exec -T app \
               php artisan optimize
+
+            docker run --rm \
+              -v /var/www/aib/public:/output \
+              ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
+              sh -c "cp -r /var/www/html/public/. /output/"
+
+            APP_IMAGE=ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
+              docker compose -f docker-compose.prod.yml --env-file .env.production restart nginx
 
             docker image prune -f
