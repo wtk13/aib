@@ -3,6 +3,7 @@
 namespace App\Modules\Quoting\Filament\Resources\QuoteResource\Pages;
 
 use App\Modules\Quoting\Filament\Resources\QuoteResource;
+use App\Modules\Quoting\Models\Quote;
 use App\Modules\Quoting\Services\QuoteShareService;
 use App\Modules\Quoting\Services\QuoteTransitionService;
 use Filament\Actions\Action;
@@ -11,7 +12,6 @@ use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
-use App\Modules\Quoting\Models\Quote;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewQuote extends ViewRecord
