@@ -94,7 +94,9 @@ class QuoteResource extends Resource
                                 return;
                             }
 
-                            $items = collect($get('items') ?? [])
+                            /** @var array<int, array<string, mixed>> $rawItems */
+                            $rawItems = $get('items') ?? [];
+                            $items = collect($rawItems)
                                 ->filter(fn (array $i) => ($i['source'] ?? 'manual') !== 'commute')
                                 ->values()
                                 ->all();

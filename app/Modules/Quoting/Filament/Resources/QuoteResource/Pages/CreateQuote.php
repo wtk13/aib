@@ -48,9 +48,9 @@ class CreateQuote extends CreateRecord
             : null;
 
         if ($suggestion) {
-            $suggestion->update(['quote_id' => $this->record->id]);
+            $suggestion->update(['quote_id' => $record->id]);
             $suggestion->refresh();
-            app(PricingSuggestionFeedbackRecorder::class)->record($suggestion, (float) $this->record->total);
+            app(PricingSuggestionFeedbackRecorder::class)->record($suggestion, (float) $record->total);
             $this->cachedSuggestionId = null;
         }
     }

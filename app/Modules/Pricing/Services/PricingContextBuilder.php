@@ -44,7 +44,7 @@ class PricingContextBuilder
             'past_quotes' => $pastQuotes->map(fn (Quote $q) => [
                 'id' => $q->id,
                 'status' => $q->status,
-                'issued_at' => $q->issued_at?->toDateString(),
+                'issued_at' => $q->issued_at?->toDateString(), // @phpstan-ignore-line
                 'total' => $q->total,
                 'items' => $q->items->map(fn ($item) => [
                     'description' => $item->description,

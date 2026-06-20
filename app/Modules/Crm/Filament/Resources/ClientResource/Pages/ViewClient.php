@@ -29,7 +29,10 @@ class ViewClient extends ViewRecord
 
     public function getWidgetData(): array
     {
-        return ['clientId' => $this->getRecord()->id];
+        /** @var Client $record */
+        $record = $this->getRecord();
+
+        return ['clientId' => $record->id];
     }
 
     protected function mutateFormDataBeforeFill(array $data): array

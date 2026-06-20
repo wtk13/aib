@@ -118,7 +118,7 @@ class ClientChatService
 
         preg_match_all('/\[notatka #(\d+)\]/i', $content, $matches);
 
-        foreach (($matches[1] ?? []) as $id) {
+        foreach ($matches[1] as $id) {
             if (in_array((int) $id, $noteIds, true)) {
                 $citations[] = ['note_id' => (int) $id];
             }

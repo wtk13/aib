@@ -9,6 +9,9 @@ use Filament\Widgets\Widget;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 
+/**
+ * @property-read Collection $dailyHistory
+ */
 class EmployeeReportWidget extends Widget
 {
     protected static string $view = 'filament.widgets.employee-report-widget';
