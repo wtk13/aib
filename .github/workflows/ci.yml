@@ -64,28 +64,22 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      - name: Copy .env
-        run: cp .env.example .env
-
       - name: Generate app key
-        run: docker run --rm -v "$PWD":/var/www/html -w /var/www/html aib-app php artisan key:generate
+        run: |
+          APP_KEY="base64:$(openssl rand -base64 32)"
+          echo "APP_KEY=$APP_KEY" >> $GITHUB_ENV
 
       - name: Run Pint (code style)
-        run: |
-          docker run --rm -v "$PWD":/var/www/html -w /var/www/html aib-app \
-            ./vendor/bin/pint --test
+        run: docker run --rm aib-app ./vendor/bin/pint --test
 
       - name: Run Larastan
-        run: |
-          docker run --rm -v "$PWD":/var/www/html -w /var/www/html aib-app \
-            ./vendor/bin/phpstan analyse --no-progress
+        run: docker run --rm aib-app ./vendor/bin/phpstan analyse --no-progress
 
       - name: Run Pest
         run: |
           docker run --rm \
-            -v "$PWD":/var/www/html \
-            -w /var/www/html \
             --network host \
+            -e APP_KEY="${{ env.APP_KEY }}" \
             -e APP_ENV=testing \
             -e DB_CONNECTION=pgsql \
             -e DB_HOST=127.0.0.1 \
