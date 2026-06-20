@@ -142,7 +142,7 @@ class JobResource extends Resource
                         ])
                         ->columns([
                             'default' => 2,
-                            'md'      => 4,
+                            'md' => 4,
                         ])
                         ->addActionLabel(__('job.payout.add'))
                         ->defaultItems(0)

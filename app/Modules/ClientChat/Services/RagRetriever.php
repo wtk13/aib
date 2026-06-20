@@ -39,8 +39,8 @@ class RagRetriever
         );
 
         return array_map(fn ($r) => [
-            'id'         => $r->id,
-            'body'       => $r->body,
+            'id' => $r->id,
+            'body' => $r->body,
             'created_at' => $r->created_at,
         ], $rows);
     }

@@ -93,8 +93,8 @@ it('QuoteNumberingService generates correct format', function () {
     $tenant = Tenant::factory()->create();
     Tenant::setCurrent($tenant);
 
-    $service = new QuoteNumberingService();
-    $date = new \DateTime('2026-06-01');
+    $service = new QuoteNumberingService;
+    $date = new DateTime('2026-06-01');
 
     $number = $service->next($tenant->id, $date);
 
@@ -105,8 +105,8 @@ it('QuoteNumberingService increments correctly on subsequent calls', function ()
     $tenant = Tenant::factory()->create();
     Tenant::setCurrent($tenant);
 
-    $service = new QuoteNumberingService();
-    $date = new \DateTime('2026-06-01');
+    $service = new QuoteNumberingService;
+    $date = new DateTime('2026-06-01');
 
     $first = $service->next($tenant->id, $date);
     $second = $service->next($tenant->id, $date);
@@ -119,8 +119,8 @@ it('QuoteNumberingService does not blow up on concurrent calls from same tenant 
     $tenant = Tenant::factory()->create();
     Tenant::setCurrent($tenant);
 
-    $service = new QuoteNumberingService();
-    $date = new \DateTime('2026-06-01');
+    $service = new QuoteNumberingService;
+    $date = new DateTime('2026-06-01');
 
     $numbers = [];
     for ($i = 0; $i < 5; $i++) {

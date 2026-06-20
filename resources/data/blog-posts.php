@@ -2,14 +2,14 @@
 
 return [
     [
-        'slug'      => 'jak-wyceniac-sprzatanie-mieszkania',
-        'title'     => 'Jak wyceniać sprzątanie mieszkania? Kompletny poradnik dla firm sprzątających',
-        'excerpt'   => 'Stawka za metr, godzina czy ryczałt? Sprawdź jak wyceniać sprzątanie w 2026 roku, żeby zarobić i nie tracić klientów.',
-        'category'  => 'Wyceny',
-        'date'      => '14 czerwca 2026',
-        'date_iso'  => '2026-06-14',
+        'slug' => 'jak-wyceniac-sprzatanie-mieszkania',
+        'title' => 'Jak wyceniać sprzątanie mieszkania? Kompletny poradnik dla firm sprzątających',
+        'excerpt' => 'Stawka za metr, godzina czy ryczałt? Sprawdź jak wyceniać sprzątanie w 2026 roku, żeby zarobić i nie tracić klientów.',
+        'category' => 'Wyceny',
+        'date' => '14 czerwca 2026',
+        'date_iso' => '2026-06-14',
         'read_time' => 7,
-        'body'      => <<<HTML
+        'body' => <<<'HTML'
 <p>Wycena sprzątania to jeden z najtrudniejszych elementów prowadzenia firmy sprzątającej. Za niska — tracisz pieniądze. Za wysoka — tracisz klienta. Jak znaleźć złoty środek?</p>
 
 <h2>Trzy modele wyceny sprzątania</h2>

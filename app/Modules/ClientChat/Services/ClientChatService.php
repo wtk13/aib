@@ -42,9 +42,9 @@ class ClientChatService
         // Store user message
         ChatMessage::create([
             'session_id' => $session->id,
-            'role'       => 'user',
-            'content'    => $question,
-            'citations'  => [],
+            'role' => 'user',
+            'content' => $question,
+            'citations' => [],
         ]);
 
         // Build context
@@ -75,26 +75,26 @@ class ClientChatService
             $costPln = $costUsd * config('services.anthropic.pln_usd_rate', 4.0);
 
             $log = AIUsageLog::create([
-                'user_id'        => Auth::id(),
-                'feature'        => 'client_chat',
-                'provider'       => 'anthropic',
-                'model'          => self::MODEL,
+                'user_id' => Auth::id(),
+                'feature' => 'client_chat',
+                'provider' => 'anthropic',
+                'model' => self::MODEL,
                 'prompt_version' => self::PROMPT_VERSION,
-                'input_tokens'   => $result['input_tokens'],
-                'output_tokens'  => $result['output_tokens'],
-                'cost_pln'       => round($costPln, 4),
-                'latency_ms'     => $result['latency_ms'],
-                'status'         => 'ok',
+                'input_tokens' => $result['input_tokens'],
+                'output_tokens' => $result['output_tokens'],
+                'cost_pln' => round($costPln, 4),
+                'latency_ms' => $result['latency_ms'],
+                'status' => 'ok',
             ]);
 
             $logId = $log->id;
         }
 
         return ChatMessage::create([
-            'session_id'      => $session->id,
-            'role'            => 'assistant',
-            'content'         => $content,
-            'citations'       => $citations,
+            'session_id' => $session->id,
+            'role' => 'assistant',
+            'content' => $content,
+            'citations' => $citations,
             'ai_usage_log_id' => $logId,
         ]);
     }

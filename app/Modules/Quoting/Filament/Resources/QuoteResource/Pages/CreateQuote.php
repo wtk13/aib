@@ -28,10 +28,10 @@ class CreateQuote extends CreateRecord
         $issuedAt = Carbon::parse($data['issued_at'] ?? now());
         $tenantId = Tenant::currentId();
 
-        $data['number']   = app(QuoteNumberingService::class)->next($tenantId, $issuedAt);
-        $data['status']   = $data['status'] ?? 'draft';
+        $data['number'] = app(QuoteNumberingService::class)->next($tenantId, $issuedAt);
+        $data['status'] = $data['status'] ?? 'draft';
         $data['subtotal'] = 0;
-        $data['total']    = 0;
+        $data['total'] = 0;
         $data['vat_rate'] = 0;
 
         return $data;
@@ -111,13 +111,13 @@ class CreateQuote extends CreateRecord
                     $this->cachedSuggestionId = $suggestion->id;
 
                     $items = collect($suggestion->breakdown)->map(fn (array $item) => [
-                        'description'  => $item['description'] ?? '',
-                        'unit'         => $item['unit'] ?? 'piece',
-                        'quantity'     => $item['quantity'] ?? 1,
-                        'rate'         => $item['rate'] ?? 0,
+                        'description' => $item['description'] ?? '',
+                        'unit' => $item['unit'] ?? 'piece',
+                        'quantity' => $item['quantity'] ?? 1,
+                        'rate' => $item['rate'] ?? 0,
                         'discount_pct' => 0,
-                        'vat_pct'      => 23,
-                        'line_total'   => $item['line_total'] ?? (($item['quantity'] ?? 1) * ($item['rate'] ?? 0)),
+                        'vat_pct' => 23,
+                        'line_total' => $item['line_total'] ?? (($item['quantity'] ?? 1) * ($item['rate'] ?? 0)),
                     ])->all();
 
                     $this->form->fill([
@@ -126,7 +126,7 @@ class CreateQuote extends CreateRecord
                     ]);
 
                     Notification::make()
-                        ->title(__('pricing.suggestion_applied', ['total' => number_format((float) $suggestion->suggested_total, 2, ',', ' ') . ' PLN']))
+                        ->title(__('pricing.suggestion_applied', ['total' => number_format((float) $suggestion->suggested_total, 2, ',', ' ').' PLN']))
                         ->success()
                         ->send();
                 }),

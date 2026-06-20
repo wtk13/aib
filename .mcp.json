@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "cloudflare": {
+      "command": "npx",
+      "args": ["-y", "@cloudflare/mcp-server-cloudflare", "run", "e889dc4ec355a9fd306a9fc362baed82"]
+    }
+  }
+}

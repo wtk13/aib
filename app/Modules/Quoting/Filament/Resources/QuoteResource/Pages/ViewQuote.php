@@ -7,10 +7,10 @@ use App\Modules\Quoting\Services\QuoteShareService;
 use App\Modules\Quoting\Services\QuoteTransitionService;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
-use Filament\Notifications\Notification;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewQuote extends ViewRecord
@@ -83,7 +83,7 @@ class ViewQuote extends ViewRecord
                 TextEntry::make('status')
                     ->label(__('quote.fields.status'))
                     ->badge()
-                    ->formatStateUsing(fn (?string $state): string => $state ? __('quote.status.' . $state) : '')
+                    ->formatStateUsing(fn (?string $state): string => $state ? __('quote.status.'.$state) : '')
                     ->color(fn (?string $state): string => match ($state) {
                         'accepted' => 'success',
                         'sent' => 'warning',

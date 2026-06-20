@@ -38,7 +38,7 @@ class TranscribeNoteJob extends TenantAwareJob
         }
 
         $note->update([
-            'body'   => $transcript,
+            'body' => $transcript,
             'status' => 'ready',
         ]);
     }

@@ -24,7 +24,7 @@ class BlogController extends Controller
         $post = collect($this->posts())->firstWhere('slug', $slug);
 
         if (! $post) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException;
         }
 
         return view('blog.show', compact('post'));

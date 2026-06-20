@@ -4,6 +4,7 @@ namespace App\Modules\Quoting\Services;
 
 use App\Modules\Quoting\Models\Quote;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Symfony\Component\HttpFoundation\Response;
 
 class QuotePdfService
 {
@@ -27,14 +28,14 @@ class QuotePdfService
         return $pdf->output();
     }
 
-    public function download(Quote $quote): \Symfony\Component\HttpFoundation\Response
+    public function download(Quote $quote): Response
     {
         $content = $this->generate($quote);
         $filename = __('quote.pdf_filename', ['number' => str_replace('/', '-', $quote->number)]);
 
         return response($content, 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
         ]);
     }
 }

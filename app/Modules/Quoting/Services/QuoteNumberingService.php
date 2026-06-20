@@ -8,7 +8,7 @@ class QuoteNumberingService
 {
     public function next(int $tenantId, \DateTimeInterface $issuedAt): string
     {
-        $year  = (int) $issuedAt->format('Y');
+        $year = (int) $issuedAt->format('Y');
         $month = (int) $issuedAt->format('m');
 
         $row = DB::selectOne(

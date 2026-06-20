@@ -50,7 +50,7 @@ class WhisperService
                     ['name' => 'language', 'contents' => $language],
                     ['name' => 'response_format', 'contents' => 'text'],
                     [
-                        'name'     => 'file',
+                        'name' => 'file',
                         'contents' => $handle,
                         'filename' => basename($absolutePath),
                     ],

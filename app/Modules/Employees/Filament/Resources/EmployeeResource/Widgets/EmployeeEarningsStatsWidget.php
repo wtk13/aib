@@ -36,10 +36,10 @@ class EmployeeEarningsStatsWidget extends BaseWidget
         $allTimeCount = $base()->count();
 
         return [
-            Stat::make(__('employee.stats.this_month'), 'PLN ' . number_format((float) $thisMonth, 2, ',', ' ')),
-            Stat::make(__('employee.stats.this_year'), 'PLN ' . number_format((float) $thisYear, 2, ',', ' ')),
-            Stat::make(__('employee.stats.all_time'), 'PLN ' . number_format((float) $allTime, 2, ',', ' '))
-                ->description($allTimeCount . ' ' . __('employee.stats.jobs')),
+            Stat::make(__('employee.stats.this_month'), 'PLN '.number_format((float) $thisMonth, 2, ',', ' ')),
+            Stat::make(__('employee.stats.this_year'), 'PLN '.number_format((float) $thisYear, 2, ',', ' ')),
+            Stat::make(__('employee.stats.all_time'), 'PLN '.number_format((float) $allTime, 2, ',', ' '))
+                ->description($allTimeCount.' '.__('employee.stats.jobs')),
         ];
     }
 }

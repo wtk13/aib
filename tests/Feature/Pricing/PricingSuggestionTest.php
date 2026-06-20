@@ -29,7 +29,7 @@ it('context builder includes client name and custom fields', function () {
 
     $client->update(['custom_fields' => ['area_m2' => 80, 'property_type' => 'apartment']]);
 
-    $builder = new PricingContextBuilder();
+    $builder = new PricingContextBuilder;
     $context = $builder->build($client);
 
     expect($context['client']['name'])->toBe('Pani Kowalska');
@@ -39,7 +39,7 @@ it('context builder includes client name and custom fields', function () {
 it('context builder marks cold_start true when no past quotes', function () {
     [$tenant, $client] = pricingContext();
 
-    $builder = new PricingContextBuilder();
+    $builder = new PricingContextBuilder;
     $context = $builder->build($client);
 
     expect($context['cold_start'])->toBeTrue();
@@ -51,7 +51,7 @@ it('suggestion service returns null when anthropic client returns null', functio
     $mockClient = Mockery::mock(AnthropicClient::class);
     $mockClient->shouldReceive('messages')->andReturn(null);
 
-    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder());
+    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder);
 
     $result = $service->suggest($client);
 
@@ -78,7 +78,7 @@ it('suggestion service creates PricingSuggestion from valid response', function 
         'latency_ms' => 200,
     ]);
 
-    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder());
+    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder);
 
     $suggestion = $service->suggest($client);
 
@@ -98,7 +98,7 @@ it('suggestion service returns null on invalid JSON', function () {
         'latency_ms' => 100,
     ]);
 
-    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder());
+    $service = new PricingSuggestionService($mockClient, new PricingContextBuilder);
 
     $result = $service->suggest($client);
 
@@ -124,7 +124,7 @@ it('feedback recorder sets decision accepted for diff less than 15 percent', fun
         'prompt_version' => 'pricing_v1',
     ]);
 
-    $recorder = new PricingSuggestionFeedbackRecorder();
+    $recorder = new PricingSuggestionFeedbackRecorder;
     $recorder->record($suggestion, 420.0);
 
     $feedback = PricingSuggestionFeedback::first();
@@ -152,7 +152,7 @@ it('feedback recorder sets decision adjusted for diff between 15 and 50 percent'
         'prompt_version' => 'pricing_v1',
     ]);
 
-    $recorder = new PricingSuggestionFeedbackRecorder();
+    $recorder = new PricingSuggestionFeedbackRecorder;
     $recorder->record($suggestion, 550.0);
 
     $feedback = PricingSuggestionFeedback::first();
@@ -165,13 +165,13 @@ it('context builder cold_start is true with exactly one past quote', function ()
 
     // Create exactly one past quote
     $quote = Quote::create([
-        'client_id'  => $client->id,
-        'number'     => '2026/06/001',
-        'status'     => 'accepted',
-        'issued_at'  => now(),
-        'subtotal'   => 400,
-        'total'      => 492,
-        'vat_rate'   => 23,
+        'client_id' => $client->id,
+        'number' => '2026/06/001',
+        'status' => 'accepted',
+        'issued_at' => now(),
+        'subtotal' => 400,
+        'total' => 492,
+        'vat_rate' => 23,
     ]);
 
     $ctx = app(PricingContextBuilder::class)->build($client);
@@ -185,13 +185,13 @@ it('context builder cold_start is false with two or more past quotes', function 
 
     foreach (['2026/06/001', '2026/06/002'] as $number) {
         Quote::create([
-            'client_id'  => $client->id,
-            'number'     => $number,
-            'status'     => 'accepted',
-            'issued_at'  => now(),
-            'subtotal'   => 400,
-            'total'      => 492,
-            'vat_rate'   => 23,
+            'client_id' => $client->id,
+            'number' => $number,
+            'status' => 'accepted',
+            'issued_at' => now(),
+            'subtotal' => 400,
+            'total' => 492,
+            'vat_rate' => 23,
         ]);
     }
 
@@ -205,7 +205,7 @@ it('feedback recorder sets decision manual when diff >= 50%', function () {
 
     $suggestion = PricingSuggestion::create([
         'suggested_total' => 400.00,
-        'breakdown'       => [],
+        'breakdown' => [],
     ]);
 
     app(PricingSuggestionFeedbackRecorder::class)->record($suggestion, 700.00);

@@ -62,8 +62,8 @@ class ClientChatWidget extends Widget
                 ->orderBy('created_at')
                 ->get(['role', 'content', 'citations'])
                 ->map(fn ($m) => [
-                    'role'      => $m->role,
-                    'content'   => $m->content,
+                    'role' => $m->role,
+                    'content' => $m->content,
                     'citations' => $m->citations ?? [],
                 ])
                 ->all();
@@ -110,14 +110,14 @@ class ClientChatWidget extends Widget
             $response = $service->ask($session, $question);
 
             $this->messages[] = [
-                'role'      => 'assistant',
-                'content'   => $response->content,
+                'role' => 'assistant',
+                'content' => $response->content,
                 'citations' => $response->citations ?? [],
             ];
         } catch (\Throwable $e) {
             $this->messages[] = [
-                'role'      => 'assistant',
-                'content'   => __('chat.error.ai_unavailable'),
+                'role' => 'assistant',
+                'content' => __('chat.error.ai_unavailable'),
                 'citations' => [],
             ];
 

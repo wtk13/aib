@@ -9,6 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Pages\Auth\Register as FilamentRegister;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,7 @@ class Register extends FilamentRegister
         return false;
     }
 
-    public function getHeading(): string|\Illuminate\Contracts\Support\Htmlable
+    public function getHeading(): string|Htmlable
     {
         return __('auth.register.heading');
     }
@@ -67,7 +68,7 @@ class Register extends FilamentRegister
                 ->dehydrated(false),
             ToggleButtons::make('preset_id')
                 ->label(__('auth.register.industry'))
-                ->options(fn () => VerticalPreset::where('is_active', true)->get()->mapWithKeys(fn ($p) => [$p->id => __('presets.' . $p->slug . '.name')])->toArray())
+                ->options(fn () => VerticalPreset::where('is_active', true)->get()->mapWithKeys(fn ($p) => [$p->id => __('presets.'.$p->slug.'.name')])->toArray())
                 ->required()
                 ->grouped()
                 ->columnSpanFull(),

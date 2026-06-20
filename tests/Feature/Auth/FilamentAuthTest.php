@@ -1,10 +1,10 @@
 <?php
 
+use App\Filament\Pages\Auth\Login;
 use App\Modules\Presets\Models\VerticalPreset;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
 use Database\Seeders\CleaningPresetSeeder;
-use App\Filament\Pages\Auth\Login;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;

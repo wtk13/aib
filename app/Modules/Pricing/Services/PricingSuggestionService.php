@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 class PricingSuggestionService
 {
     protected const MODEL = 'claude-haiku-4-5-20251001';
+
     private const PROMPT_VERSION = 'pricing_v1';
 
     public function __construct(
@@ -36,7 +37,7 @@ class PricingSuggestionService
             }
 
             $userMessage = 'Generate a pricing suggestion for the following client and context: '
-                . json_encode($context, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+                .json_encode($context, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
             $result = $this->anthropic->messages(
                 model: self::MODEL,

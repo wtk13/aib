@@ -27,7 +27,7 @@ class EmbeddingService
             $response = $this->http->post('https://api.openai.com/v1/embeddings', [
                 'headers' => [
                     'Authorization' => 'Bearer '.$apiKey,
-                    'Content-Type'  => 'application/json',
+                    'Content-Type' => 'application/json',
                 ],
                 'json' => [
                     'model' => self::MODEL,

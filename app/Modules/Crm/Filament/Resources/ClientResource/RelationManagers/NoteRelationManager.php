@@ -57,10 +57,10 @@ class NoteRelationManager extends RelationManager
                 TextColumn::make('status_badge')
                     ->label('')
                     ->state(fn (Note $record): string => match ($record->status) {
-                        'transcribing'         => __('note.status.transcribing'),
+                        'transcribing' => __('note.status.transcribing'),
                         'transcription_failed' => __('note.status.transcription_failed'),
-                        'ready'                => $record->audio_path ? __('note.status.ready') : '',
-                        default                => '',
+                        'ready' => $record->audio_path ? __('note.status.ready') : '',
+                        default => '',
                     })
                     ->width('120px'),
                 TextColumn::make('body')

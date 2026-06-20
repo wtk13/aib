@@ -44,12 +44,12 @@ class TenantSettingsPage extends Page implements HasForms
             ?? new TenantSettings(['tenant_id' => $tenantId, 'locale' => 'pl']);
 
         $this->form->fill([
-            'is_vat_payer'          => $settings->is_vat_payer ?? false,
-            'default_vat_rate'      => $settings->default_vat_rate ?? 23,
-            'locale'                => $settings->locale ?? 'pl',
-            'fuel_rate_pln_per_km'  => (float) ($settings->fuel_rate_pln_per_km ?? 0),
-            'addr_line1'            => $settings->originAddress?->line1 ?? '',
-            'addr_city'             => $settings->originAddress?->city ?? '',
+            'is_vat_payer' => $settings->is_vat_payer ?? false,
+            'default_vat_rate' => $settings->default_vat_rate ?? 23,
+            'locale' => $settings->locale ?? 'pl',
+            'fuel_rate_pln_per_km' => (float) ($settings->fuel_rate_pln_per_km ?? 0),
+            'addr_line1' => $settings->originAddress?->line1 ?? '',
+            'addr_city' => $settings->originAddress?->city ?? '',
         ]);
     }
 

@@ -1,6 +1,5 @@
 <?php
 
-use App\Modules\ClientChat\Models\ChatMessage;
 use App\Modules\ClientChat\Models\ChatSession;
 use App\Modules\ClientChat\Services\ClientChatService;
 use App\Modules\Crm\Models\Client;
@@ -20,11 +19,13 @@ it('getOrCreateSession is scoped to tenant', function () {
 
     $clientA = Tenant::bypass(function () use ($tenantA) {
         Tenant::setCurrent($tenantA);
+
         return Client::create(['name' => 'Client A', 'client_type' => 'person', 'tenant_id' => $tenantA->id]);
     });
 
     $clientB = Tenant::bypass(function () use ($tenantB) {
         Tenant::setCurrent($tenantB);
+
         return Client::create(['name' => 'Client B', 'client_type' => 'person', 'tenant_id' => $tenantB->id]);
     });
 
@@ -56,6 +57,7 @@ it('chat sessions are not visible across tenants via global scope', function () 
 
     $clientA = Tenant::bypass(function () use ($tenantA) {
         Tenant::setCurrent($tenantA);
+
         return Client::create(['name' => 'Client A', 'client_type' => 'person', 'tenant_id' => $tenantA->id]);
     });
 
@@ -65,7 +67,7 @@ it('chat sessions are not visible across tenants via global scope', function () 
     ChatSession::create([
         'tenant_id' => $tenantA->id,
         'client_id' => $clientA->id,
-        'user_id'   => $userA->id,
+        'user_id' => $userA->id,
     ]);
 
     // Switch to tenant B — session should not be visible
@@ -80,6 +82,7 @@ it('getOrCreateSession is idempotent within same tenant', function () {
     $user = Tenant::bypass(fn () => User::factory()->for($tenant, 'tenant')->create());
     $client = Tenant::bypass(function () use ($tenant) {
         Tenant::setCurrent($tenant);
+
         return Client::create(['name' => 'Idempotent Client', 'client_type' => 'person', 'tenant_id' => $tenant->id]);
     });
 

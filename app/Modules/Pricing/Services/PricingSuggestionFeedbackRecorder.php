@@ -29,10 +29,10 @@ class PricingSuggestionFeedbackRecorder
         PricingSuggestionFeedback::firstOrCreate(
             ['suggestion_id' => $suggestion->id],
             [
-                'tenant_id'   => Tenant::currentId(),
-                'decision'    => $decision,
+                'tenant_id' => Tenant::currentId(),
+                'decision' => $decision,
                 'final_total' => $finalTotal,
-                'diff_pct'    => round($diffPct, 2),
+                'diff_pct' => round($diffPct, 2),
             ]
         );
     }

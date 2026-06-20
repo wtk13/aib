@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Crm\Models\Client;
 use App\Modules\Notes\Models\Note;
 use App\Modules\Tenancy\Models\Tenant;
 use App\Modules\Tenancy\Models\User;
@@ -23,10 +24,10 @@ it('streams audio for the owning tenant user', function () {
     Storage::disk('local')->put('notes/audio/1/test.mp3', 'fake-audio-data');
 
     $note = Note::create([
-        'client_id'          => \App\Modules\Crm\Models\Client::create(['name' => 'Test'])->id,
-        'audio_path'         => 'notes/audio/1/test.mp3',
-        'status'             => 'ready',
-        'source'             => 'audio',
+        'client_id' => Client::create(['name' => 'Test'])->id,
+        'audio_path' => 'notes/audio/1/test.mp3',
+        'status' => 'ready',
+        'source' => 'audio',
         'created_by_user_id' => $user->id,
     ]);
 
@@ -47,10 +48,10 @@ it('returns 403 when a user from a different tenant tries to access audio', func
     Storage::disk('local')->put('notes/audio/1/secret.mp3', 'private-audio');
 
     $note = Note::create([
-        'client_id'  => \App\Modules\Crm\Models\Client::create(['name' => 'Tenant A Client'])->id,
+        'client_id' => Client::create(['name' => 'Tenant A Client'])->id,
         'audio_path' => 'notes/audio/1/secret.mp3',
-        'status'     => 'ready',
-        'source'     => 'audio',
+        'status' => 'ready',
+        'source' => 'audio',
     ]);
 
     $this->actingAs($userB)
@@ -64,10 +65,10 @@ it('returns 404 when note has no audio', function () {
     Tenant::setCurrent($tenant);
 
     $note = Note::create([
-        'client_id' => \App\Modules\Crm\Models\Client::create(['name' => 'Test'])->id,
-        'status'    => 'ready',
-        'source'    => 'text',
-        'body'      => 'Just a text note',
+        'client_id' => Client::create(['name' => 'Test'])->id,
+        'status' => 'ready',
+        'source' => 'text',
+        'body' => 'Just a text note',
     ]);
 
     $this->actingAs($user)
@@ -80,10 +81,10 @@ it('returns 401 for unauthenticated request', function () {
     Tenant::setCurrent($tenant);
 
     $note = Note::create([
-        'client_id'  => \App\Modules\Crm\Models\Client::create(['name' => 'Test'])->id,
+        'client_id' => Client::create(['name' => 'Test'])->id,
         'audio_path' => 'notes/audio/1/test.mp3',
-        'status'     => 'ready',
-        'source'     => 'audio',
+        'status' => 'ready',
+        'source' => 'audio',
     ]);
 
     $this->get(route('note.audio', $note->id))

@@ -100,14 +100,14 @@ class QuoteResource extends Resource
                                 ->all();
 
                             $items[] = [
-                                'description'  => __('quote.line.commute'),
-                                'unit'         => 'flat',
-                                'quantity'     => 1,
-                                'rate'         => round($distance->commuteCostPln, 2),
+                                'description' => __('quote.line.commute'),
+                                'unit' => 'flat',
+                                'quantity' => 1,
+                                'rate' => round($distance->commuteCostPln, 2),
                                 'discount_pct' => 0,
-                                'vat_pct'      => 23,
-                                'line_total'   => round($distance->commuteCostPln, 2),
-                                'source'       => 'commute',
+                                'vat_pct' => 23,
+                                'line_total' => round($distance->commuteCostPln, 2),
+                                'source' => 'commute',
                             ];
 
                             $set('items', $items);
@@ -177,7 +177,7 @@ class QuoteResource extends Resource
                                 ->dehydrateStateUsing(fn (?string $state): string => $state ?? 'manual'),
                         ])
                         ->columns(7)
-                        ->addActionLabel('+ ' . __('quote.add_item'))
+                        ->addActionLabel('+ '.__('quote.add_item'))
                         ->defaultItems(0)
                         ->reorderable(false),
                 ]),
@@ -200,7 +200,7 @@ class QuoteResource extends Resource
                 TextColumn::make('status')
                     ->label(__('quote.fields.status'))
                     ->badge()
-                    ->formatStateUsing(fn (?string $state): string => $state ? __('quote.status.' . $state) : '')
+                    ->formatStateUsing(fn (?string $state): string => $state ? __('quote.status.'.$state) : '')
                     ->color(fn (?string $state): string => match ($state) {
                         'accepted' => 'success',
                         'sent' => 'warning',
