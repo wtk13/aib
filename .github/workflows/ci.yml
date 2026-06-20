@@ -73,7 +73,7 @@ jobs:
         run: docker run --rm aib-app ./vendor/bin/pint --test
 
       - name: Run Larastan
-        run: docker run --rm aib-app ./vendor/bin/phpstan analyse --no-progress
+        run: docker run --rm aib-app ./vendor/bin/phpstan analyse --no-progress --memory-limit=512M
 
       - name: Run Pest
         run: |
