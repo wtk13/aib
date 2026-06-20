@@ -13,7 +13,7 @@ services:
 
   horizon:
     image: "${APP_IMAGE:-ghcr.io/rybinski/aib/app:latest}"
-    command: php artisan horizon
+    command: php artisan queue:work --sleep=3 --tries=3 --max-time=3600
     restart: unless-stopped
     env_file: .env.production
     depends_on:
