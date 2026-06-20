@@ -2,7 +2,7 @@ ARG PHP_VERSION=8.4
 FROM php:${PHP_VERSION}-fpm-alpine
 
 RUN apk add --no-cache \
-    git curl zip unzip libpq-dev libzip-dev oniguruma-dev icu-dev \
+    git curl zip unzip libpq-dev libzip-dev oniguruma-dev icu-dev icu-data-full \
     libpng-dev libjpeg-turbo-dev freetype-dev
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
