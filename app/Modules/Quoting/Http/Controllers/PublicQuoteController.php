@@ -5,11 +5,13 @@ namespace App\Modules\Quoting\Http\Controllers;
 use App\Modules\Quoting\Models\Quote;
 use App\Modules\Quoting\Services\QuoteShareService;
 use App\Modules\Quoting\Services\QuoteTransitionService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PublicQuoteController
 {
-    public function show(string $token, QuoteShareService $service)
+    public function show(string $token, QuoteShareService $service): View
     {
         $shareToken = $service->findValidToken($token);
         abort_if(! $shareToken, 404);
@@ -32,7 +34,7 @@ class PublicQuoteController
         return view('quoting.public-quote', compact('quote', 'shareToken', 'token', 'unitLabels'));
     }
 
-    public function accept(string $token, Request $request, QuoteShareService $shareService, QuoteTransitionService $transitionService)
+    public function accept(string $token, Request $request, QuoteShareService $shareService, QuoteTransitionService $transitionService): RedirectResponse
     {
         $shareToken = $shareService->findValidToken($token);
         abort_if(! $shareToken, 404);

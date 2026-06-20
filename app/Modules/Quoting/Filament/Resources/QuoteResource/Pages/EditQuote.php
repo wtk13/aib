@@ -15,7 +15,9 @@ class EditQuote extends EditRecord
     protected function authorizeAccess(): void
     {
         parent::authorizeAccess();
-        abort_unless($this->getRecord()->isEditable(), 403);
+        /** @var Quote $record */
+        $record = $this->getRecord();
+        abort_unless($record->isEditable(), 403);
     }
 
     protected function getHeaderActions(): array

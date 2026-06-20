@@ -11,6 +11,7 @@ use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
+use App\Modules\Quoting\Models\Quote;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewQuote extends ViewRecord
@@ -19,6 +20,7 @@ class ViewQuote extends ViewRecord
 
     protected function getHeaderActions(): array
     {
+        /** @var Quote $quote */
         $quote = $this->getRecord();
         $actions = [
             EditAction::make(),
@@ -59,7 +61,9 @@ class ViewQuote extends ViewRecord
                 ->icon('heroicon-o-link')
                 ->color('gray')
                 ->action(function () {
-                    $link = app(QuoteShareService::class)->createLink($this->getRecord());
+                    /** @var Quote $record */
+                    $record = $this->getRecord();
+                    $link = app(QuoteShareService::class)->createLink($record);
                     Notification::make()
                         ->title(__('quote.actions.share_link'))
                         ->body($link)
