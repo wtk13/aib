@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\NoteAudioUploadController;
 use App\Modules\Notes\Models\Note;
 use App\Modules\Quoting\Http\Controllers\PublicQuoteController;
 use App\Modules\Quoting\Models\Quote;
@@ -34,6 +35,9 @@ Route::get('/sitemap.xml', function () {
 })->name('sitemap');
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('/audio/notes/upload', [NoteAudioUploadController::class, 'store'])
+        ->name('note.audio.upload');
+
     Route::get('/audio/notes/{id}', function (int $id) {
         $note = Note::withoutGlobalScopes()->findOrFail($id);
         abort_unless(auth()->user()->tenant_id === $note->tenant_id, 403);

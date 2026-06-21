@@ -10,6 +10,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -84,6 +85,16 @@ class NoteRelationManager extends RelationManager
             ->defaultSort('created_at', 'desc')
             ->searchable()
             ->headerActions([
+                Action::make('recordAudio')
+                    ->label(__('note.action.record'))
+                    ->icon('heroicon-o-microphone')
+                    ->color('gray')
+                    ->modalHeading(__('note.action.record_heading'))
+                    ->modalContent(fn () => view('filament.components.voice-recorder', [
+                        'clientId' => $this->ownerRecord->getKey(),
+                    ]))
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel(__('note.action.close')),
                 Tables\Actions\CreateAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['created_by_user_id'] = Auth::id();
