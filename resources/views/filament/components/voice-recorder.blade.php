@@ -106,6 +106,7 @@ function voiceRecorder(clientId, uploadUrl, csrfToken) {
     return {
         state: 'idle',
         mediaRecorder: null,
+        stream: null,
         chunks: [],
         mimeType: '',
         audioBlob: null,
@@ -116,8 +117,10 @@ function voiceRecorder(clientId, uploadUrl, csrfToken) {
         errorMsg: '',
 
         async start() {
+            let stream = null;
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+                stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+                this.stream = stream;
 
                 this.mimeType = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus', '']
                     .find(t => t === '' || MediaRecorder.isTypeSupported(t));
@@ -132,7 +135,8 @@ function voiceRecorder(clientId, uploadUrl, csrfToken) {
                 };
 
                 this.mediaRecorder.onstop = () => {
-                    stream.getTracks().forEach(t => t.stop());
+                    this.stream?.getTracks().forEach(t => t.stop());
+                    this.stream = null;
                     const type = this.mimeType || 'audio/webm';
                     this.audioBlob = new Blob(this.chunks, { type });
                     this.audioUrl = URL.createObjectURL(this.audioBlob);
@@ -147,9 +151,11 @@ function voiceRecorder(clientId, uploadUrl, csrfToken) {
                     if (this.elapsed >= this.maxSeconds) this.stop();
                 }, 1000);
             } catch (e) {
+                stream?.getTracks().forEach(t => t.stop());
+                this.stream = null;
                 this.errorMsg = e.name === 'NotAllowedError'
-                    ? '{{ __("note.recorder.error_permission") }}'
-                    : '{{ __("note.recorder.error_generic") }} ' + e.message;
+                    ? <?= json_encode(__('note.recorder.error_permission')) ?>
+                    : <?= json_encode(__('note.recorder.error_generic')) ?> + ' ' + e.message;
                 this.state = 'error';
             }
         },
@@ -182,7 +188,7 @@ function voiceRecorder(clientId, uploadUrl, csrfToken) {
                 }
                 this.state = 'done';
             } catch (e) {
-                this.errorMsg = '{{ __("note.recorder.error_upload") }} ' + e.message;
+                this.errorMsg = <?= json_encode(__('note.recorder.error_upload')) ?> + ' ' + e.message;
                 this.state = 'error';
             }
         },
@@ -194,6 +200,8 @@ function voiceRecorder(clientId, uploadUrl, csrfToken) {
         reset() {
             clearInterval(this.timer);
             this.timer = null;
+            this.stream?.getTracks().forEach(t => t.stop());
+            this.stream = null;
             if (this.audioUrl) URL.revokeObjectURL(this.audioUrl);
             this.audioBlob = null;
             this.audioUrl = null;

@@ -17,7 +17,7 @@ class NoteAudioUploadController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'audio' => ['required', 'file', 'max:51200'],
+            'audio' => ['required', 'file', 'max:51200', 'mimes:webm,mp4,ogg,mpeg,wav,x-m4a'],
             'client_id' => ['required', 'integer'],
             'duration' => ['nullable', 'integer', 'min:1', 'max:3600'],
         ]);
@@ -33,6 +33,7 @@ class NoteAudioUploadController extends Controller
         /** @var UploadedFile $file */
         $file = $request->file('audio');
         $path = $file->store("notes/audio/{$tenant->id}", 'local');
+        abort_if($path === false, 500, 'Audio storage failed.');
 
         $note = Note::create([
             'client_id' => $client->id,
